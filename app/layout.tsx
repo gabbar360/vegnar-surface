@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     "Discover premium ceramic tiles, porcelain pavers, and luxury surfaces from Vegnar Surface. Quality craftsmanship meets modern design.",
   keywords:
     "ceramic tiles, porcelain pavers, luxury surfaces, tile installation, home design",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   icons: {
     icon: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
     shortcut: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
