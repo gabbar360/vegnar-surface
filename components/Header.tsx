@@ -47,7 +47,7 @@ const Header = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-transparent backdrop-blur-md border-b border-white/10 shadow-md transition-all duration-300">
+    <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-md transition-all duration-300">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -144,44 +144,55 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden absolute left-0 right-0 top-full bg-background border-b border-border/20 shadow-elegant animate-slide-down">
-            <nav className="py-6 px-4 space-y-4">
-              {navigationItems.map((item) => (
-                <div key={item.name}>
+      </div>
+      
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-white shadow-lg z-40 overflow-y-auto">
+          <nav className="py-4 px-4 space-y-2 pb-20">
+            {navigationItems.map((item) => (
+              <div key={item.name}>
+                {item.isButton ? (
+                  <Link
+                    href={item.path}
+                    className="block w-full bg-charcoal text-white px-4 py-3 rounded-lg text-sm font-medium text-center hover:bg-charcoal-light transition-colors duration-200 mb-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
                   <Link
                     href={item.path}
                     className={cn(
-                      "block py-3 text-base font-medium transition-colors duration-200",
+                      "block py-3 text-sm font-medium transition-colors duration-200 border-b border-gray-100",
                       isActive(item.path)
-                        ? "text-charcoal"
+                        ? "text-charcoal font-semibold"
                         : "text-charcoal hover:text-charcoal-light"
                     )}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
                   </Link>
-                  {item.hasDropdown && (
-                    <div className="ml-4 mt-2 space-y-2">
-                      {item.dropdownItems?.map((dropdownItem) => (
-                        <Link
-                          key={dropdownItem.name}
-                          href={dropdownItem.path}
-                          className="block py-2 text-sm text-muted-foreground hover:text-charcoal transition-colors duration-200"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {dropdownItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </nav>
-          </div>
-        )}
-      </div>
+                )}
+                {item.hasDropdown && (
+                  <div className="ml-4 mt-1 mb-2 space-y-1 bg-gray-50 rounded-lg p-2">
+                    {item.dropdownItems?.map((dropdownItem) => (
+                      <Link
+                        key={dropdownItem.name}
+                        href={dropdownItem.path}
+                        className="block py-2 px-2 text-xs text-gray-600 hover:text-charcoal hover:bg-white rounded transition-colors duration-200"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {dropdownItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
