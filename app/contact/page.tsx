@@ -34,31 +34,31 @@ export default function Contact() {
       icon: MapPin,
       title: "Visit Our Office",
       details: [
-        "123 Ceramic Street, Industrial Area",
-        "Morbi, Gujarat 363642, India"
+        "B-623 RK Iconic, Shital Park",
+        "Rajkot, Gujarat 360001, India"
       ]
     },
     {
       icon: Phone,
       title: "Call Us",
       details: [
-        "+91 12345 67890",
-        "+91 98765 43210"
+        "+91 9998040370",
+        // "+91 98765 43210"
       ]
     },
     {
       icon: Mail,
       title: "Email Us", 
       details: [
-        "info@sunwinceramica.com",
-        "sales@sunwinceramica.com"
+        "info@vegnarsurfacesgmail.com",
+        // "sales@sunwinceramica.com"
       ]
     },
     {
       icon: Clock,
       title: "Business Hours",
       details: [
-        "Monday - Saturday: 9:00 AM - 6:00 PM",
+        "Monday - Saturday: 10:00 AM - 7:00 PM",
         "Sunday: Closed"
       ]
     }
@@ -115,16 +115,7 @@ export default function Contact() {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="mt-12">
-                <div className="bg-marble rounded-xl p-8 text-center">
-                  <MapPin className="w-12 h-12 text-orange mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-charcoal mb-2">Find Us on Map</h3>
-                  <p className="text-muted-foreground">
-                    Interactive map would be embedded here
-                  </p>
-                </div>
-              </div>
+
             </div>
 
             {/* Contact Form */}
@@ -217,6 +208,27 @@ export default function Contact() {
                 </form>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Full Width Google Map */}
+      <section className="relative"> 
+        <div className="relative h-96 w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.234!2d70.7512!3d22.3039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959ca248c77c099%3A0x200eef734f1e2b7c!2sShital%20Park%2C%20Rajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1234567890!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="RK Iconic, B623, 150 Feet Ring Rd, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360007"
+          ></iframe>
+        </div>
+        
+        <div className="bg-white border-t border-border py-4">
+          <div className="container mx-auto px-4">
           </div>
         </div>
       </section>
