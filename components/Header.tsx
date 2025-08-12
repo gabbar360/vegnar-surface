@@ -77,7 +77,7 @@ const Header = () => {
               src="/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png"
               alt="Vegnar Surfaces Logo"
               className={cn(
-                "h-12 w-auto object-contain transition-all duration-300",
+                "h-8 w-auto object-contain transition-all duration-300",
                 isHomePage && !isScrolled ? "brightness-0 invert" : ""
               )}
             />
@@ -96,12 +96,12 @@ const Header = () => {
                           isHomePage
                             ? isScrolled
                               ? isActive(item.path)
-                                ? "text-orange"
-                                : "text-gray-800 hover:text-orange"
-                              : "text-white drop-shadow-lg hover:text-orange/90"
+                                ? "text-charcoal"
+                                : "text-gray-800 hover:text-charcoal"
+                              : "text-white drop-shadow-lg hover:text-charcoal/90"
                             : isActive(item.path)
-                              ? "text-orange"
-                              : "text-gray-800 hover:text-orange"
+                              ? "text-charcoal"
+                              : "text-gray-800 hover:text-charcoal"
                         )}
                       >
                         {item.name}
@@ -115,7 +115,7 @@ const Header = () => {
                         <Link
                           key={dropdownItem.name}
                           href={dropdownItem.path}
-                          className="block px-6 py-3 text-sm text-gray-700 hover:text-white hover:bg-orange transition-all duration-300 rounded-lg mx-2"
+                          className="block px-6 py-3 text-sm text-gray-700 hover:text-white hover:bg-charcoal transition-all duration-300 rounded-lg mx-2"
                         >
                           {dropdownItem.name}
                         </Link>
@@ -125,7 +125,7 @@ const Header = () => {
                 ) : item.isButton ? (
                   <Link
                     href={item.path}
-                    className="bg-gradient-to-r from-orange to-orange/90 text-white px-4 xl:px-8 py-2 xl:py-3 rounded-full text-xs xl:text-sm font-semibold tracking-wide hover:from-orange/90 hover:to-orange/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-orange/50 whitespace-nowrap"
+                    className="bg-gradient-to-r from-charcoal to-charcoal/90 text-white px-4 xl:px-8 py-2 xl:py-3 rounded-full text-xs xl:text-sm font-semibold tracking-wide hover:from-charcoal/90 hover:to-charcoal/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-charcoal/50 whitespace-nowrap"
                   >
                     {item.name}
                   </Link>
@@ -137,9 +137,9 @@ const Header = () => {
                       isHomePage
                         ? isScrolled
                           ? isActive(item.path)
-                            ? "text-orange"
-                            : "text-gray-800 hover:text-orange"
-                          : "text-white drop-shadow-lg hover:text-orange/90"
+                            ? "text-charcoal"
+                            : "text-gray-800 hover:text-charcoal"
+                          : "text-white drop-shadow-lg hover:text-charcoal/90"
                         : isActive(item.path)
                           ? "text-orange"
                           : "text-gray-800 hover:text-orange"
@@ -159,9 +159,9 @@ const Header = () => {
               "lg:hidden p-2 transition-all duration-300 hover:scale-110 rounded-lg",
               isHomePage
                 ? isScrolled
-                  ? "text-gray-800 hover:text-orange hover:bg-orange/10"
-                  : "text-white hover:text-orange/90 hover:bg-white/20"
-                : "text-gray-800 hover:text-orange hover:bg-orange/10"
+                  ? "text-gray-800 hover:text-charcoal hover:bg-charcoal/10"
+                  : "text-white hover:text-charcoal/90 hover:bg-white/20"
+                : "text-gray-800 hover:text-charcoal hover:bg-charcoal/10"
             )}
           >
             {isMenuOpen ? (

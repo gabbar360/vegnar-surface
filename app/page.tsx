@@ -110,7 +110,7 @@ export default function Home() {
                   </div>
                   <CardContent className="p-6">
                     <div className="mb-2">
-                      <span className="text-sm text-orange font-medium">{product.category}</span>
+                      <span className="text-sm text-charcoal font-medium">{product.category}</span>
                     </div>
                     <h3 className="text-xl font-semibold text-charcoal mb-2">{product.name}</h3>
                     <p className="text-muted-foreground mb-4">Size: {product.size}</p>
@@ -163,7 +163,7 @@ export default function Home() {
                   </div>
                   <CardContent className="p-6">
                     <div className="mb-2">
-                      <span className="text-sm text-orange font-medium">{item.category}</span>
+                      <span className="text-sm text-charcoal font-medium">{item.category}</span>
                     </div>
                     <h3 className="text-xl font-semibold text-charcoal mb-2">{item.title}</h3>
                     <p className="text-muted-foreground">{item.description}</p>
