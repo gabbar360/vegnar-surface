@@ -69,7 +69,7 @@ const CustomizationSection = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        {/* <div className="text-center">
           <Button 
             size="lg" 
             className="bg-charcoal text-white hover:bg-charcoal-light px-12 py-4 text-lg"
@@ -80,7 +80,7 @@ const CustomizationSection = () => {
               Start Customization
             </Link>
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
