@@ -136,32 +136,71 @@ export default function About() {
             <p className="section-subtitle">Key milestones in our growth story</p>
           </div>
           
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-orange/20"></div>
+          <div className="relative max-w-6xl mx-auto">
+            {/* Premium Animated Timeline Line */}
+            <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 md:w-2">
+              <div className="w-full h-full bg-gradient-to-b from-orange/30 via-orange/60 to-orange/30 rounded-full shadow-lg animate-pulse"></div>
+            </div>
             
-            <div className="space-y-12">
+            <div className="space-y-12 md:space-y-16">
               {milestones.map((milestone, index) => (
                 <div
                   key={index}
-                  className={`flex items-center cursor-pointer group ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                  className="relative flex items-start md:items-center cursor-pointer group"
+                  style={{ animationDelay: `${index * 200}ms` }}
                 >
-                  <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                    <div className="card-luxury group-hover:shadow-elegant transition-all duration-300 group-hover:-translate-y-1">
-                      <div className="text-2xl font-bold text-orange mb-2">{milestone.year}</div>
-                      <h3 className="text-xl font-semibold text-charcoal mb-3 group-hover:text-charcoal-light transition-colors">
-                        {milestone.title}
-                      </h3>
-                      <p className="text-muted-foreground">{milestone.description}</p>
+                  {/* Mobile Layout */}
+                  <div className="md:hidden flex items-start w-full">
+                    {/* Premium Mobile Timeline Dot */}
+                    <div className="relative z-20 flex-shrink-0 mt-3 mr-6">
+                      <div className="w-8 h-8 bg-gradient-to-br from-orange to-orange/80 rounded-full shadow-2xl border-4 border-white group-hover:scale-125 group-hover:rotate-180 transition-all duration-500 flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
+                      </div>
+                      <div className="absolute inset-0 bg-orange/20 rounded-full animate-pulse scale-150"></div>
+                    </div>
+                    
+                    {/* Premium Mobile Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="relative bg-gradient-to-br from-white via-white/95 to-gray-50/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/50 group-hover:shadow-orange/20 group-hover:shadow-3xl transition-all duration-700 group-hover:-translate-y-2 group-hover:scale-105 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="text-2xl font-black text-transparent bg-gradient-to-r from-orange to-orange/80 bg-clip-text mb-2 group-hover:scale-110 transition-transform duration-300">{milestone.year}</div>
+                          <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-orange transition-all duration-300">
+                            {milestone.title}
+                          </h3>
+                          <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{milestone.description}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Timeline Dot */}
-                  <div className="relative z-10 w-6 h-6 bg-orange rounded-full border-4 border-background shadow-orange group-hover:scale-110 transition-transform"></div>
-                  
-                  <div className="flex-1 hidden md:block"></div>
+
+                  {/* Desktop Layout */}
+                  <div className={`hidden md:flex items-center w-full ${
+                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                  }`}>
+                    <div className={`flex-1 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
+                      <div className="relative bg-gradient-to-br from-white via-white/95 to-gray-50/80 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/50 group-hover:shadow-orange/20 group-hover:shadow-3xl transition-all duration-700 group-hover:-translate-y-3 group-hover:scale-105 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="text-4xl font-black text-transparent bg-gradient-to-r from-orange to-orange/80 bg-clip-text mb-4 group-hover:scale-110 transition-transform duration-300">{milestone.year}</div>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange transition-all duration-300">
+                            {milestone.title}
+                          </h3>
+                          <p className="text-gray-600 leading-relaxed text-lg group-hover:text-gray-800 transition-colors duration-300">{milestone.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Premium Desktop Timeline Dot */}
+                    <div className="relative z-20 flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-orange to-orange/80 rounded-full shadow-2xl border-4 border-white group-hover:scale-125 group-hover:rotate-180 transition-all duration-500 flex items-center justify-center">
+                        <div className="w-3 h-3 bg-white rounded-full animate-ping"></div>
+                      </div>
+                      <div className="absolute inset-0 bg-orange/20 rounded-full animate-pulse scale-150"></div>
+                    </div>
+                    
+                    <div className="flex-1"></div>
+                  </div>
                 </div>
               ))}
             </div>
