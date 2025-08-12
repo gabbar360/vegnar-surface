@@ -53,7 +53,7 @@ const Footer = () => {
             </div>
 
             {/* Social Media Icons */}
-            <div className="flex space-x-4 mb-6">
+            {/* <div className="flex space-x-4 mb-6">
               <a
                 href="#"
                 className="text-white hover:text-gray-300 transition-colors"
@@ -78,7 +78,7 @@ const Footer = () => {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-            </div>
+            </div> */}
 
             {/* Contact Info */}
             <div className="space-y-4">
@@ -86,9 +86,9 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-primary-foreground/80">
-                    123 Ceramic Street, Industrial Area
+                    B-623 RK Iconic, Shital Park
                     <br />
-                    Morbi, Gujarat 363642, India
+                    Rajkot, Gujarat 360001, India
                   </p>
                 </div>
               </div>
@@ -99,7 +99,7 @@ const Footer = () => {
                   href="tel:+91-12345-67890"
                   className="text-sm text-primary-foreground/80  hover:text-gray-300 transition-colors"
                 >
-                  +91 12345 67890
+                  +91 9998040370
                 </a>
               </div>
 
@@ -109,7 +109,7 @@ const Footer = () => {
                   href="mailto:info@vegnar.com"
                   className="text-sm text-primary-foreground/80  hover:text-gray-300 transition-colors"
                 >
-                  info@vegnar.com
+                  info@vegnarsurfacesgmail.com
                 </a>
               </div>
             </div>
@@ -161,13 +161,13 @@ const Footer = () => {
 
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.facebook.com/vegnarsurfaces"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-charcoal rounded-lg transition-all duration-300 hover:scale-110"
               >
                 <Facebook className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/vegnarsurfaces/"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-charcoal rounded-lg transition-all duration-300 hover:scale-110"
               >
                 <Instagram className="w-6 h-6" />
@@ -179,7 +179,7 @@ const Footer = () => {
                 <Twitter className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/vegnar-surfaces/posts/?feedView=all"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-charcoal rounded-lg transition-all duration-300 hover:scale-110"
               >
                 <Linkedin className="w-6 h-6" />
