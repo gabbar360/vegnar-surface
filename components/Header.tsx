@@ -28,6 +28,7 @@ const Header = () => {
       hasDropdown: true,
       dropdownItems: [
         { name: "About Us", path: "/about" },
+        { name: "Manufacturing Facility", path: "/manufacturing" },
         { name: "Export", path: "/export" },
       ],
     },
