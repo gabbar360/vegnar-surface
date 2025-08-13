@@ -53,8 +53,8 @@ export default function About() {
         </div>
         <div className="relative z-10 container mx-auto px-4">
           <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">About Vegnar</h1>
-            <p className="text-xl opacity-90">Dedicated to excellence in ceramic manufacturing since 2014</p>
+            <h1 className="text-5xl font-bold mb-4">About Us</h1>
+            <p className="text-xl opacity-90">Built for the World — premium porcelain surfaces for every space</p>
           </div>
         </div>
       </section>
@@ -68,19 +68,23 @@ export default function About() {
                 Our Story
               </span>
               <h2 className="section-title mt-4 mb-6">
-                Dedication towards the customers.
+                Built for the World
               </h2>
               <div className="space-y-6 text-muted-foreground leading-relaxed">
                 <p>
-                  Since <strong className="text-charcoal">2014</strong>, We have been bringing architectural 
-                  concepts, projects, and innovations to reality. Vegnar Ceramic is a leading 
-                  tile and sanitarywares manufacturing company. We are a sophisticated worldwide 
-                  company that combines manufacturing, sales, and service.
+                  Built for the World, Vegnar Surfaces is a new-generation global brand that brings together world-class porcelain surfaces with exceptional design versatility.
                 </p>
                 <p>
-                  The company has a great capacity to create high-quality tiles and sanitarywares 
-                  products in a variety of finishes, forms, and sizes to meet the diverse demands 
-                  of homeowners and architects.
+                  From sleek subway tiles and timeless mosaics to large-format slabs and durable outdoor pavers, we deliver collections that inspire architects, designers, and builders worldwide.
+                </p>
+                <p>
+                  Our journey began in Morbi, India, the heart of the global ceramic industry, with a vision to create surfaces that transcend trends and borders. Backed by cutting-edge technology, meticulous craftsmanship, and a passion for design, every Vegnar Surfaces creation combines innovation, durability, and aesthetic perfection.
+                </p>
+                <p>
+                  We understand that every project tells a story. That’s why our collections are crafted to perform beautifully in residential, commercial, and outdoor applications across diverse climates and cultures. Whether it’s the refined beauty of porcelain slabs, the timeless charm of mosaic and subway tiles, or the enduring strength of 20 mm outdoor pavers, our collections bring global design inspirations to life, crafted to perform and endure in every space.
+                </p>
+                <p>
+                  With a focus on quality, service, and long-term partnerships, we are not just a supplier; we are your design partner, delivering surfaces built for the world.
                 </p>
               </div>
             </div>
@@ -99,7 +103,7 @@ export default function About() {
       <section className="py-24 bg-cream">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="section-title mb-6">Our Mission & Vision</h2>
+            <h2 className="section-title mb-6">Mission & Vision</h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12">
@@ -107,10 +111,9 @@ export default function About() {
               <div className="bg-orange/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Building className="w-10 h-10 text-orange" />
               </div>
-              <h3 className="text-2xl font-semibold text-charcoal mb-4">Our Mission</h3>
+              <h3 className="text-2xl font-semibold text-charcoal mb-4">Mission</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To provide world-class ceramic tiles and sanitaryware products that exceed 
-                customer expectations through innovation, quality, and service excellence.
+                We craft premium porcelain surfaces that blend beauty, performance, and sustainability, enabling our partners to deliver projects of lasting value. Through design innovation, consistent quality, and responsive service, we aim to be the preferred choice for architects, designers, and distributors worldwide.
               </p>
             </div>
             
@@ -118,10 +121,9 @@ export default function About() {
               <div className="bg-orange/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Globe className="w-10 h-10 text-orange" />
               </div>
-              <h3 className="text-2xl font-semibold text-charcoal mb-4">Our Vision</h3>
+              <h3 className="text-2xl font-semibold text-charcoal mb-4">Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To be the global leader in ceramic solutions, known for our commitment to 
-                sustainability, innovation, and customer satisfaction worldwide.
+                To set new benchmarks in the global surfaces industry by creating designs that inspire, quality that endures, and solutions that connect cultures across the world.
               </p>
             </div>
           </div>
@@ -233,7 +235,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section
       <section className="py-24 bg-charcoal text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Space?</h2>
@@ -250,7 +252,7 @@ export default function About() {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

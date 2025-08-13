@@ -103,13 +103,20 @@ export default function Export() {
             <h2 className="text-4xl font-bold text-charcoal mb-8">
               Our Global Presence
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Sunwin ceramica tiles are exported to more than 29 countries in
-              the world. Our resoluteness to manufacture superlative tiles, not
-              just in terms of quality but also aesthetics, has made us the
-              fancy of homeowners across the globe. We export our tiles to many
-              European, African, as well as Gulf countries.
-            </p>
+            <div className="text-lg text-muted-foreground mb-8 space-y-4">
+              <p>
+                At Vegnar Surfaces, our reach extends far beyond borders. With a product portfolio tailored to diverse markets, we proudly export to multiple countries across Europe, North America, and beyond.
+              </p>
+              <p>
+                Our commitment to exceptional design, consistent quality, and reliable service has made us a trusted partner for architects, designers, distributors, and builders worldwide.
+              </p>
+              <p>
+                From sleek subway tiles in the UK to durable 20 mm outdoor pavers in the USA and Canada, and large-format porcelain slabs across Europe, our surfaces are crafted to meet the unique needs of every market we serve.
+              </p>
+              <p>
+                Wherever your project is, Vegnar Surfaces delivers products that are truly built for the world.
+              </p>
+            </div>
             <Button
               variant="outline"
               size="lg"
