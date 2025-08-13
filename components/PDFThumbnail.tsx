@@ -36,6 +36,7 @@ export default function PDFThumbnail({ pdfPath, alt, className }: PDFThumbnailPr
         await page.render({
           canvasContext: context,
           viewport: viewport,
+          canvas: canvas,
         }).promise;
 
         setLoading(false);
