@@ -62,7 +62,7 @@ const Header = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-700 ease-out",
+      "fixed top-0 w-full z-40 transition-all duration-700 ease-out",
       isHomePage
         ? isScrolled 
           ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-xl" 
@@ -175,14 +175,14 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-white/98 backdrop-blur-2xl shadow-2xl z-40 overflow-y-auto border-t border-gray-200/50">
+        <div className="lg:hidden fixed inset-x-0 top-20 bg-white shadow-2xl z-50 max-h-screen overflow-y-auto border-t border-gray-200/50">
           <nav className="py-4 px-4 space-y-2 pb-20 min-h-screen">
             {navigationItems.map((item) => (
               <div key={item.name}>
                 {item.isButton ? (
                   <Link
                     href={item.path}
-                    className="block w-full bg-charcoal bg-gray-800 text-white px-4 py-3 rounded-lg text-sm font-medium text-center hover:bg-charcoal-light hover:bg-gray-600 transition-colors duration-200 mb-2"
+                    className="block w-full bg-gray-800 text-white px-4 py-3 rounded-lg text-sm font-medium text-center hover:bg-gray-600 transition-colors duration-200 mb-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -193,8 +193,8 @@ const Header = () => {
                     className={cn(
                       "block py-3 text-sm font-medium transition-colors duration-200 border-b border-gray-100",
                       isActive(item.path)
-                        ? "text-charcoal text-gray-800 font-semibold"
-                        : "text-charcoal text-gray-800 hover:text-charcoal-light hover:text-gray-600"
+                        ? "text-gray-800 font-semibold"
+                        : "text-gray-800 hover:text-gray-600"
                     )}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -207,7 +207,7 @@ const Header = () => {
                       <Link
                         key={dropdownItem.name}
                         href={dropdownItem.path}
-                        className="block py-2 px-2 text-xs text-gray-600 hover:text-charcoal hover:text-gray-800 hover:bg-white rounded transition-colors duration-200"
+                        className="block py-2 px-2 text-xs text-gray-600 hover:text-gray-800 hover:bg-white rounded transition-colors duration-200"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {dropdownItem.name}
