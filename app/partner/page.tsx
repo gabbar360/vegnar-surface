@@ -149,11 +149,11 @@ export default function Partner() {
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <div className="flex items-center gap-2">
                 <Mail className="w-5 h-5" />
-                <span>partner@vegnarsurfaces.com</span>
+                <span>info@vegnarsurfaces.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
-                <span>+91 9998040373</span>
+                <span>+919998040370</span>
               </div>
             </div>
           </div>

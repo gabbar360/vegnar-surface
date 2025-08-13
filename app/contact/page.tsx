@@ -227,13 +227,13 @@ export default function Contact() {
           ></iframe>
         </div>
         
-        <div className="bg-white border-t border-border py-4">
+        {/* <div className="bg-white border-t border-border py-4">
           <div className="container mx-auto px-4">
           </div>
-        </div>
+        </div> */}
       </section>
 
-      {/* Export Information */}
+      {/* Export Information
       <section className="py-16 bg-cream">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -258,7 +258,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>
