@@ -4,6 +4,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Globe, Truck, Award, Users } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const Globe3D = dynamic(() => import("@/components/Globe3D"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[600px] bg-gradient-to-r from-gray-900 to-black rounded-2xl flex items-center justify-center">
+      <div className="text-white text-xl">Loading Interactive Globe...</div>
+    </div>
+  ),
+});
 
 export default function Export() {
   const exportCountries = [
@@ -128,88 +138,33 @@ export default function Export() {
         </div>
       </section>
 
-      {/* Worldwide Network */}
+      {/* Interactive 3D Globe */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-charcoal mb-6">
-              Worldwide Network
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Our global distribution network ensures quality tiles reach every
-              corner of the world
-            </p>
-          </div>
-
-          {/* World Map Placeholder */}
-          <div className="bg-gradient-to-r from-orange/20 to-orange/10 rounded-2xl p-12 mb-12">
-            <div className="text-center">
-              <svg
-                className="w-full h-64 mx-auto"
-                viewBox="0 0 800 400"
-                fill="none"
-              >
-                <rect width="800" height="400" fill="url(#gradient)" rx="20" />
-                <defs>
-                  <linearGradient
-                    id="gradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop
-                      offset="0%"
-                      stopColor="hsl(var(--orange))"
-                      stopOpacity="0.1"
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="hsl(var(--orange))"
-                      stopOpacity="0.3"
-                    />
-                  </linearGradient>
-                </defs>
-                <text
-                  x="400"
-                  y="200"
-                  textAnchor="middle"
-                  className="fill-charcoal font-bold text-2xl"
-                >
-                  Global Presence Map
-                </text>
-                <text
-                  x="400"
-                  y="230"
-                  textAnchor="middle"
-                  className="fill-muted-foreground text-lg"
-                >
-                  29+ Countries Worldwide
-                </text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Export Countries */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
-            Countries We Export To
+        <div className="text-center mb-12 px-4">
+          <h2 className="text-4xl font-bold text-charcoal mb-6">
+            Interactive Global Presence
           </h2>
+        </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {exportCountries.map((country, index) => (
-              <div
-                key={index}
-                className="group bg-secondary/50 p-4 rounded-lg text-center hover:bg-orange hover:text-white transition-all duration-300 hover:scale-105"
-              >
-                <div className="w-8 h-6 bg-gradient-to-r from-orange/30 to-orange/60 rounded-sm mx-auto mb-2 group-hover:from-white/30 group-hover:to-white/60 transition-all duration-300" />
-                <span className="text-sm font-medium">{country}</span>
-              </div>
-            ))}
-          </div>
+        {/* 3D Globe Component */}
+        <div className="w-full mb-8">
+          <Globe3D rotationSpeed={0.3} />
+        </div>
+        
+        <div className="text-center px-4">
+          <p className="text-sm text-muted-foreground mb-4">
+            The globe shows our key markets and distribution centers worldwide
+          </p>
+          {/* <div className="flex justify-center space-x-8 text-xs text-muted-foreground">
+            <div className="flex items-center">
+              <div className="w-3 h-3 bg-orange rounded-full mr-2"></div>
+              <span>Export Countries</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-3 h-3 bg-white border-2 border-orange rounded-full mr-2"></div>
+              <span>Regional Offices</span>
+            </div>
+          </div> */}
         </div>
       </section>
 
