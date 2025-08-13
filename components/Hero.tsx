@@ -123,19 +123,19 @@ const Hero = () => {
                 {index === currentSlide && (
                   <>
                     <div className="mb-6">
-                      <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-none">
+                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-none">
                         {slide.title}
                       </h1>
-                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white/90">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-charcoal">
                         {slide.subtitle}
                       </h2>
                     </div>
                     
-                    <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
+                    <p className="text-base md:text-lg text-white/90 mb-10 max-w-2xl leading-relaxed">
                       {slide.description}
                     </p>
                     
-                    <div className="flex justify-center">
+                    <div className="flex justify-start">
                       {mounted && (
                         <Link href={`/products?category=${slide.category}`}>
                           <Button variant="luxury" size="xl" className="group">
@@ -171,7 +171,7 @@ const Hero = () => {
                 className={cn(
                   "w-3 h-3 rounded-full transition-all duration-300",
                   index === currentSlide
-                    ? "bg-orange w-8"
+                    ? "bg-charcoal w-8"
                     : "bg-white/40 hover:bg-white/60"
                 )}
               />
@@ -192,7 +192,7 @@ const Hero = () => {
         <div className="flex flex-col items-center space-y-2 text-white/60">
           <span className="text-sm tracking-widest vertical-text">SCROLL</span>
           <div className="w-px h-12 bg-white/30 relative">
-            <div className="absolute top-0 w-px h-6 bg-orange animate-pulse" />
+            <div className="absolute top-0 w-px h-6 bg-charcoal animate-pulse" />
           </div>
         </div>
       </div>

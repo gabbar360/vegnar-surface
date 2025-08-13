@@ -12,19 +12,19 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-cream">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Content */}
           <div className="order-2 lg:order-1">
             <div className="mb-6">
-              <span className="text-gold font-semibold tracking-wider uppercase text-sm">
+              <span className="text-charcoal font-semibold tracking-wider uppercase text-sm">
                 Let's Know About Vegnar
               </span>
               <h2 className="section-title mt-4 mb-6">
                 Dedication towards
-                <span className="block text-gold">the customers.</span>
+                <span className="block text-charcoal">the customers.</span>
               </h2>
             </div>
             
@@ -67,8 +67,8 @@ const AboutSection = () => {
               {/* Floating Stats Card */}
               <div className="absolute -bottom-8 -left-8 bg-background border border-border/20 rounded-xl p-6 shadow-elegant hidden md:block">
                 <div className="flex items-center space-x-4">
-                  <div className="bg-gold/10 p-3 rounded-lg">
-                    <Award className="w-6 h-6 text-gold" />
+                  <div className="bg-charcoal/10 p-3 rounded-lg">
+                    <Award className="w-6 h-6 text-charcoal" />
                   </div>
                   <div>
                     <div className="text-2xl font-bold text-charcoal">50M+</div>
@@ -89,8 +89,8 @@ const AboutSection = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="bg-background border border-border/20 rounded-xl p-6 shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
-                <div className="bg-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold/20 transition-colors">
-                  <stat.icon className="w-8 h-8 text-gold" />
+                <div className="bg-charcoal/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-charcoal/20 transition-colors">
+                  <stat.icon className="w-8 h-8 text-charcoal" />
                 </div>
                 <div className="text-3xl font-bold text-charcoal mb-2">{stat.value}</div>
                 <div className="text-muted-foreground font-medium">{stat.label}</div>

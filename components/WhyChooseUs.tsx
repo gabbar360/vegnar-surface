@@ -58,8 +58,8 @@ const WhyChooseUs = () => {
               {/* Content */}
               <div className={`${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
                 <div className="flex items-center space-x-4 mb-6">
-                  <div className="bg-gold/10 p-4 rounded-xl">
-                    <feature.icon className="w-8 h-8 text-gold" />
+                  <div className="bg-charcoal/10 p-4 rounded-xl">
+                    <feature.icon className="w-8 h-8 text-charcoal" />
                   </div>
                   <h3 className="text-2xl font-semibold text-charcoal">
                     {feature.title}
@@ -75,7 +75,7 @@ const WhyChooseUs = () => {
                   {index === 0 && (
                     <>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-gold mb-2">
+                        <div className="text-3xl font-bold text-charcoal mb-2">
                           99.5%
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -83,7 +83,7 @@ const WhyChooseUs = () => {
                         </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-gold mb-2">
+                        <div className="text-3xl font-bold text-charcoal mb-2">
                           22+
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -96,7 +96,7 @@ const WhyChooseUs = () => {
                   {index === 1 && (
                     <>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-gold mb-2">
+                        <div className="text-3xl font-bold text-charcoal mb-2">
                           500+
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -104,7 +104,7 @@ const WhyChooseUs = () => {
                         </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-gold mb-2">
+                        <div className="text-3xl font-bold text-charcoal mb-2">
                           15+
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -117,7 +117,7 @@ const WhyChooseUs = () => {
                   {index === 2 && (
                     <>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-gold mb-2">
+                        <div className="text-3xl font-bold text-charcoal mb-2">
                           4+
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -125,7 +125,7 @@ const WhyChooseUs = () => {
                         </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-gold mb-2">
+                        <div className="text-3xl font-bold text-charcoal mb-2">
                           100%
                         </div>
                         <div className="text-sm text-muted-foreground">
@@ -143,7 +143,7 @@ const WhyChooseUs = () => {
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="w-full rounded-2xl shadow-elegant group-hover:shadow-gold transition-all duration-500"
+                    className="w-full rounded-2xl shadow-elegant group-hover:shadow-charcoal transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent rounded-2xl" />
                 </div>
@@ -169,8 +169,8 @@ const WhyChooseUs = () => {
                 key={index}
                 className="bg-background border border-border/20 rounded-xl p-6 text-center shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="bg-gold/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-gold" />
+                <div className="bg-charcoal/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-charcoal" />
                 </div>
                 <h4 className="font-semibold text-charcoal mb-2">
                   {cert.name}
