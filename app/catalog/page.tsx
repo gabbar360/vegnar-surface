@@ -158,10 +158,10 @@ export default function Catalog() {
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <Button
                       size="lg"
-                      className="bg-orange hover:bg-orange/90 text-white"
+                      className="bg-orange hover:bg-orange/90 text-white flex-1"
                     >
                       <Download className="w-5 h-5 mr-2" />
                       Download Now
@@ -169,7 +169,7 @@ export default function Catalog() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-orange text-orange"
+                      className="border-orange text-orange flex-1 min-w-0"
                     >
                       <Eye className="w-5 h-5 mr-2" />
                       Preview
@@ -219,22 +219,20 @@ export default function Catalog() {
                     <span>{catalog.size}</span>
                   </div>
 
-                  <div className="flex gap-2">
-                    <Button className="flex-1 bg-orange hover:bg-orange/90 text-white">
+                  <div className="flex gap-2 items-center">
+                    <Button className="flex-1 bg-orange hover:bg-orange/90 text-white h-10">
                       <Download className="w-4 h-4 mr-1" />
                       Download
                     </Button>
                     <Button
                       variant="outline"
-                      size="sm"
-                      className="border-orange text-orange"
+                      className="border-orange text-orange h-10 w-10 p-0 flex items-center justify-center"
                     >
                       <Eye className="w-4 h-4" />
                     </Button>
                     <Button
                       variant="outline"
-                      size="sm"
-                      className="border-orange text-orange"
+                      className="border-orange text-orange h-10 w-10 p-0 flex items-center justify-center"
                     >
                       <Share2 className="w-4 h-4" />
                     </Button>
