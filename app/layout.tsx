@@ -19,7 +19,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Vegnar Surface - Premium Ceramic & Tile Solutions",
+  title: "Vegnar Surface - Premium Ceramic & Tiles Solutions",
   description:
     "Discover premium ceramic tiles, porcelain pavers, and luxury surfaces from Vegnar Surface. Quality craftsmanship meets modern design.",
   keywords:
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
   icons: {
-    icon: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    shortcut: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    apple: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
+    icon: "/tile-favicon-dark.svg",
+    shortcut: "/tile-favicon-dark.svg",
+    apple: "/tile-favicon-dark.svg",
   },
 };
 
