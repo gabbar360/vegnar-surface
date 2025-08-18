@@ -84,7 +84,7 @@ const WhyChooseUs = () => {
                       </div>
                       <div className="text-center">
                         <div className="text-3xl font-bold text-charcoal mb-2">
-                          22+
+                          30+
                         </div>
                         <div className="text-sm text-muted-foreground">
                           Countries

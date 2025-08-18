@@ -126,7 +126,7 @@ const Hero = () => {
                       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-none">
                         {slide.title}
                       </h1>
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-charcoal">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white">
                         {slide.subtitle}
                       </h2>
                     </div>
@@ -138,7 +138,7 @@ const Hero = () => {
                     <div className="flex justify-start">
                       {mounted && (
                         <Link href={`/products?category=${slide.category}`}>
-                          <Button variant="luxury" size="xl" className="group">
+                          <Button variant="luxury" size="xl" className="group rounded-full">
                             View Collection
                             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                           </Button>

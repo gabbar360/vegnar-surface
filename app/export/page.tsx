@@ -75,7 +75,7 @@ export default function Export() {
               <div className="bg-orange text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Globe className="w-8 h-8" />
               </div>
-              <h3 className="text-3xl font-bold text-charcoal mb-2">29+</h3>
+              <h3 className="text-3xl font-bold text-charcoal mb-2">30+</h3>
               <p className="text-muted-foreground">Export Countries</p>
             </div>
 
@@ -99,14 +99,14 @@ export default function Export() {
               <div className="bg-orange text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8" />
               </div>
-              <h3 className="text-3xl font-bold text-charcoal mb-2">1000+</h3>
+              <h3 className="text-3xl font-bold text-charcoal mb-2">25000+</h3>
               <p className="text-muted-foreground">Happy Clients</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Export Description */}
+      {/* Our Global Presence */}
       <section className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -127,13 +127,6 @@ export default function Export() {
                 Wherever your project is, Vegnar Surfaces delivers products that are truly built for the world.
               </p>
             </div>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-orange text-orange hover:bg-orange hover:text-white"
-            >
-              Download Export Catalog
-            </Button>
           </div>
         </div>
       </section>
@@ -151,21 +144,7 @@ export default function Export() {
           <Globe3D rotationSpeed={0.3} />
         </div>
         
-        <div className="text-center px-4">
-          <p className="text-sm text-muted-foreground mb-4">
-            The globe shows our key markets and distribution centers worldwide
-          </p>
-          {/* <div className="flex justify-center space-x-8 text-xs text-muted-foreground">
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-orange rounded-full mr-2"></div>
-              <span>Export Countries</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-white border-2 border-orange rounded-full mr-2"></div>
-              <span>Regional Offices</span>
-            </div>
-          </div> */}
-        </div>
+        
       </section>
 
       <Footer />

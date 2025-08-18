@@ -43,12 +43,10 @@ const Header = () => {
         },
         { name: "Subway Tiles", path: "/products?category=subway-tiles" },
         { name: "Mosaic Tiles", path: "/products?category=mosaic-tiles" },
-        { name: "Porcelain Tiles", path: "/products?category=porcelain-tiles" },
         {
           name: "Large Format Porcelain Slabs",
           path: "/products?category=large-format-slabs",
         },
-        { name: "Flexible Tiles", path: "/products?category=flexible-tiles" },
       ],
     },
     { name: "E-CATALOGUE", path: "/catalog" },
