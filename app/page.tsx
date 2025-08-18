@@ -81,7 +81,7 @@ export default function Home() {
         <WhyChooseUs />
         
         {/* Featured Products Section */}
-        <section className="py-20 bg-background">
+        {/* <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-charcoal mb-4">Our Collection</h2>
@@ -133,7 +133,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Featured Inspirations Section */}
         <section className="py-20 bg-grey-light">

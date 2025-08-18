@@ -5,10 +5,10 @@ import Link from "next/link";
 
 const AboutSection = () => {
   const stats = [
-    { icon: Globe, value: "22+", label: "Countries Exported" },
-    { icon: Factory, value: "10+", label: "Years Experience" },
-    { icon: Users, value: "10,000+", label: "Happy Customers" },
-    { icon: Award, value: "50M+", label: "Tiles Delivered" },
+    { icon: Globe, value: "30+", label: "Countries Exported" },
+    { icon: Factory, value: "18+", label: "Years Experience" },
+    { icon: Users, value: "25,000+", label: "Happy Customers" },
+    { icon: Award, value: "100M+", label: "Tiles Delivered" },
   ];
 
   return (
@@ -30,18 +30,16 @@ const AboutSection = () => {
             
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                Since <strong className="text-charcoal">2014</strong>, We have been bringing architectural 
-                concepts, projects, and innovations to reality. Vegnar Ceramic is a leading 
-                tile and sanitarywares manufacturing company. We are a sophisticated worldwide 
-                company that combines manufacturing, sales, and service.
+                Since <strong className="text-charcoal">2007</strong> Built for the World, Vegnar Surfaces is a new-generation global brand that brings together world-class porcelain surfaces with exceptional design versatility.
+From sleek subway tiles and timeless mosaics to large-format slabs and durable outdoor pavers, we deliver collections that inspire architects, designers, and builders worldwide.
               </p>
               
               <p>
-                The company has a great capacity to create high-quality tiles and sanitarywares 
-                products in a variety of finishes, forms, and sizes to meet the diverse demands 
-                of homeowners and architects. We manufacture and provide the high-quality, best 
-                selection of <strong className="text-charcoal">Outdoor Porcelain Tiles, Subway tiles, 
-                Porcelain Floor Tiles, and Porcelain Slab Tiles</strong> with unique patterns.
+                Our journey began in Morbi, India, the heart of the global ceramic industry, with a vision to create surfaces that transcend trends and borders. Backed by cutting-edge technology, meticulous craftsmanship, and a passion for design, every Vegnar Surfaces creation combines innovation, durability, and aesthetic perfection.
+              </p>
+              <p>
+                We understand that every project tells a story. That’s why our collections are crafted to perform beautifully in residential, commercial, and outdoor applications across diverse climates and cultures. Whether it’s the refined beauty of porcelain slabs, the timeless charm of mosaic and subway tiles, or the enduring strength of 20 mm outdoor pavers, our collections bring global design inspirations to life, crafted to perform and endure in every space.
+
               </p>
             </div>
 
@@ -71,7 +69,7 @@ const AboutSection = () => {
                     <Award className="w-6 h-6 text-charcoal" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-charcoal">50M+</div>
+                    <div className="text-2xl font-bold text-charcoal">100M+</div>
                     <div className="text-sm text-muted-foreground">Tiles Delivered</div>
                   </div>
                 </div>

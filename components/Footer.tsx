@@ -10,6 +10,7 @@ import {
   Linkedin,
   Download,
   ArrowRight,
+  MessageCircleHeart,
 } from "lucide-react";
 
 const Footer = () => {
@@ -29,12 +30,12 @@ const Footer = () => {
     },
     { name: "Subway Tiles", href: "/products?category=subway-tiles" },
     { name: "Mosaic Tiles", href: "/products?category=mosaic-tiles" },
-    { name: "Porcelain Tiles", href: "/products?category=porcelain-tiles" },
+    // { name: "Porcelain Tiles", href: "/products?category=porcelain-tiles" },
     {
       name: "Large Format Porcelain Slabs",
       href: "/products?category=large-format-slabs",
     },
-    { name: "Flexible Tiles", href: "/products?category=flexible-tiles" },
+    // { name: "Flexible Tiles", href: "/products?category=flexible-tiles" },
   ];
 
   return (
@@ -51,35 +52,6 @@ const Footer = () => {
                 className="h-12 w-auto object-contain brightness-0 invert"
               />
             </div>
-
-            {/* Social Media Icons */}
-            {/* <div className="flex space-x-4 mb-6">
-              <a
-                href="#"
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div> */}
-
             {/* Contact Info */}
             <div className="space-y-4">
               <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
@@ -208,10 +180,10 @@ const Footer = () => {
                 <Instagram className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://in.pinterest.com/latavegnarsurfaces/_created/"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-black rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
               >
-                <Twitter className="w-6 h-6" />
+                <MessageCircleHeart  className="w-6 h-6" />
               </a>
               <a
                 href="https://www.linkedin.com/company/vegnar-surfaces/posts/?feedView=all"
@@ -241,11 +213,11 @@ const Footer = () => {
 
             <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 md:gap-6 text-sm">
               <span className="text-primary-foreground/60">
-                Exporting to 22+ Countries
+                Exporting to 30+ Countries
               </span>
               <span className="text-primary-foreground/60 hidden md:inline">•</span>
               <span className="text-primary-foreground/60">
-                10+ Years of Excellence
+                18+ Years of Excellence
               </span>
               <span className="text-primary-foreground/60 hidden md:inline">•</span>
               <span className="text-white font-semibold">Made in India</span>

@@ -703,81 +703,81 @@ export default function Catalog() {
       </section>
 
       {/* Quick Links */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
-            Quick Access
-          </h2>
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
+              Quick Access
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-              <h3 className="font-semibold text-charcoal mb-2">Price List</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Current pricing for all products
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-orange text-orange"
-              >
-                Download
-              </Button>
-            </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
+                <h3 className="font-semibold text-charcoal mb-2">Price List</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Current pricing for all products
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-orange text-orange"
+                >
+                  Download
+                </Button>
+              </Card>
 
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-              <h3 className="font-semibold text-charcoal mb-2">
-                Installation Guide
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Step-by-step installation instructions
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-orange text-orange"
-              >
-                Download
-              </Button>
-            </Card>
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
+                <h3 className="font-semibold text-charcoal mb-2">
+                  Installation Guide
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Step-by-step installation instructions
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-orange text-orange"
+                >
+                  Download
+                </Button>
+              </Card>
 
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-              <h3 className="font-semibold text-charcoal mb-2">
-                Care & Maintenance
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Keep your tiles looking perfect
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-orange text-orange"
-              >
-                Download
-              </Button>
-            </Card>
+              {/* <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
+                <h3 className="font-semibold text-charcoal mb-2">
+                  Care & Maintenance
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Keep your tiles looking perfect
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-orange text-orange"
+                >
+                  Download
+                </Button>
+              </Card> */}
 
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-              <h3 className="font-semibold text-charcoal mb-2">
-                Warranty Terms
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Product warranty information
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-orange text-orange"
-              >
-                Download
-              </Button>
-            </Card>
+              {/* <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
+                <h3 className="font-semibold text-charcoal mb-2">
+                  Warranty Terms
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Product warranty information
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-orange text-orange"
+                >
+                  Download
+                </Button>
+              </Card> */}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <Footer />
     </div>
