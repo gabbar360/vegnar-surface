@@ -8,14 +8,14 @@ const WhyChooseUs = () => {
       description:
         "We are the top manufacturer because of our on-time and secure deliveries. You can be certain that when you work with us, your cargo will arrive on schedule, undamaged, and in the best possible shape.",
       image:
-        "https://sfycdn.speedsize.com/a513b203-c893-45cc-878b-3b5f4ffe1ea9/https://www.hyperiontiles.co.uk/cdn/shop/articles/how_to_choose_tiles-_a_simple_guide_for_stylish_homes_bhlws6oDE0LZ3_Bn-Qngh_1624beb1-9ad2-4276-90bc-568556606b18.png?v=1744738179",
+        "/assets/about1.jpg"
     },
     {
       icon: Package,
       title: "Extensive Product Line",
       description:
         "Vegnar Ceramic is aware everybody has different tastes. To satisfy the various needs of our customers, we provide a varied and distinctive range of tiles and sanitaryware products.",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600",
+      image: "/assets/about2.jpg",
     },
     {
       icon: Award,
@@ -23,7 +23,7 @@ const WhyChooseUs = () => {
       description:
         "We utilize cutting-edge technologies and maintain international standards throughout the whole manufacturing and testing process to guarantee that our goods are of the highest quality.",
       image:
-        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600",
+        "/assets/about3.jpg",
     },
   ];
 

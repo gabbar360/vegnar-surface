@@ -418,7 +418,7 @@ export default function Products() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-charcoal text-primary-foreground">
+      {/* <section className="py-16 bg-charcoal text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Need Custom Solutions?</h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -433,7 +433,7 @@ export default function Products() {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

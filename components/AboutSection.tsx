@@ -57,7 +57,7 @@ From sleek subway tiles and timeless mosaics to large-format slabs and durable o
           <div className="order-1 lg:order-2">
             <div className="relative">
               <img
-                src={"/assets/about-tiles.jpg"}
+                src={"/assets/about-tiles-main.jpg"}
                 alt="Premium ceramic tiles by Vegnar"
                 className="w-full rounded-2xl shadow-elegant"
               />

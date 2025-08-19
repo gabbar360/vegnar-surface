@@ -46,7 +46,7 @@ export default function About() {
       <section className="relative h-96 bg-charcoal flex items-center">
         <div className="absolute inset-0">
           <img 
-            src="/assets/about-tiles.jpg" 
+            src="/assets/about-section.jpg" 
             alt="About Vegnar" 
             className="w-full h-full object-cover opacity-30"
           />
