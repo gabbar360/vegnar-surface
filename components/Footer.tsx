@@ -12,7 +12,7 @@ import {
   ArrowRight,
   MessageCircleHeart,
 } from "lucide-react";
-
+import { FaPinterest } from "react-icons/fa";
 const Footer = () => {
   const quickLinks = [
     { name: "About Us", href: "/about" },
@@ -183,7 +183,7 @@ const Footer = () => {
                 href="https://in.pinterest.com/latavegnarsurfaces/_created/"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-black rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
               >
-                <MessageCircleHeart  className="w-6 h-6" />
+                <FaPinterest  className="w-6 h-6" />
               </a>
               <a
                 href="https://www.linkedin.com/company/vegnar-surfaces/posts/?feedView=all"

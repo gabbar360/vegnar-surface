@@ -10,7 +10,7 @@ export default function Utilities() {
   const utilities = [
     {
       icon: Calculator,
-      title: "Tile Calculator",
+      title: "Tiles Calculator",
       description: "Calculate the exact amount of tiles needed for your project",
       action: "Calculate Now"
     },

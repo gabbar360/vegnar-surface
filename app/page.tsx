@@ -66,10 +66,10 @@ export default function Home() {
   const featuredInspirations = [
     { id: 1, title: "Outdoor Patio Design", image: "/assets/product-outdoor.jpg", description: "Modern outdoor space with 2cm porcelain pavers", category: "Porcelain Pavers" },
     { id: 2, title: "Kitchen Backsplash", image: "/assets/product-subway.jpg", description: "Classic white subway tile kitchen", category: "Subway Tiles" },
-    { id: 3, title: "Bathroom Feature Wall", image: "/assets/about-tiles.jpg", description: "Stunning mosaic feature wall", category: "Mosaic Tiles" },
+    { id: 3, title: "Bathroom Feature Wall", image: "/assets/about-tiles-test.jpg", description: "Stunning mosaic feature wall", category: "Mosaic Tiles" },
     { id: 4, title: "Living Room Floor", image: "/assets/hero-marble-bg.jpg", description: "Elegant living room flooring", category: "Porcelain Tiles" },
     { id: 5, title: "Kitchen Countertop", image: "/assets/product-slab.jpg", description: "Seamless kitchen countertop design", category: "Large Format Slabs" },
-    { id: 6, title: "Curved Wall Design", image: "/assets/about-tiles.jpg", description: "Innovative curved wall installation", category: "Flexible Tiles" }
+    { id: 6, title: "Curved Wall Design", image: "/assets/about-tiles-test.jpg", description: "Innovative curved wall installation", category: "Flexible Tiles" }
   ];
 
   return (

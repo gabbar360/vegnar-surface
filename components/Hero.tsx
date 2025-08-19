@@ -14,23 +14,15 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      image: "/assets/hero-marble-bg.jpg",
+      image: "/assets/large-formate-tiles.png",
       title: "Large Format",
       subtitle: "Porcelain Slabs",
       description: "Large format porcelain slab tiles characterized by their large size and thin profile for seamless installations.",
       category: "large-format-slabs"
     },
     {
-      id: 2,
-      image: "/assets/hero-interior.jpg",
-      title: "Premium Porcelain",
-      subtitle: "Floor Tiles",
-      description: "Discover our extensive collection of luxury porcelain tiles crafted with ultra-modern technology.",
-      category: "porcelain-tiles"
-    },
-    {
       id: 3,
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
+      image: "/assets/20mm-outdoor-tiles.png",
       title: "Outdoor Porcelain",
       subtitle: "Pavers 2cm",
       description: "Weather-resistant outdoor porcelain pavers designed for terraces and commercial spaces.",
@@ -38,7 +30,7 @@ const Hero = () => {
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200",
+      image: "/assets/subway-tiles.png",
       title: "Subway Collection",
       subtitle: "Classic Design",
       description: "Timeless subway tiles bringing elegance and versatility to modern interiors.",
@@ -46,20 +38,12 @@ const Hero = () => {
     },
     {
       id: 5,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200",
+      image: "/assets/Mosaics-tiles.jpg",
       title: "Mosaic Collection",
       subtitle: "Artistic Tiles",
       description: "Beautiful mosaic tiles perfect for creating stunning feature walls and decorative elements.",
       category: "mosaic-tiles"
     },
-    {
-      id: 6,
-      image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200",
-      title: "Flexible Tiles",
-      subtitle: "Innovative Design",
-      description: "Revolutionary flexible tiles for curved surfaces and unique architectural applications.",
-      category: "flexible-tiles"
-    }
   ];
 
   useEffect(() => {
