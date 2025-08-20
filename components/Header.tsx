@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SearchBar from "@/components/SearchBar";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,8 +83,16 @@ const Header = () => {
             />
           </Link>
 
+          {/* Search Bar - Desktop & Tablet */}
+          <div className="hidden sm:block flex-1 max-w-xs lg:max-w-sm mx-2 sm:mx-4 lg:mx-8">
+            <SearchBar 
+              isHomePage={isHomePage} 
+              isScrolled={isScrolled}
+            />
+          </div>
+
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8">
+          <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4">
             {navigationItems.map((item) => (
               <div key={item.name} className="relative group">
                 {item.hasDropdown ? (
@@ -124,7 +133,7 @@ const Header = () => {
                 ) : item.isButton ? (
                   <Link
                     href={item.path}
-                    className="bg-gradient-to-r from-charcoal to-charcoal/90 text-white px-4 xl:px-8 py-2 xl:py-3 rounded-full text-xs xl:text-sm font-semibold tracking-wide hover:from-charcoal/90 hover:to-charcoal/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-charcoal/50 whitespace-nowrap"
+                    className="bg-gradient-to-r from-charcoal to-charcoal/90 text-white px-3 xl:px-6 py-2 xl:py-3 rounded-full text-xs xl:text-sm font-semibold tracking-wide hover:from-charcoal/90 hover:to-charcoal/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-charcoal/50 whitespace-nowrap"
                   >
                     {item.name}
                   </Link>
@@ -175,6 +184,11 @@ const Header = () => {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-x-0 top-20 bg-white shadow-2xl z-50 max-h-screen overflow-y-auto border-t border-gray-200/50">
+          {/* Mobile Search */}
+          <div className="p-4 border-b border-gray-100">
+            <SearchBar />
+          </div>
+          
           <nav className="py-4 px-4 space-y-2 pb-20 min-h-screen">
             {navigationItems.map((item) => (
               <div key={item.name}>

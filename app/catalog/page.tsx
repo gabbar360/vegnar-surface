@@ -19,7 +19,6 @@ export default function Catalog() {
   const categories = [
     "All",
     "Large Slab Collection",
-    "200x200MM Collection",
     "Subway Collection",
     "Outdoor Collection",
     "Mosaics Collection",
@@ -249,65 +248,6 @@ export default function Catalog() {
         "/catalogs/Large Slab Collection/Vegnar Surfaces - Vellura Luxe B.pdf",
       thumbnailImage: "/catalogs/thumbnails/luxeA.png",
     },
-
-    // 200x200MM Collection (4 PDFs)
-    {
-      id: 17,
-      title: "Bloomora 200×200 mm",
-      description:
-        "Beautiful floral-inspired 200x200mm tiles with elegant patterns",
-      pages: 12,
-      size: "5 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image:
-        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      pdfPath:
-        "/catalogs/200x200MM Collection/Vegnar Surfaces - Bloomora 200×200 mm.pdf",
-      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
-    },
-    {
-      id: 18,
-      title: "MagnaStone 200×200 mm",
-      description: "Magnetic stone-effect tiles in compact 200x200mm format",
-      pages: 14,
-      size: "6 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-      pdfPath:
-        "/catalogs/200x200MM Collection/Vegnar Surfaces - MagnaStone 200×200 mm.pdf",
-      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
-    },
-    {
-      id: 19,
-      title: "MonoLux 200×200 mm",
-      description: "Monochromatic luxury tiles in versatile 200x200mm size",
-      pages: 10,
-      size: "4 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
-      pdfPath:
-        "/catalogs/200x200MM Collection/Vegnar Surfaces - MonoLux 200×200 mm.pdf",
-      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
-    },
-    {
-      id: 20,
-      title: "OpalTone 200×200 mm",
-      description: "Opal-toned tiles with subtle color variations in 200x200mm",
-      pages: 16,
-      size: "7 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-      pdfPath:
-        "/catalogs/200x200MM Collection/Vegnar Surfaces - OpalTone 200×200 mm.pdf",
-      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
-    },
-
     // Subway Collection (4 PDFs)
     {
       id: 21,
