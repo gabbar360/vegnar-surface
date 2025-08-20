@@ -76,27 +76,6 @@ const sampleData = {
       info: `Export market - Vegnar Surfaces supplies premium tiles to ${country.name}`,
       isHQ: false
     })),
-    // {
-    //   lat: 40.7128,
-    //   lng: -74.0060,
-    //   name: "New York Office",
-    //   logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    //   info: "Regional headquarters serving North American markets with premium tile collections."
-    // },
-    // {
-    //   lat: 51.5074,
-    //   lng: -0.1278,
-    //   name: "London Showroom",
-    //   logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    //   info: "European flagship showroom featuring our complete range of luxury surfaces."
-    // },
-    // {
-    //   lat: -33.8688,
-    //   lng: 151.2093,
-    //   name: "Sydney Distribution",
-    //   logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    //   info: "Pacific region distribution center ensuring fast delivery across Australia and New Zealand."
-    // }
   ]
 };
 

@@ -216,7 +216,7 @@ export default function Blog() {
                     </span>
                     <Button
                       variant="ghost"
-                      className="text-orange hover:text-orange/80"
+                      className="text-orange hover:text-orange hover:bg-orange/10"
                     >
                       Read More
                       <ArrowRight className="w-4 h-4 ml-1" />
