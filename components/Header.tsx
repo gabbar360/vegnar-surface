@@ -92,7 +92,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
             {navigationItems.map((item) => (
               <div key={item.name} className="relative group">
                 {item.hasDropdown ? (
@@ -133,7 +133,7 @@ const Header = () => {
                 ) : item.isButton ? (
                   <Link
                     href={item.path}
-                    className="bg-gradient-to-r from-charcoal to-charcoal/90 text-white px-3 xl:px-6 py-2 xl:py-3 rounded-full text-xs xl:text-sm font-semibold tracking-wide hover:from-charcoal/90 hover:to-charcoal/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-charcoal/50 whitespace-nowrap"
+                    className="bg-gradient-to-r from-charcoal to-charcoal/90 text-white px-2 xl:px-4 py-1.5 xl:py-2 rounded-full text-xs font-semibold tracking-wide hover:from-charcoal/90 hover:to-charcoal/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-charcoal/50 whitespace-nowrap"
                   >
                     {item.name}
                   </Link>
