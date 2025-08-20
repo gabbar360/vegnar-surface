@@ -5,12 +5,33 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Filter, Search, Grid3X3, List } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function Products() {
+function ProductsContent() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const urlSearch = searchParams.get('search');
+    const urlCategory = searchParams.get('category');
+    
+    if (urlSearch) {
+      setSearchTerm(urlSearch);
+    }
+    if (urlCategory) {
+      const categoryMap: { [key: string]: string } = {
+        'subway-tiles': 'Subway Tiles',
+        'outdoor-tiles': 'Outdoor Tiles',
+        'porcelain-pavers': 'Outdoor Tiles',
+        'mosaic-tiles': 'Fullbody Tiles',
+        'large-format-slabs': 'Slab Tiles'
+      };
+      setActiveCategory(categoryMap[urlCategory] || 'All');
+    }
+  }, [searchParams]);
 
   const categories = [
     "All",
@@ -283,7 +304,7 @@ export default function Products() {
   });
 
   return (
-    <div className="min-h-screen">
+    <>
       <Header />
       
       {/* Hero Banner */}
@@ -436,6 +457,16 @@ export default function Products() {
       </section> */}
 
       <Footer />
+    </>
+  );
+}
+
+export default function Products() {
+  return (
+    <div className="min-h-screen">
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductsContent />
+      </Suspense>
     </div>
   );
 }

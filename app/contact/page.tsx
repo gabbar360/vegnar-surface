@@ -226,40 +226,7 @@ export default function Contact() {
             title="RK Iconic, B623, 150 Feet Ring Rd, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360007"
           ></iframe>
         </div>
-        
-        {/* <div className="bg-white border-t border-border py-4">
-          <div className="container mx-auto px-4">
-          </div>
-        </div> */}
       </section>
-
-      {/* Export Information
-      <section className="py-16 bg-cream">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="section-title mb-6">Export Inquiries</h2>
-            <p className="section-subtitle">
-              We export to 22+ countries worldwide. Contact us for international business opportunities.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="card-luxury text-center">
-              <div className="text-3xl font-bold text-orange mb-2">22+</div>
-              <div className="text-muted-foreground">Countries Exported</div>
-            </div>
-            <div className="card-luxury text-center">
-              <div className="text-3xl font-bold text-orange mb-2">50M+</div>
-              <div className="text-muted-foreground">Tiles Delivered</div>
-            </div>
-            <div className="card-luxury text-center">
-              <div className="text-3xl font-bold text-orange mb-2">10+</div>
-              <div className="text-muted-foreground">Years Experience</div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       <Footer />
     </div>
   );

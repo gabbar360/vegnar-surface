@@ -16,38 +16,25 @@ const Globe3D = dynamic(() => import("@/components/Globe3D"), {
 });
 
 export default function Export() {
-  const exportCountries = [
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Germany",
-    "France",
-    "Australia",
-    "New Zealand",
-    "UAE",
-    "Saudi Arabia",
-    "Kuwait",
-    "Qatar",
-    "Oman",
-    "Bahrain",
-    "South Africa",
-    "Kenya",
-    "Nigeria",
-    "Ghana",
-    "Morocco",
-    "Egypt",
-    "Libya",
-    "Tunisia",
-    "Algeria",
-    "Bangladesh",
-    "Sri Lanka",
-    "Nepal",
-    "Maldives",
-    "Thailand",
-    "Malaysia",
-    "Singapore",
-    "Philippines",
-  ];
+  const exportCountries = {
+    Europe: [
+      "United Kingdom", "Germany", "France", "Netherlands", "Belgium", "Poland", 
+      "Austria", "Portugal", "Greece", "Czech Republic", "Hungary", "Romania", 
+      "Sweden", "Denmark", "Norway", "Ireland", "Finland"
+    ],
+    "North America": [
+      "United States (Houston)", "Canada", "Mexico"
+    ],
+    "Middle East": [
+      "United Arab Emirates", "Saudi Arabia", "Qatar", "Kuwait", "Oman"
+    ],
+    Africa: [
+      "South Africa"
+    ],
+    Asia: [
+      "Australia", "New Zealand", "Japan", "South Korea", "Maldives", "Vietnam"
+    ]
+  };
 
   return (
     <div className="min-h-screen">
@@ -140,11 +127,35 @@ export default function Export() {
         </div>
 
         {/* 3D Globe Component */}
-        <div className="w-full mb-8">
-          <Globe3D rotationSpeed={0.3} />
+        <div className="w-full mb-12">
+          <Globe3D rotationSpeed={1.5} />
         </div>
         
-        
+        {/* Country Presence List */}
+        {/* <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-3xl font-bold text-charcoal text-center mb-12">
+              Countries We Export To
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {Object.entries(exportCountries).map(([region, countries]) => (
+                <div key={region} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                  <h4 className="text-xl font-bold text-charcoal mb-4 border-b border-orange pb-2">
+                    {region}
+                  </h4>
+                  <ul className="space-y-2">
+                    {countries.map((country) => (
+                      <li key={country} className="text-muted-foreground flex items-center">
+                        <span className="w-2 h-2 bg-orange rounded-full mr-3"></span>
+                        {country}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div> */}
       </section>
 
       <Footer />

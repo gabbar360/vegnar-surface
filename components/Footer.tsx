@@ -13,6 +13,7 @@ import {
   MessageCircleHeart,
 } from "lucide-react";
 import { FaPinterest } from "react-icons/fa";
+import { FaSquareWhatsapp } from "react-icons/fa6";
 const Footer = () => {
   const quickLinks = [
     { name: "About Us", href: "/about" },
@@ -87,39 +88,7 @@ const Footer = () => {
             </div>
 
             {/* Certification Icons */}
-            <div className="mt-6">
-              <h4 className="text-sm font-semibold text-white mb-3">Certifications</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
-                  <img
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyMCIgeT0iMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DRTwvdGV4dD4KPHRleHQgeD0iMjAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iOCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1BUktJTkc8L3RleHQ+Cjwvc3ZnPgo="
-                    alt="CE Marking"
-                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
-                  />
-                </div>
-                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
-                  <img
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyMCIgeT0iMTQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1BS0UgSU48L3RleHQ+Cjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPklORElBPC90ZXh0Pgo8L3N2Zz4K"
-                    alt="Make in India"
-                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
-                  />
-                </div>
-                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
-                  <img
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJ3aGl0ZSIvPgo8dGV4dCB4PSIyMCIgeT0iMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzMzMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPklTTzwvdGV4dD4KPHRleHQgeD0iMjAiIHk9IjI4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMzMzMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj45MDAxPC90ZXh0Pgo8L3N2Zz4K"
-                    alt="ISO 9001"
-                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
-                  />
-                </div>
-                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
-                  <img
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyMCIgeT0iMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GSUVPPC90ZXh0Pgo8dGV4dCB4PSIyMCIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RVhQT1JUPC90ZXh0Pgo8L3N2Zz4K"
-                    alt="FIEO Export"
-                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
-                  />
-                </div>
-              </div>
-            </div>
+           
           </div>
 
           {/* Quick Links */}
@@ -166,7 +135,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6 text-white">Follow Us</h3>
 
-            <div className="flex space-x-4">
+            <div className="flex space-x-3">
               <a
                 href="https://www.facebook.com/vegnarsurfaces"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-black rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
@@ -180,10 +149,19 @@ const Footer = () => {
                 <Instagram className="w-6 h-6" />
               </a>
               <a
+                href="https://wa.me/919998040370"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-black rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <FaSquareWhatsapp className="w-6 h-6" />
+              </a>
+
+              <a
                 href="https://in.pinterest.com/latavegnarsurfaces/_created/"
                 className="p-3 bg-primary-foreground/10 hover:bg-white hover:text-black rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
               >
-                <FaPinterest  className="w-6 h-6" />
+                <FaPinterest className="w-6 h-6" />
               </a>
               <a
                 href="https://www.linkedin.com/company/vegnar-surfaces/posts/?feedView=all"
@@ -193,11 +171,46 @@ const Footer = () => {
               </a>
             </div>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <Button className="w-full bg-white text-charcoal hover:bg-white hover:text-black hover:scale-105 hover:-translate-y-1 transition-all duration-300 group">
                 <Download className="w-4 h-4 mr-2 transition-all duration-300" />
                 Download PDF
               </Button>
+            </div> */}
+             <div className="mt-6">
+              <h4 className="text-sm font-semibold text-white mb-3">
+                Certifications
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyMCIgeT0iMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DRTwvdGV4dD4KPHRleHQgeD0iMjAiIHk9IjMwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iOCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1BUktJTkc8L3RleHQ+Cjwvc3ZnPgo="
+                    alt="CE Marking"
+                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
+                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyMCIgeT0iMTQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1BS0UgSU48L3RleHQ+Cjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPklORElBPC90ZXh0Pgo8L3N2Zz4K"
+                    alt="Make in India"
+                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
+                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTgiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJ3aGl0ZSIvPgo8dGV4dCB4PSIyMCIgeT0iMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzMzMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPklTTzwvdGV4dD4KPHRleHQgeD0iMjAiIHk9IjI4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMzMzMzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj45MDAxPC90ZXh0Pgo8L3N2Zz4K"
+                    alt="ISO 9001"
+                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
+                <div className="bg-white/10 p-2 rounded-lg hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyMCIgeT0iMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GSUVPPC90ZXh0Pgo8dGV4dCB4PSIyMCIgeT0iMjgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RVhQT1JUPC90ZXh0Pgo8L3N2Zz4K"
+                    alt="FIEO Export"
+                    className="w-full h-8 object-contain group-hover:brightness-110 transition-all duration-300"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -215,12 +228,16 @@ const Footer = () => {
               <span className="text-primary-foreground/60">
                 Exporting to 30+ Countries
               </span>
-              <span className="text-primary-foreground/60 hidden md:inline">•</span>
+              <span className="text-primary-foreground/60 hidden md:inline">
+                •
+              </span>
               <span className="text-primary-foreground/60">
                 18+ Years of Excellence
               </span>
-              <span className="text-primary-foreground/60 hidden md:inline">•</span>
-              <span className="text-white font-semibold">Made in India</span>
+              {/* <span className="text-primary-foreground/60 hidden md:inline">
+                •
+              </span> */}
+              {/* <span className="text-white font-semibold">Made in India</span> */}
             </div>
           </div>
         </div>

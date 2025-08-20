@@ -1,6 +1,70 @@
-import { Clock, Package, Award, Truck, Shield, Globe } from "lucide-react";
+"use client";
+import { Clock, Package, Award, Truck, Shield, Globe, CheckCircle, MapPin, Star } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 const WhyChooseUs = () => {
+  const [isVisible, setIsVisible] = useState([false, false, false]);
+  const [animatedValues, setAnimatedValues] = useState([
+    [0, 0], // On-Time Delivery stats
+    [0, 0], // Extensive Product Line stats  
+    [0, 0]  // Excellent Quality stats
+  ]);
+  const sectionRefs = [useRef(null), useRef(null), useRef(null)];
+
+  const statsData = [
+    [{ value: 99.5, suffix: "%", label: "On-Time Rate" }, { value: 30, suffix: "+", label: "Countries" }],
+    [{ value: 500, suffix: "+", label: "Product Variants" }, { value: 15, suffix: "+", label: "Size Options" }],
+    [{ value: 4, suffix: "+", label: "Certifications" }, { value: 100, suffix: "%", label: "Quality Tested" }]
+  ];
+
+  useEffect(() => {
+    const observers = sectionRefs.map((ref, index) => {
+      return new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !isVisible[index]) {
+            setIsVisible(prev => {
+              const newVisible = [...prev];
+              newVisible[index] = true;
+              return newVisible;
+            });
+            animateCounters(index);
+          }
+        },
+        { threshold: 0.5 }
+      );
+    });
+
+    sectionRefs.forEach((ref, index) => {
+      if (ref.current) {
+        observers[index].observe(ref.current);
+      }
+    });
+
+    return () => observers.forEach(observer => observer.disconnect());
+  }, [isVisible]);
+
+  const animateCounters = (sectionIndex:any) => {
+    statsData[sectionIndex].forEach((stat, statIndex) => {
+      let start = 0;
+      const end = stat.value;
+      const duration = 2000;
+      const increment = end / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+        }
+        
+        setAnimatedValues(prev => {
+          const newValues = [...prev];
+          newValues[sectionIndex][statIndex] = start;
+          return newValues;
+        });
+      }, 16);
+    });
+  };
   const features = [
     {
       icon: Clock,
@@ -28,10 +92,10 @@ const WhyChooseUs = () => {
   ];
 
   const certifications = [
-    { name: "ISO 9001:2015", description: "Quality Management" },
-    { name: "CE Marking", description: "European Conformity" },
-    { name: "ISI Mark", description: "Indian Standards" },
-    { name: "Export Excellence", description: "Government Recognition" },
+    { name: "ISO 9001:2015", description: "Quality Management", icon: Award },
+    { name: "CE Marking", description: "European Conformity", icon: CheckCircle },
+    { name: "ISI Mark", description: "Indian Standards", icon: MapPin },
+    { name: "Export Excellence", description: "Government Recognition", icon: Star },
   ];
 
   return (
@@ -71,69 +135,21 @@ const WhyChooseUs = () => {
                 </p>
 
                 {/* Stats for this feature */}
-                <div className="grid grid-cols-2 gap-6">
-                  {index === 0 && (
-                    <>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          99.5%
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          On-Time Rate
-                        </div>
+                <div ref={sectionRefs[index]} className="grid grid-cols-2 gap-6">
+                  {statsData[index].map((stat, statIndex) => (
+                    <div key={statIndex} className="text-center">
+                      <div className="text-3xl font-bold text-charcoal mb-2">
+                        {stat.suffix === "%" ? 
+                          animatedValues[index][statIndex].toFixed(1) : 
+                          Math.floor(animatedValues[index][statIndex])
+                        }
+                        {stat.suffix}
                       </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          30+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Countries
-                        </div>
+                      <div className="text-sm text-muted-foreground">
+                        {stat.label}
                       </div>
-                    </>
-                  )}
-
-                  {index === 1 && (
-                    <>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          500+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Product Variants
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          15+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Size Options
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {index === 2 && (
-                    <>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          4+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Certifications
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          100%
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Quality Tested
-                        </div>
-                      </div>
-                    </>
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -170,7 +186,7 @@ const WhyChooseUs = () => {
                 className="bg-background border border-border/20 rounded-xl p-6 text-center shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="bg-charcoal/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-charcoal" />
+                  <cert.icon className="w-8 h-8 text-charcoal" />
                 </div>
                 <h4 className="font-semibold text-charcoal mb-2">
                   {cert.name}
