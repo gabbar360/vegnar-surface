@@ -42,27 +42,27 @@ export default function Partner() {
   const benefits = [
     {
       icon: CheckCircle,
-      title: "Quality Assurance",
+      title: "Uncompromising Quality",
       description:
-        "Premium ceramic tiles manufactured to international standards with rigorous quality control",
+        "Every product is manufactured to international standards, with rigorous quality checks at every stage.",
     },
     {
       icon: Globe,
-      title: "Global Distribution",
+      title: "Global Expertise",
       description:
-        "Extensive distribution network covering 22+ countries with reliable logistics support",
+        "Serving over 30+ countries, we understand the diverse needs of our markets and ensure smooth, reliable logistics for our partners.",
     },
     {
       icon: Shield,
-      title: "Certified Products",
+      title: "Certified Excellence",
       description:
-        "ISO 9001:2015 certified manufacturing with comprehensive product warranties",
+        "ISO certified manufacturing and comprehensive product warranties for complete peace of mind.",
     },
     {
       icon: Package,
-      title: "Custom Branding",
+      title: "Custom Branding Solutions",
       description:
-        "OEM/White label solutions with custom packaging and branding options",
+        "OEM and white-label options with tailored packaging and branding to strengthen your local market presence.",
     },
   ];
 
@@ -71,25 +71,25 @@ export default function Partner() {
       step: "1",
       title: "Connect",
       description:
-        "Fill out our partnership form or schedule a call with our team to discuss your requirements",
+        "Reach out via our partnership form or schedule a call with our team.",
     },
     {
       step: "2",
       title: "Evaluate",
       description:
-        "Our team evaluates your market potential and provides customized partnership proposals",
+        "We assess your market potential and prepare a customised partnership proposal.",
     },
     {
       step: "3",
       title: "Agreement",
       description:
-        "Finalize partnership terms including territory, products, and pricing structure",
+        "Define partnership terms: territory, product range, and pricing structure.",
     },
     {
       step: "4",
       title: "Launch",
       description:
-        "Begin operations with marketing support, training, and dedicated account management",
+        "Start operations with dedicated account management, marketing materials, and training support.",
     },
   ];
 
@@ -143,8 +143,7 @@ export default function Partner() {
               Become a Partner
             </h1>
             <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
-              Join our global network of distributors and retailers committed to
-              delivering premium ceramic solutions worldwide
+              Join our global network of trusted distributors, retailers, and project partners delivering premium porcelain surfaces to the world.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <div className="flex items-center gap-2">
@@ -175,8 +174,7 @@ export default function Partner() {
               Why Partner With Vegnar Surfaces?
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Join our mission to deliver exceptional ceramic solutions and
-              build a profitable partnership with industry-leading support
+              Partnering with Vegnar Surfaces means more than access to exceptional products — it’s about building a profitable, long-term relationship backed by world-class service and support.
             </p>
           </div>
 
@@ -220,10 +218,10 @@ export default function Partner() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-charcoal mb-6">
-              Partnership Process
+              How to Become a Vegnar Partner
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our simple four-step process to become a Vegnar Surfaces partner
+              Our streamlined process ensures a smooth and professional onboarding experience
             </p>
           </div>
 

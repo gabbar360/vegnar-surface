@@ -51,7 +51,7 @@ const PageLoader = ({ onComplete, duration = 700 }: PageLoaderProps) => {
         {/* Company Name */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-charcoal mb-2">VEGNAR</h2>
-          <p className="text-sm text-muted-foreground tracking-widest">CERAMICA</p>
+          <p className="text-sm text-muted-foreground tracking-widest">SURFACES</p>
         </div>
 
         {/* Progress Bar */}

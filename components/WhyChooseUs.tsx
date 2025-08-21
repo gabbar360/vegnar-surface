@@ -1,6 +1,70 @@
-import { Clock, Package, Award, Truck, Shield, Globe } from "lucide-react";
+"use client";
+import { Clock, Package, Award, Truck, Shield, Globe, CheckCircle, MapPin, Star } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 const WhyChooseUs = () => {
+  const [isVisible, setIsVisible] = useState([false, false, false]);
+  const [animatedValues, setAnimatedValues] = useState([
+    [0, 0], // On-Time Delivery stats
+    [0, 0], // Extensive Product Line stats  
+    [0, 0]  // Excellent Quality stats
+  ]);
+  const sectionRefs = [useRef(null), useRef(null), useRef(null)];
+
+  const statsData = [
+    [{ value: 99.5, suffix: "%", label: "On-Time Rate" }, { value: 30, suffix: "+", label: "Countries" }],
+    [{ value: 500, suffix: "+", label: "Product Variants" }, { value: 15, suffix: "+", label: "Size Options" }],
+    [{ value: 4, suffix: "+", label: "Certifications" }, { value: 100, suffix: "%", label: "Quality Tested" }]
+  ];
+
+  useEffect(() => {
+    const observers = sectionRefs.map((ref, index) => {
+      return new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !isVisible[index]) {
+            setIsVisible(prev => {
+              const newVisible = [...prev];
+              newVisible[index] = true;
+              return newVisible;
+            });
+            animateCounters(index);
+          }
+        },
+        { threshold: 0.5 }
+      );
+    });
+
+    sectionRefs.forEach((ref, index) => {
+      if (ref.current) {
+        observers[index].observe(ref.current);
+      }
+    });
+
+    return () => observers.forEach(observer => observer.disconnect());
+  }, [isVisible]);
+
+  const animateCounters = (sectionIndex:any) => {
+    statsData[sectionIndex].forEach((stat, statIndex) => {
+      let start = 0;
+      const end = stat.value;
+      const duration = 2000;
+      const increment = end / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+        }
+        
+        setAnimatedValues(prev => {
+          const newValues = [...prev];
+          newValues[sectionIndex][statIndex] = start;
+          return newValues;
+        });
+      }, 16);
+    });
+  };
   const features = [
     {
       icon: Clock,
@@ -8,14 +72,14 @@ const WhyChooseUs = () => {
       description:
         "We are the top manufacturer because of our on-time and secure deliveries. You can be certain that when you work with us, your cargo will arrive on schedule, undamaged, and in the best possible shape.",
       image:
-        "https://sfycdn.speedsize.com/a513b203-c893-45cc-878b-3b5f4ffe1ea9/https://www.hyperiontiles.co.uk/cdn/shop/articles/how_to_choose_tiles-_a_simple_guide_for_stylish_homes_bhlws6oDE0LZ3_Bn-Qngh_1624beb1-9ad2-4276-90bc-568556606b18.png?v=1744738179",
+        "/assets/about1.jpg"
     },
     {
       icon: Package,
       title: "Extensive Product Line",
       description:
         "Vegnar Ceramic is aware everybody has different tastes. To satisfy the various needs of our customers, we provide a varied and distinctive range of tiles and sanitaryware products.",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600",
+      image: "/assets/about2.jpg",
     },
     {
       icon: Award,
@@ -23,15 +87,15 @@ const WhyChooseUs = () => {
       description:
         "We utilize cutting-edge technologies and maintain international standards throughout the whole manufacturing and testing process to guarantee that our goods are of the highest quality.",
       image:
-        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600",
+        "/assets/about3.jpg",
     },
   ];
 
   const certifications = [
-    { name: "ISO 9001:2015", description: "Quality Management" },
-    { name: "CE Marking", description: "European Conformity" },
-    { name: "ISI Mark", description: "Indian Standards" },
-    { name: "Export Excellence", description: "Government Recognition" },
+    { name: "ISO 9001:2015", description: "Quality Management", icon: Award },
+    { name: "CE Marking", description: "European Conformity", icon: CheckCircle },
+    { name: "ISI Mark", description: "Indian Standards", icon: MapPin },
+    { name: "Export Excellence", description: "Government Recognition", icon: Star },
   ];
 
   return (
@@ -71,69 +135,21 @@ const WhyChooseUs = () => {
                 </p>
 
                 {/* Stats for this feature */}
-                <div className="grid grid-cols-2 gap-6">
-                  {index === 0 && (
-                    <>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          99.5%
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          On-Time Rate
-                        </div>
+                <div ref={sectionRefs[index]} className="grid grid-cols-2 gap-6">
+                  {statsData[index].map((stat, statIndex) => (
+                    <div key={statIndex} className="text-center">
+                      <div className="text-3xl font-bold text-charcoal mb-2">
+                        {stat.suffix === "%" ? 
+                          animatedValues[index][statIndex].toFixed(1) : 
+                          Math.floor(animatedValues[index][statIndex])
+                        }
+                        {stat.suffix}
                       </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          22+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Countries
-                        </div>
+                      <div className="text-sm text-muted-foreground">
+                        {stat.label}
                       </div>
-                    </>
-                  )}
-
-                  {index === 1 && (
-                    <>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          500+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Product Variants
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          15+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Size Options
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {index === 2 && (
-                    <>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          4+
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Certifications
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-charcoal mb-2">
-                          100%
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Quality Tested
-                        </div>
-                      </div>
-                    </>
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -170,7 +186,7 @@ const WhyChooseUs = () => {
                 className="bg-background border border-border/20 rounded-xl p-6 text-center shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="bg-charcoal/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-charcoal" />
+                  <cert.icon className="w-8 h-8 text-charcoal" />
                 </div>
                 <h4 className="font-semibold text-charcoal mb-2">
                   {cert.name}

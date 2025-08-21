@@ -8,33 +8,33 @@ import Link from "next/link";
 
 export default function About() {
   const milestones = [
-    { year: "2014", title: "Company Founded", description: "Started our journey in ceramic tile manufacturing" },
-    { year: "2016", title: "First Export", description: "Expanded to international markets" },
-    { year: "2018", title: "ISO Certification", description: "Achieved ISO 9001:2015 quality certification" },
-    { year: "2020", title: "20+ Countries", description: "Reached export milestone of 20+ countries" },
-    { year: "2024", title: "50M+ Tiles", description: "Delivered over 50 million tiles worldwide" },
+    { year: "2007", title: "Company Founded", description: "Started our journey in ceramic tile manufacturing" },
+    { year: "2009", title: "First Export", description: "Expanded to international markets" },
+    { year: "2015", title: "ISO Certification", description: "Achieved ISO 9001:2015 quality certification" },
+    { year: "2020", title: "30+ Countries", description: "Reached export milestone of 30+ countries" },
+    { year: "2024", title: "100M+ Tiles", description: "Delivered over 100 million tiles worldwide" },
   ];
 
   const values = [
     {
       icon: Users,
       title: "Customer First",
-      description: "We prioritize our customers' needs and satisfaction above everything else."
+      description: "We build lasting partnerships by truly understanding our clients’ needs and delivering solutions that exceed expectations."
     },
     {
       icon: Building,
-      title: "Quality Excellence",
-      description: "Committed to delivering the highest quality products through innovation."
+      title: "Uncompromising Quality",
+      description: "Every surface is crafted with precision, using the finest materials and advanced technology to ensure enduring performance."
     },
     {
       icon: Globe,
-      title: "Global Reach",
-      description: "Expanding our presence across 22+ countries with premium products."
+      title: "Global Vision",
+      description: "With a presence in 30+ countries, we design products that cater to diverse markets and cultural aesthetics worldwide."
     },
     {
       icon: Award,
-      title: "Continuous Innovation",
-      description: "Investing in R&D to create cutting-edge ceramic solutions."
+      title: "Innovation at the Core",
+      description: "Through continuous research and development, we push the boundaries of design and functionality in porcelain surfaces."
     }
   ];
 
@@ -46,7 +46,7 @@ export default function About() {
       <section className="relative h-96 bg-charcoal flex items-center">
         <div className="absolute inset-0">
           <img 
-            src="/assets/about-tiles.jpg" 
+            src="/assets/about-section.jpg" 
             alt="About Vegnar" 
             className="w-full h-full object-cover opacity-30"
           />
@@ -215,7 +215,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">Our Core Values</h2>
-            <p className="section-subtitle">The principles that guide everything we do</p>
+            <p className="section-subtitle">The principles that shape everything we create.</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -234,26 +234,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section
-      <section className="py-24 bg-charcoal text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Space?</h2>
-          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Discover our premium collection of ceramic tiles and sanitaryware products 
-            designed to elevate your projects.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="luxury" size="lg">
-              View Our Products
-            </Button>
-            <Button variant="outline" size="lg">
-              Get Quote
-            </Button>
-          </div>
-        </div>
-      </section> */}
-
       <Footer />
     </div>
   );

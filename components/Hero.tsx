@@ -14,23 +14,15 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      image: "/assets/hero-marble-bg.jpg",
+      image: "/assets/large-formate-tiles.png",
       title: "Large Format",
       subtitle: "Porcelain Slabs",
       description: "Large format porcelain slab tiles characterized by their large size and thin profile for seamless installations.",
       category: "large-format-slabs"
     },
     {
-      id: 2,
-      image: "/assets/hero-interior.jpg",
-      title: "Premium Porcelain",
-      subtitle: "Floor Tiles",
-      description: "Discover our extensive collection of luxury porcelain tiles crafted with ultra-modern technology.",
-      category: "porcelain-tiles"
-    },
-    {
       id: 3,
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
+      image: "/assets/20mm-outdoor-tiles.png",
       title: "Outdoor Porcelain",
       subtitle: "Pavers 2cm",
       description: "Weather-resistant outdoor porcelain pavers designed for terraces and commercial spaces.",
@@ -38,7 +30,7 @@ const Hero = () => {
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200",
+      image: "/assets/subway-tiles.png",
       title: "Subway Collection",
       subtitle: "Classic Design",
       description: "Timeless subway tiles bringing elegance and versatility to modern interiors.",
@@ -46,20 +38,12 @@ const Hero = () => {
     },
     {
       id: 5,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200",
+      image: "/assets/Mosaics-tiles.jpg",
       title: "Mosaic Collection",
       subtitle: "Artistic Tiles",
       description: "Beautiful mosaic tiles perfect for creating stunning feature walls and decorative elements.",
       category: "mosaic-tiles"
     },
-    {
-      id: 6,
-      image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200",
-      title: "Flexible Tiles",
-      subtitle: "Innovative Design",
-      description: "Revolutionary flexible tiles for curved surfaces and unique architectural applications.",
-      category: "flexible-tiles"
-    }
   ];
 
   useEffect(() => {
@@ -126,7 +110,7 @@ const Hero = () => {
                       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-none">
                         {slide.title}
                       </h1>
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-charcoal">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white">
                         {slide.subtitle}
                       </h2>
                     </div>
@@ -138,7 +122,7 @@ const Hero = () => {
                     <div className="flex justify-start">
                       {mounted && (
                         <Link href={`/products?category=${slide.category}`}>
-                          <Button variant="luxury" size="xl" className="group">
+                          <Button variant="luxury" size="xl" className="group rounded-full">
                             View Collection
                             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                           </Button>
@@ -188,14 +172,14 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 right-8 z-10">
+      {/* <div className="absolute bottom-8 right-8 z-10">
         <div className="flex flex-col items-center space-y-2 text-white/60">
           <span className="text-sm tracking-widest vertical-text">SCROLL</span>
           <div className="w-px h-12 bg-white/30 relative">
             <div className="absolute top-0 w-px h-6 bg-charcoal animate-pulse" />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

@@ -1,15 +1,62 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Award, Globe, Users, Factory } from "lucide-react";
+import { ArrowRight, Award, Globe, Users, Factory, Calendar, Heart, Package } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
 
 const AboutSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [animatedValues, setAnimatedValues] = useState([0, 0, 0, 0]);
+  const sectionRef = useRef(null);
+
   const stats = [
-    { icon: Globe, value: "22+", label: "Countries Exported" },
-    { icon: Factory, value: "10+", label: "Years Experience" },
-    { icon: Users, value: "10,000+", label: "Happy Customers" },
-    { icon: Award, value: "50M+", label: "Tiles Delivered" },
+    { icon: Globe, value: 30, suffix: "+", label: "Countries Exported" },
+    { icon: Calendar, value: 18, suffix: "+", label: "Years Experience" },
+    { icon: Heart, value: 25000, suffix: "+", label: "Happy Customers" },
+    { icon: Package, value: 100, suffix: "M+", label: "Tiles Delivered" },
   ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          animateCounters();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  const animateCounters = () => {
+    stats.forEach((stat, index) => {
+      let start = 0;
+      const end = stat.value;
+      const duration = 2000;
+      const increment = end / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+        }
+        
+        setAnimatedValues(prev => {
+          const newValues = [...prev];
+          newValues[index] = Math.floor(start);
+          return newValues;
+        });
+      }, 16);
+    });
+  };
 
   return (
     <section className="py-24 bg-white">
@@ -30,18 +77,16 @@ const AboutSection = () => {
             
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                Since <strong className="text-charcoal">2014</strong>, We have been bringing architectural 
-                concepts, projects, and innovations to reality. Vegnar Ceramic is a leading 
-                tile and sanitarywares manufacturing company. We are a sophisticated worldwide 
-                company that combines manufacturing, sales, and service.
+                Since <strong className="text-charcoal">2007</strong> Built for the World, Vegnar Surfaces is a new-generation global brand that brings together world-class porcelain surfaces with exceptional design versatility.
+From sleek subway tiles and timeless mosaics to large-format slabs and durable outdoor pavers, we deliver collections that inspire architects, designers, and builders worldwide.
               </p>
               
               <p>
-                The company has a great capacity to create high-quality tiles and sanitarywares 
-                products in a variety of finishes, forms, and sizes to meet the diverse demands 
-                of homeowners and architects. We manufacture and provide the high-quality, best 
-                selection of <strong className="text-charcoal">Outdoor Porcelain Tiles, Subway tiles, 
-                Porcelain Floor Tiles, and Porcelain Slab Tiles</strong> with unique patterns.
+                Our journey began in Morbi, India, the heart of the global ceramic industry, with a vision to create surfaces that transcend trends and borders. Backed by cutting-edge technology, meticulous craftsmanship, and a passion for design, every Vegnar Surfaces creation combines innovation, durability, and aesthetic perfection.
+              </p>
+              <p>
+                We understand that every project tells a story. That’s why our collections are crafted to perform beautifully in residential, commercial, and outdoor applications across diverse climates and cultures. Whether it’s the refined beauty of porcelain slabs, the timeless charm of mosaic and subway tiles, or the enduring strength of 20 mm outdoor pavers, our collections bring global design inspirations to life, crafted to perform and endure in every space.
+
               </p>
             </div>
 
@@ -59,7 +104,7 @@ const AboutSection = () => {
           <div className="order-1 lg:order-2">
             <div className="relative">
               <img
-                src={"/assets/about-tiles.jpg"}
+                src={"/assets/about-tiles-main.jpg"}
                 alt="Premium ceramic tiles by Vegnar"
                 className="w-full rounded-2xl shadow-elegant"
               />
@@ -68,10 +113,10 @@ const AboutSection = () => {
               <div className="absolute -bottom-8 -left-8 bg-background border border-border/20 rounded-xl p-6 shadow-elegant hidden md:block">
                 <div className="flex items-center space-x-4">
                   <div className="bg-charcoal/10 p-3 rounded-lg">
-                    <Award className="w-6 h-6 text-charcoal" />
+                    <Package className="w-6 h-6 text-charcoal" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-charcoal">50M+</div>
+                    <div className="text-2xl font-bold text-charcoal">100M+</div>
                     <div className="text-sm text-muted-foreground">Tiles Delivered</div>
                   </div>
                 </div>
@@ -81,7 +126,7 @@ const AboutSection = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+        <div ref={sectionRef} className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
           {stats.map((stat, index) => (
             <div 
               key={index} 
@@ -92,7 +137,14 @@ const AboutSection = () => {
                 <div className="bg-charcoal/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-charcoal/20 transition-colors">
                   <stat.icon className="w-8 h-8 text-charcoal" />
                 </div>
-                <div className="text-3xl font-bold text-charcoal mb-2">{stat.value}</div>
+                <div className="text-3xl font-bold text-charcoal mb-2">
+                  {animatedValues[index] === stat.value ? (
+                    stat.value === 25000 ? `${(animatedValues[index] / 1000).toFixed(0)}K` : animatedValues[index]
+                  ) : (
+                    stat.value === 25000 ? `${(animatedValues[index] / 1000).toFixed(0)}K` : animatedValues[index]
+                  )}
+                  {stat.suffix}
+                </div>
                 <div className="text-muted-foreground font-medium">{stat.label}</div>
               </div>
             </div>

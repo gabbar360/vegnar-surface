@@ -3,7 +3,47 @@
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-// Sample data for countries and markers
+// Export countries data
+const exportCountriesData = [
+  // Europe
+  { name: "United Kingdom", lat: 55.3781, lng: -3.4360 },
+  { name: "Germany", lat: 51.1657, lng: 10.4515 },
+  { name: "France", lat: 46.2276, lng: 2.2137 },
+  { name: "Netherlands", lat: 52.1326, lng: 5.2913 },
+  { name: "Belgium", lat: 50.5039, lng: 4.4699 },
+  { name: "Poland", lat: 51.9194, lng: 19.1451 },
+  { name: "Austria", lat: 47.5162, lng: 14.5501 },
+  { name: "Portugal", lat: 39.3999, lng: -8.2245 },
+  { name: "Greece", lat: 39.0742, lng: 21.8243 },
+  { name: "Czech Republic", lat: 49.8175, lng: 15.4730 },
+  { name: "Hungary", lat: 47.1625, lng: 19.5033 },
+  { name: "Romania", lat: 45.9432, lng: 24.9668 },
+  { name: "Sweden", lat: 60.1282, lng: 18.6435 },
+  { name: "Denmark", lat: 56.2639, lng: 9.5018 },
+  { name: "Norway", lat: 60.4720, lng: 8.4689 },
+  { name: "Ireland", lat: 53.4129, lng: -8.2439 },
+  { name: "Finland", lat: 61.9241, lng: 25.7482 },
+  // North America
+  { name: "United States", lat: 39.8283, lng: -98.5795 },
+  { name: "Canada", lat: 56.1304, lng: -106.3468 },
+  { name: "Mexico", lat: 23.6345, lng: -102.5528 },
+  // Middle East
+  { name: "United Arab Emirates", lat: 23.4241, lng: 53.8478 },
+  { name: "Saudi Arabia", lat: 23.8859, lng: 45.0792 },
+  { name: "Qatar", lat: 25.3548, lng: 51.1839 },
+  { name: "Kuwait", lat: 29.3117, lng: 47.4818 },
+  { name: "Oman", lat: 21.4735, lng: 55.9754 },
+  // Africa
+  { name: "South Africa", lat: -30.5595, lng: 22.9375 },
+  // Asia
+  { name: "Australia", lat: -25.2744, lng: 133.7751 },
+  { name: "New Zealand", lat: -40.9006, lng: 174.8860 },
+  { name: "Japan", lat: 36.2048, lng: 138.2529 },
+  { name: "South Korea", lat: 35.9078, lng: 127.7669 },
+  { name: "Maldives", lat: 3.2028, lng: 73.2207 },
+  { name: "Vietnam", lat: 14.0583, lng: 108.2772 }
+];
+
 const sampleData = {
   countries: [
     {
@@ -13,27 +53,11 @@ const sampleData = {
       projects: "Manufacturing Hub & Headquarters",
       description: "Main manufacturing facility and corporate headquarters located in Rajkot, Gujarat."
     },
-    // {
-    //   name: "United States",
-    //   lat: 39.8283,
-    //   lng: -98.5795,
-    //   projects: "150+ Premium Residential Projects",
-    //   description: "Leading supplier of luxury porcelain tiles for high-end residential and commercial spaces."
-    // },
-    // {
-    //   name: "United Kingdom", 
-    //   lat: 55.3781,
-    //   lng: -3.4360,
-    //   projects: "80+ Commercial & Residential Projects",
-    //   description: "Trusted partner for modern architectural projects across England, Scotland, and Wales."
-    // },
-    // {
-    //   name: "Australia",
-    //   lat: -25.2744,
-    //   lng: 133.7751,
-    //   projects: "120+ Luxury Developments",
-    //   description: "Premium tile solutions for Australia's growing construction and renovation market."
-    // }
+    ...exportCountriesData.map(country => ({
+      ...country,
+      projects: "Export Market",
+      description: `Vegnar Surfaces exports premium tiles to ${country.name}`
+    }))
   ],
   markers: [
     {
@@ -41,29 +65,17 @@ const sampleData = {
       lng: 70.7922,
       name: "Vegnar Surfaces HQ",
       logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-      info: "B-623 RK Iconic, Shital Park, Rajkot, Gujarat 360001, India - Main headquarters and manufacturing facility."
+      info: "B-623 RK Iconic, Shital Park, Rajkot, Gujarat 360001, India - Main headquarters and manufacturing facility.",
+      isHQ: true
     },
-    // {
-    //   lat: 40.7128,
-    //   lng: -74.0060,
-    //   name: "New York Office",
-    //   logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    //   info: "Regional headquarters serving North American markets with premium tile collections."
-    // },
-    // {
-    //   lat: 51.5074,
-    //   lng: -0.1278,
-    //   name: "London Showroom",
-    //   logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    //   info: "European flagship showroom featuring our complete range of luxury surfaces."
-    // },
-    // {
-    //   lat: -33.8688,
-    //   lng: 151.2093,
-    //   name: "Sydney Distribution",
-    //   logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
-    //   info: "Pacific region distribution center ensuring fast delivery across Australia and New Zealand."
-    // }
+    ...exportCountriesData.map(country => ({
+      lat: country.lat,
+      lng: country.lng,
+      name: country.name,
+      logo: "/lovable-uploads/2b3bfeb0-ccc4-4eda-87c4-d2bb408e3dec.png",
+      info: `Export market - Vegnar Surfaces supplies premium tiles to ${country.name}`,
+      isHQ: false
+    })),
   ]
 };
 
@@ -158,10 +170,10 @@ const Globe3D: React.FC<GlobeProps> = ({ rotationSpeed = 0.5 }) => {
         
         // Countries data
         polygonsData={sampleData.countries}
-        polygonCapColor={() => 'rgba(255, 107, 53, 0.4)'}
-        polygonSideColor={() => 'rgba(255, 107, 53, 0.15)'}
+        polygonCapColor={(d: any) => d.name === 'India' ? 'rgba(255, 107, 53, 0.8)' : 'rgba(255, 107, 53, 0.4)'}
+        polygonSideColor={(d: any) => d.name === 'India' ? 'rgba(255, 107, 53, 0.3)' : 'rgba(255, 107, 53, 0.15)'}
         polygonStrokeColor={() => '#FF6B35'}
-        polygonAltitude={0.015}
+        polygonAltitude={(d: any) => d.name === 'India' ? 0.025 : 0.015}
         polygonLabel={(d: any) => {
           const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
           return `
@@ -179,30 +191,61 @@ const Globe3D: React.FC<GlobeProps> = ({ rotationSpeed = 0.5 }) => {
         htmlElement={(d: any) => {
           const el = document.createElement('div');
           const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-          const size = isMobile ? 24 : 30;
-          const imgSize = isMobile ? 16 : 20;
+          const size = d.isHQ ? (isMobile ? 32 : 40) : (isMobile ? 16 : 20);
+          const borderColor = d.isHQ ? '#FF6B35' : '#FFA500';
+          const bgColor = d.isHQ ? 'white' : '#FF6B35';
           
-          el.innerHTML = `
-            <div style="
-              width: ${size}px; 
-              height: ${size}px; 
-              background: white; 
-              border: 3px solid #FF6B35; 
-              border-radius: 50%; 
-              display: flex; 
-              align-items: center; 
-              justify-content: center;
-              cursor: pointer;
-              box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
-              transition: transform 0.2s;
-            ">
-              <img src="${d.logo}" alt="Logo" style="width: ${imgSize}px; height: ${imgSize}px; object-fit: contain;" />
-            </div>
-          `;
+          if (d.isHQ) {
+            el.innerHTML = `
+              <div style="
+                width: ${size}px; 
+                height: ${size}px; 
+                background: ${bgColor}; 
+                border: 3px solid ${borderColor}; 
+                border-radius: 50%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(255, 107, 53, 0.6);
+                transition: transform 0.2s;
+              ">
+                <img src="${d.logo}" alt="Logo" style="width: ${size-12}px; height: ${size-12}px; object-fit: contain;" />
+              </div>
+            `;
+          } else {
+            el.innerHTML = `
+              <div style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+                <div style="
+                  width: ${size}px; 
+                  height: ${size}px; 
+                  background: ${bgColor}; 
+                  border: 2px solid white; 
+                  border-radius: 50%; 
+                  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
+                  transition: transform 0.2s;
+                ">
+                </div>
+                <div style="
+                  color: white;
+                  font-size: ${isMobile ? '10px' : '12px'};
+                  font-weight: bold;
+                  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+                  margin-top: 4px;
+                  text-align: center;
+                  white-space: nowrap;
+                  max-width: 80px;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                ">${d.name}</div>
+              </div>
+            `;
+          }
+          
           el.style.pointerEvents = 'auto';
           el.style.cursor = 'pointer';
           el.addEventListener('mouseenter', () => {
-            el.style.transform = 'scale(1.2)';
+            el.style.transform = 'scale(1.3)';
           });
           el.addEventListener('mouseleave', () => {
             el.style.transform = 'scale(1)';
