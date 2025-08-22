@@ -16,10 +16,12 @@ function ProductsContent() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeSize, setActiveSize] = useState("");
   const [activeColor, setActiveColor] = useState("");
+  const [activeSurfaceType, setActiveSurfaceType] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState<string[]>(["All"]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
+  const [surfaceTypes, setSurfaceTypes] = useState<string[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
@@ -51,11 +53,12 @@ function ProductsContent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoriesData, productsData, sizesData, colorsData] = await Promise.all([
+        const [categoriesData, productsData, sizesData, colorsData, surfaceTypesData] = await Promise.all([
           api.getCategories(),
           api.getProducts(),
           getSizes(),
           api.getColors(),
+          api.getSurfaceType(),
         ]);
 
         const categoryNames = categoriesData.map(
@@ -65,6 +68,7 @@ function ProductsContent() {
 
         setSizes(sizesData.map((size: any) => size.size_name || size.name || size));
         setColors(colorsData.map((color: any) => color.color_name || color.name || color));
+        setSurfaceTypes(surfaceTypesData.map((surface: any) => surface.surface_name || surface.name || surface.surface_type_name));
         setProducts(productsData);
         console.log("Products loaded:", productsData.length);
         console.log("Categories:", categoryNames);
@@ -111,10 +115,11 @@ function ProductsContent() {
             ? color === activeColor
             : color.color_name === activeColor
         ));
+    const matchesSurfaceType = !activeSurfaceType || (product.surface_types && product.surface_types.some((surface: any) => surface.surface_name === activeSurfaceType));
     const matchesSearch =
       product.product_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       false;
-    return matchesCategory && matchesSize && matchesColor && matchesSearch;
+    return matchesCategory && matchesSize && matchesColor && matchesSurfaceType && matchesSearch;
   });
 
   console.log(
@@ -214,16 +219,17 @@ function ProductsContent() {
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     Size
                   </label>
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-3 gap-2">
                     {sizes.map((size) => (
                       <button
                         key={size}
                         onClick={() => setActiveSize(size)}
-                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                        className={`px-2 py-1 rounded text-xs transition-all duration-200 ${
                           activeSize === size
                             ? "bg-orange text-white"
-                            : "text-gray-700 hover:bg-orange/10 hover:text-orange"
+                            : "text-gray-700 hover:bg-orange/10 hover:text-orange border border-gray-200"
                         }`}
+                        title={size}
                       >
                         {size}
                       </button>
@@ -254,6 +260,29 @@ function ProductsContent() {
                   </div>
                 </div>
 
+                {/* Surface Type Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Surface Type
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {surfaceTypes.map((surfaceType) => (
+                      <button
+                        key={surfaceType}
+                        onClick={() => setActiveSurfaceType(surfaceType)}
+                        className={`px-2 py-1 rounded text-xs transition-all duration-200 ${
+                          activeSurfaceType === surfaceType
+                            ? "bg-orange text-white"
+                            : "text-gray-700 hover:bg-orange/10 hover:text-orange border border-gray-200"
+                        }`}
+                        title={surfaceType}
+                      >
+                        {surfaceType}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Clear Filters */}
                 <Button
                   variant="outline"
@@ -262,6 +291,7 @@ function ProductsContent() {
                     setActiveCategory("All");
                     setActiveSize("");
                     setActiveColor("");
+                    setActiveSurfaceType("");
                   }}
                   className="w-full"
                 >
@@ -331,6 +361,7 @@ function ProductsContent() {
                       }
                       href={`/product/${product.documentId}`}
                       colors={product.colors || []}
+                      surfaceTypes={product.surface_types || []}
                       className="animate-fade-in cursor-pointer hover:shadow-lg transition-shadow"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     />

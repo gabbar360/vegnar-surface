@@ -84,5 +84,26 @@ export const api = {
       console.error('Error fetching colors:', error);
       return [];
     }
+  },
+
+    async getSurfaceType() {
+    try {
+      const response = await fetch(`${API_URL}/api/surface-types`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store'
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return data.data || [];
+    } catch (error) {
+      console.error('Error fetching surface-types:', error);
+      return [];
+    }
   }
 };

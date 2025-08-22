@@ -12,6 +12,7 @@ interface ProductCardProps {
   image: string;
   href: string;
   colors?: any[];
+  surfaceTypes?: any[];
   className?: string;
   style?: React.CSSProperties;
 }
@@ -24,6 +25,7 @@ const ProductCard = ({
   image,
   href,
   colors = [],
+  surfaceTypes = [],
   className,
   style,
 }: ProductCardProps) => {
@@ -49,8 +51,13 @@ const ProductCard = ({
             {name}
           </h3>
           {sizes && sizes.length > 0 && (
-            <p className="text-muted-foreground font-medium mb-4">
+            <p className="text-muted-foreground font-medium mb-2">
               {sizes.map(s => s.size_name).join(', ')}
+            </p>
+          )}
+          {surfaceTypes && surfaceTypes.length > 0 && (
+            <p className="text-muted-foreground text-sm mb-4">
+              Surface: {surfaceTypes.map(s => s.surface_name).join(', ')}
             </p>
           )}
         </div>
