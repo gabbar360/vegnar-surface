@@ -58,12 +58,30 @@ export const api = {
       }
       
       const data = await response.json();
-     
-      console.log("malammiya",data);
-      
       return data.data || [];
     } catch (error) {
       console.error('Error fetching sizes:', error);
+      return [];
+    }
+  },
+
+  async getColors() {
+    try {
+      const response = await fetch(`${API_URL}/api/colors`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store'
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return data.data || [];
+    } catch (error) {
+      console.error('Error fetching colors:', error);
       return [];
     }
   }

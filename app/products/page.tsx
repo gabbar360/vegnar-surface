@@ -51,10 +51,11 @@ function ProductsContent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoriesData, productsData, sizesData] = await Promise.all([
+        const [categoriesData, productsData, sizesData, colorsData] = await Promise.all([
           api.getCategories(),
           api.getProducts(),
           getSizes(),
+          api.getColors(),
         ]);
 
         const categoryNames = categoriesData.map(
@@ -62,21 +63,8 @@ function ProductsContent() {
         );
         setCategories(["All", ...categoryNames]);
 
-        // Extract unique colors from products
-        const uniqueColors = [
-          ...new Set(
-            productsData
-              .flatMap((p: any) =>
-                (p.colors || []).map((color: any) =>
-                  typeof color === "string" ? color : color.color_name
-                )
-              )
-              .filter(Boolean)
-          ),
-        ];
-
         setSizes(sizesData.map((size: any) => size.size_name || size.name || size));
-        setColors(uniqueColors);
+        setColors(colorsData.map((color: any) => color.color_name || color.name || color));
         setProducts(productsData);
         console.log("Products loaded:", productsData.length);
         console.log("Categories:", categoryNames);
@@ -248,18 +236,19 @@ function ProductsContent() {
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     Color
                   </label>
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-5 gap-3">
                     {colors.map((color) => (
                       <button
                         key={color}
                         onClick={() => setActiveColor(color)}
-                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                        className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${
                           activeColor === color
-                            ? "bg-orange text-white"
-                            : "text-gray-700 hover:bg-orange/10 hover:text-orange"
+                            ? "border-orange scale-110"
+                            : "border-gray-300 hover:border-orange hover:scale-105"
                         }`}
+                        style={{ backgroundColor: color.toLowerCase() }}
+                        title={color}
                       >
-                        {color}
                       </button>
                     ))}
                   </div>
