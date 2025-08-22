@@ -7,12 +7,39 @@ import { Button } from "@/components/ui/button";
 import { Filter, Search, Grid3X3, List } from "lucide-react";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { api } from "@/lib/api";
+
+const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 
 function ProductsContent() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [categories, setCategories] = useState<string[]>(["All"]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [categoriesData, productsData] = await Promise.all([
+          api.getCategories(),
+          api.getProducts()
+        ]);
+        
+        const categoryNames = categoriesData.map((cat: any) => cat.category_name);
+        setCategories(["All", ...categoryNames]);
+        setProducts(productsData);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const urlSearch = searchParams.get('search');
@@ -33,273 +60,14 @@ function ProductsContent() {
     }
   }, [searchParams]);
 
-  const categories = [
-    "All",
-    "Subway Tiles",
-    "Outdoor Tiles", 
-    "Porcelain Floor",
-    "Slab Tiles",
-    "Fullbody Tiles",
-    "Sanitaryware"
-  ];
 
-  const products = [
-    // Subway Tiles (10 products)
-    {
-      id: "1",
-      name: "Subway Tiles 100x200mm",
-      category: "Subway Tiles",
-      size: "100x200 MM",
-      image: "/assets/product-subway.jpg",
-      href: "/product/subway-tile-100x200mm"
-    },
-    {
-      id: "2",
-      name: "Subway Tiles 75x150mm", 
-      category: "Subway Tiles",
-      size: "75x150 MM",
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      href: "/product/subway-tile-75x150mm"
-    },
-    {
-      id: "3",
-      name: "Beveled Subway 100x300mm",
-      category: "Subway Tiles",
-      size: "100x300 MM",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-      href: "/product/beveled-subway-100x300mm"
-    },
-    {
-      id: "4",
-      name: "Metro Glossy 150x75mm",
-      category: "Subway Tiles",
-      size: "150x75 MM",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      href: "/product/metro-glossy-150x75mm"
-    },
-    {
-      id: "5",
-      name: "Classic White Subway 100x200mm",
-      category: "Subway Tiles",
-      size: "100x200 MM",
-      image: "https://images.unsplash.com/photo-1582653291997-079a1c04e5a1?w=400",
-      href: "/product/classic-white-subway-100x200mm"
-    },
 
-    // Outdoor Tiles (10 products)
-    {
-      id: "11",
-      name: "Outdoor Porcelain 600x600mm",
-      category: "Outdoor Tiles",
-      size: "600x600 MM",
-      image: "/assets/product-outdoor.jpg",
-      href: "/product/outdoor-porcelain-tiles-600x600"
-    },
-    {
-      id: "12",
-      name: "Outdoor Porcelain 600x900mm",
-      category: "Outdoor Tiles", 
-      size: "600x900 MM",
-      image: "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      href: "/product/outdoor-porcelain-tiles-600x900"
-    },
-    {
-      id: "13",
-      name: "Anti-Slip Outdoor 600x1200mm",
-      category: "Outdoor Tiles",
-      size: "600x1200 MM",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400",
-      href: "/product/anti-slip-outdoor-600x1200"
-    },
-    {
-      id: "14",
-      name: "Stone Effect Outdoor 800x800mm",
-      category: "Outdoor Tiles",
-      size: "800x800 MM",
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400",
-      href: "/product/stone-effect-outdoor-800x800"
-    },
-    {
-      id: "15",
-      name: "Wood Look Outdoor 200x1200mm",
-      category: "Outdoor Tiles",
-      size: "200x1200 MM",
-      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400",
-      href: "/product/wood-look-outdoor-200x1200"
-    },
 
-    // Porcelain Floor (10 products)
-    {
-      id: "21",
-      name: "Porcelain Floor 800x800mm",
-      category: "Porcelain Floor",
-      size: "800x800 MM",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      href: "/product/porcelain-tiles-800x800mm"
-    },
-    {
-      id: "22",
-      name: "Marble Effect 600x1200mm",
-      category: "Porcelain Floor",
-      size: "600x1200 MM",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
-      href: "/product/marble-effect-600x1200mm"
-    },
-    {
-      id: "23",
-      name: "Wood Grain 200x1200mm",
-      category: "Porcelain Floor",
-      size: "200x1200 MM",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400",
-      href: "/product/wood-grain-200x1200mm"
-    },
-    {
-      id: "24",
-      name: "Polished Porcelain 600x600mm",
-      category: "Porcelain Floor",
-      size: "600x600 MM",
-      image: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400",
-      href: "/product/polished-porcelain-600x600mm"
-    },
-    {
-      id: "25",
-      name: "Cement Look 800x800mm",
-      category: "Porcelain Floor",
-      size: "800x800 MM",
-      image: "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=400",
-      href: "/product/cement-look-800x800mm"
-    },
-
-    // Slab Tiles (10 products)
-    {
-      id: "31",
-      name: "Large Format Slab 1200x2400mm",
-      category: "Slab Tiles",
-      size: "1200x2400 MM",
-      image: "/assets/product-slab.jpg",
-      href: "/product/large-format-slab-1200x2400mm"
-    },
-    {
-      id: "32",
-      name: "Ultra Thin Slab 1600x3200mm",
-      category: "Slab Tiles",
-      size: "1600x3200 MM",
-      image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=400",
-      href: "/product/ultra-thin-slab-1600x3200mm"
-    },
-    {
-      id: "33",
-      name: "Calacatta Slab 1200x2700mm",
-      category: "Slab Tiles",
-      size: "1200x2700 MM",
-      image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400",
-      href: "/product/calacatta-slab-1200x2700mm"
-    },
-    {
-      id: "34",
-      name: "Statuario Slab 1500x3000mm",
-      category: "Slab Tiles",
-      size: "1500x3000 MM",
-      image: "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=400",
-      href: "/product/statuario-slab-1500x3000mm"
-    },
-    {
-      id: "35",
-      name: "Bookmatch Slab 1200x2400mm",
-      category: "Slab Tiles",
-      size: "1200x2400 MM",
-      image: "https://images.unsplash.com/photo-1572721546624-05bf65ad9c2a?w=400",
-      href: "/product/bookmatch-slab-1200x2400mm"
-    },
-
-    // Fullbody Tiles (5 products)
-    {
-      id: "41",
-      name: "Fullbody Porcelain 600x600mm",
-      category: "Fullbody Tiles",
-      size: "600x600 MM",
-      image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400",
-      href: "/product/fullbody-porcelain-600x600mm"
-    },
-    {
-      id: "42",
-      name: "Through Body 800x800mm",
-      category: "Fullbody Tiles",
-      size: "800x800 MM",
-      image: "https://images.unsplash.com/photo-1556228394-b8fb73c8b8c7?w=400",
-      href: "/product/through-body-800x800mm"
-    },
-    {
-      id: "43",
-      name: "Homogeneous 600x1200mm",
-      category: "Fullbody Tiles",
-      size: "600x1200 MM",
-      image: "https://images.unsplash.com/photo-1556909195-f4e1d1bf66c8?w=400",
-      href: "/product/homogeneous-600x1200mm"
-    },
-    {
-      id: "44",
-      name: "Solid Color 400x400mm",
-      category: "Fullbody Tiles",
-      size: "400x400 MM",
-      image: "https://images.unsplash.com/photo-1556909195-4b7b2e39ef0b?w=400",
-      href: "/product/solid-color-400x400mm"
-    },
-    {
-      id: "45",
-      name: "Vitrified Fullbody 600x600mm",
-      category: "Fullbody Tiles",
-      size: "600x600 MM",
-      image: "https://images.unsplash.com/photo-1556909215-4b1f8b1e7b92?w=400",
-      href: "/product/vitrified-fullbody-600x600mm"
-    },
-
-    // Sanitaryware (5 products)
-    {
-      id: "51",
-      name: "Table Top Basin",
-      category: "Sanitaryware",
-      size: "Standard",
-      image: "/assets/product-sanitaryware.jpg",
-      href: "/product/table-top-basin"
-    },
-    {
-      id: "52",
-      name: "Wall Hung Toilet",
-      category: "Sanitaryware", 
-      size: "Standard",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400",
-      href: "/product/wall-hung-toilet"
-    },
-    {
-      id: "53",
-      name: "Pedestal Basin",
-      category: "Sanitaryware",
-      size: "Standard",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
-      href: "/product/pedestal-basin"
-    },
-    {
-      id: "54",
-      name: "Counter Top Basin",
-      category: "Sanitaryware",
-      size: "Standard",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400",
-      href: "/product/counter-top-basin"
-    },
-    {
-      id: "55",
-      name: "One Piece Toilet",
-      category: "Sanitaryware",
-      size: "Standard",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400",
-      href: "/product/one-piece-toilet"
-    }
-  ];
 
   const filteredProducts = products.filter(product => {
-    const matchesCategory = activeCategory === "All" || product.category === activeCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const categoryName = product.product_category?.category_name || '';
+    const matchesCategory = activeCategory === "All" || categoryName === activeCategory;
+    const matchesSearch = product.product_name?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
     return matchesCategory && matchesSearch;
   });
 
@@ -343,19 +111,27 @@ function ProductsContent() {
 
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                    activeCategory === category
-                      ? 'bg-orange text-white shadow-orange'
-                      : 'bg-background text-muted-foreground hover:bg-orange/20 hover:text-charcoal'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
+              {loading ? (
+                <div className="flex gap-2">
+                  {[1,2,3,4].map(i => (
+                    <div key={i} className="h-10 w-24 bg-gray-200 animate-pulse rounded-lg"></div>
+                  ))}
+                </div>
+              ) : (
+                categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                      activeCategory === category
+                        ? 'bg-orange text-white shadow-orange'
+                        : 'bg-background text-muted-foreground hover:bg-orange/20 hover:text-charcoal'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))
+              )}
             </div>
 
             {/* View Toggle */}
@@ -390,7 +166,7 @@ function ProductsContent() {
         <div className="container mx-auto px-4">
           
           {/* Results Header */}
-          <div className="flex justify-between items-center mb-8">
+          {/* <div className="flex justify-between items-center mb-8">
             <div>
               <h2 className="text-2xl font-semibold text-charcoal">
                 {activeCategory === "All" ? "All Products" : activeCategory}
@@ -399,7 +175,7 @@ function ProductsContent() {
                 Showing {filteredProducts.length} products
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Products */}
           {filteredProducts.length > 0 ? (
@@ -411,7 +187,13 @@ function ProductsContent() {
               {filteredProducts.map((product, index) => (
                 <ProductCard
                   key={product.id}
-                  {...product}
+                  id={product.id.toString()}
+                  name={product.product_name}
+                  category={product.product_category?.category_name || 'Uncategorized'}
+                  size={product.size}
+                  image={product.image?.url ? `${API_URL}${product.image.url}` : '/assets/product-subway.jpg'}
+                  href={`/product/${product.documentId}`}
+                  colors={product.colors || []}
                   className="animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 />

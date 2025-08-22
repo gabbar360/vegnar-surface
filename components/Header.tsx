@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SearchBar from "@/components/SearchBar";
+import { api } from "@/lib/api";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [categories, setCategories] = useState<any[]>([]);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -19,6 +21,18 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await api.getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error('Error loading categories:', error);
+      }
+    };
+    fetchCategories();
   }, []);
 
   const navigationItems = [
@@ -37,18 +51,10 @@ const Header = () => {
       name: "COLLECTION",
       path: "/products",
       hasDropdown: true,
-      dropdownItems: [
-        {
-          name: "Porcelain Pavers (2 cm)",
-          path: "/products?category=porcelain-pavers",
-        },
-        { name: "Subway Tiles", path: "/products?category=subway-tiles" },
-        { name: "Mosaic Tiles", path: "/products?category=mosaic-tiles" },
-        {
-          name: "Large Format Porcelain Slabs",
-          path: "/products?category=large-format-slabs",
-        },
-      ],
+      dropdownItems: categories.map(cat => ({
+        name: cat.category_name,
+        path: `/products?category=${cat.category_name.toLowerCase().replace(/\s+/g, '-')}`
+      })),
     },
     { name: "E-CATALOGUE", path: "/catalog" },
     { name: "UTILITIES", path: "/utilities" },
