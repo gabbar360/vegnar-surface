@@ -9,30 +9,80 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { api } from "@/lib/api";
 
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
 function ProductsContent() {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [activeSize, setActiveSize] = useState("");
+  const [activeColor, setActiveColor] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState<string[]>(["All"]);
+  const [sizes, setSizes] = useState<string[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
 
+  const getSizes = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/sizes`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store'
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const data = await response.json();
+     
+      console.log("malammiya",data);
+      
+      return data.data || [];
+    } catch (error) {
+      console.error('Error fetching sizes:', error);
+      return [];
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoriesData, productsData] = await Promise.all([
+        const [categoriesData, productsData, sizesData] = await Promise.all([
           api.getCategories(),
-          api.getProducts()
+          api.getProducts(),
+          getSizes(),
         ]);
-        
-        const categoryNames = categoriesData.map((cat: any) => cat.category_name);
+
+        const categoryNames = categoriesData.map(
+          (cat: any) => cat.category_name
+        );
         setCategories(["All", ...categoryNames]);
+
+        // Extract unique colors from products
+        const uniqueColors = [
+          ...new Set(
+            productsData
+              .flatMap((p: any) =>
+                (p.colors || []).map((color: any) =>
+                  typeof color === "string" ? color : color.color_name
+                )
+              )
+              .filter(Boolean)
+          ),
+        ];
+
+        setSizes(sizesData.map((size: any) => size.size_name || size.name || size));
+        setColors(uniqueColors);
         setProducts(productsData);
+        console.log("Products loaded:", productsData.length);
+        console.log("Categories:", categoryNames);
+        console.log("Sample product:", productsData[0]);
       } catch (error) {
-        console.error('Error loading data:', error);
+        console.error("Error loading data:", error);
       } finally {
         setLoading(false);
       }
@@ -42,181 +92,285 @@ function ProductsContent() {
   }, []);
 
   useEffect(() => {
-    const urlSearch = searchParams.get('search');
-    const urlCategory = searchParams.get('category');
-    
+    const urlSearch = searchParams.get("search");
+    const urlCategory = searchParams.get("category");
+
     if (urlSearch) {
       setSearchTerm(urlSearch);
     }
     if (urlCategory) {
       const categoryMap: { [key: string]: string } = {
-        'subway-tiles': 'Subway Tiles',
-        'outdoor-tiles': 'Outdoor Tiles',
-        'porcelain-pavers': 'Outdoor Tiles',
-        'mosaic-tiles': 'Fullbody Tiles',
-        'large-format-slabs': 'Slab Tiles'
+        "subway-tiles": "Subway Tiles",
+        "outdoor-tiles": "Outdoor Tiles",
+        "porcelain-pavers": "Outdoor Tiles",
+        "mosaic-tiles": "Fullbody Tiles",
+        "large-format-slabs": "Slab Tiles",
       };
-      setActiveCategory(categoryMap[urlCategory] || 'All');
+      setActiveCategory(categoryMap[urlCategory] || "All");
     }
   }, [searchParams]);
 
-
-
-
-
-  const filteredProducts = products.filter(product => {
-    const categoryName = product.product_category?.category_name || '';
-    const matchesCategory = activeCategory === "All" || categoryName === activeCategory;
-    const matchesSearch = product.product_name?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
-    return matchesCategory && matchesSearch;
+  const filteredProducts = products.filter((product) => {
+    const categoryName = product.product_category?.category_name || "";
+    const matchesCategory =
+      activeCategory === "All" || categoryName === activeCategory;
+    const matchesSize = !activeSize || (product.sizes && product.sizes.some((size: any) => size.size_name === activeSize));
+    const matchesColor =
+      !activeColor ||
+      (product.colors &&
+        product.colors.some((color: any) =>
+          typeof color === "string"
+            ? color === activeColor
+            : color.color_name === activeColor
+        ));
+    const matchesSearch =
+      product.product_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      false;
+    return matchesCategory && matchesSize && matchesColor && matchesSearch;
   });
+
+  console.log(
+    "Filtered products:",
+    filteredProducts.length,
+    "Active category:",
+    activeCategory
+  );
 
   return (
     <>
       <Header />
-      
+
       {/* Hero Banner */}
       <section className="relative h-80 bg-charcoal flex items-center">
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200" 
-            alt="Our Product Collection" 
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200"
+            alt="Our Product Collection"
             className="w-full h-full object-cover opacity-30"
           />
         </div>
         <div className="relative z-10 container mx-auto px-4">
           <div className="text-center text-white">
             <h1 className="text-5xl font-bold mb-4">Our Product Collection</h1>
-            <p className="text-xl opacity-90">Discover premium ceramic tiles and sanitaryware</p>
+            <p className="text-xl opacity-90">
+              Discover premium ceramic tiles and sanitaryware
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Filters & Search */}
-      <section className="py-12 bg-cream border-b">
+      {/* Main Content with Sidebar */}
+      <section className="py-8 bg-background">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-            
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
-              />
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Sidebar - Filters */}
+            <div className="lg:w-1/4">
+              <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-24">
+                <h3 className="text-lg font-semibold text-charcoal mb-6 flex items-center gap-2">
+                  <Filter className="w-5 h-5" />
+                  Filters
+                </h3>
+
+                {/* Search */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Search
+                  </label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <input
+                      type="text"
+                      placeholder="Search products..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange text-sm"
+                    />
+                  </div>
+                </div>
+
+                {/* Category Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Category
+                  </label>
+                  <div className="space-y-2">
+                    {loading ? (
+                      <div className="space-y-2">
+                        {[1, 2, 3, 4].map((i) => (
+                          <div
+                            key={i}
+                            className="h-8 bg-gray-200 animate-pulse rounded"
+                          ></div>
+                        ))}
+                      </div>
+                    ) : (
+                      categories.map((category) => (
+                        <button
+                          key={category}
+                          onClick={() => setActiveCategory(category)}
+                          className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                            activeCategory === category
+                              ? "bg-orange text-white"
+                              : "text-gray-700 hover:bg-orange/10 hover:text-orange"
+                          }`}
+                        >
+                          {category}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {/* Size Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Size
+                  </label>
+                  <div className="space-y-2">
+                    {sizes.map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setActiveSize(size)}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                          activeSize === size
+                            ? "bg-orange text-white"
+                            : "text-gray-700 hover:bg-orange/10 hover:text-orange"
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Color Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Color
+                  </label>
+                  <div className="space-y-2">
+                    {colors.map((color) => (
+                      <button
+                        key={color}
+                        onClick={() => setActiveColor(color)}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
+                          activeColor === color
+                            ? "bg-orange text-white"
+                            : "text-gray-700 hover:bg-orange/10 hover:text-orange"
+                        }`}
+                      >
+                        {color}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Clear Filters */}
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setActiveCategory("All");
+                    setActiveSize("");
+                    setActiveColor("");
+                  }}
+                  className="w-full"
+                >
+                  Clear All Filters
+                </Button>
+              </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              {loading ? (
-                <div className="flex gap-2">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="h-10 w-24 bg-gray-200 animate-pulse rounded-lg"></div>
+            {/* Right Content - Products */}
+            <div className="lg:w-3/4">
+              {/* Results Header */}
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h2 className="text-2xl font-semibold text-charcoal">
+                    {activeCategory === "All" ? "All Products" : activeCategory}
+                  </h2>
+                </div>
+
+                {/* View Toggle */}
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => setViewMode("grid")}
+                    className={`p-2 rounded-lg transition-colors ${
+                      viewMode === "grid"
+                        ? "bg-orange text-white"
+                        : "bg-gray-100 text-gray-600 hover:bg-orange/20"
+                    }`}
+                  >
+                    <Grid3X3 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`p-2 rounded-lg transition-colors ${
+                      viewMode === "list"
+                        ? "bg-orange text-white"
+                        : "bg-gray-100 text-gray-600 hover:bg-orange/20"
+                    }`}
+                  >
+                    <List className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Products Grid */}
+              {filteredProducts.length > 0 ? (
+                <div
+                  className={`grid gap-6 ${
+                    viewMode === "grid"
+                      ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+                      : "grid-cols-1"
+                  }`}
+                >
+                  {filteredProducts.map((product, index) => (
+                    <ProductCard
+                      key={product.id}
+                      id={product.id.toString()}
+                      name={product.product_name}
+                      category={
+                        product.product_category?.category_name ||
+                        "Uncategorized"
+                      }
+                      sizes={product.sizes}
+                      image={
+                        product.image?.url
+                          ? `${API_URL}${product.image.url}`
+                          : "/assets/product-subway.jpg"
+                      }
+                      href={`/product/${product.documentId}`}
+                      colors={product.colors || []}
+                      className="animate-fade-in cursor-pointer hover:shadow-lg transition-shadow"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    />
                   ))}
                 </div>
               ) : (
-                categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                      activeCategory === category
-                        ? 'bg-orange text-white shadow-orange'
-                        : 'bg-background text-muted-foreground hover:bg-orange/20 hover:text-charcoal'
-                    }`}
+                <div className="text-center py-16">
+                  <div className="text-6xl mb-4">🔍</div>
+                  <h3 className="text-2xl font-semibold text-charcoal mb-2">
+                    No products found
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Try adjusting your search or filter criteria
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setSearchTerm("");
+                      setActiveCategory("All");
+                      setActiveSize("All");
+                      setActiveColor("All");
+                    }}
                   >
-                    {category}
-                  </button>
-                ))
+                    Clear All Filters
+                  </Button>
+                </div>
               )}
             </div>
-
-            {/* View Toggle */}
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-lg transition-colors ${
-                  viewMode === 'grid' 
-                    ? 'bg-orange text-white' 
-                    : 'bg-background text-muted-foreground hover:bg-orange/20'
-                }`}
-              >
-                <Grid3X3 className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`p-2 rounded-lg transition-colors ${
-                  viewMode === 'list' 
-                    ? 'bg-orange text-white' 
-                    : 'bg-background text-muted-foreground hover:bg-orange/20'
-                }`}
-              >
-                <List className="w-5 h-5" />
-              </button>
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Products Grid */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          
-          {/* Results Header */}
-          {/* <div className="flex justify-between items-center mb-8">
-            <div>
-              <h2 className="text-2xl font-semibold text-charcoal">
-                {activeCategory === "All" ? "All Products" : activeCategory}
-              </h2>
-              <p className="text-muted-foreground">
-                Showing {filteredProducts.length} products
-              </p>
-            </div>
-          </div> */}
-
-          {/* Products */}
-          {filteredProducts.length > 0 ? (
-            <div className={`grid gap-8 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-                : 'grid-cols-1 lg:grid-cols-2'
-            }`}>
-              {filteredProducts.map((product, index) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id.toString()}
-                  name={product.product_name}
-                  category={product.product_category?.category_name || 'Uncategorized'}
-                  size={product.size}
-                  image={product.image?.url ? `${API_URL}${product.image.url}` : '/assets/product-subway.jpg'}
-                  href={`/product/${product.documentId}`}
-                  colors={product.colors || []}
-                  className="animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-semibold text-charcoal mb-2">No products found</h3>
-              <p className="text-muted-foreground mb-6">
-                Try adjusting your search or filter criteria
-              </p>
-              <Button 
-                variant="outline" 
-                onClick={() => {
-                  setSearchTerm("");
-                  setActiveCategory("All");
-                }}
-              >
-                Clear Filters
-              </Button>
-            </div>
-          )}
         </div>
       </section>
 

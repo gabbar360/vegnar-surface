@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://10.165.67.219';
 
 export const api = {
   async getCategories() {
@@ -41,6 +41,29 @@ export const api = {
       return data.data || [];
     } catch (error) {
       console.error('Error fetching products:', error);
+      return [];
+    }
+  },
+   async getSizes() {
+    try {
+      const response = await fetch(`${API_URL}/api/sizes`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store'
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const data = await response.json();
+     
+      console.log("malammiya",data);
+      
+      return data.data || [];
+    } catch (error) {
+      console.error('Error fetching sizes:', error);
       return [];
     }
   }

@@ -50,11 +50,11 @@ const Header = () => {
     {
       name: "COLLECTION",
       path: "/products",
-      hasDropdown: true,
-      dropdownItems: categories.map(cat => ({
-        name: cat.category_name,
-        path: `/products?category=${cat.category_name.toLowerCase().replace(/\s+/g, '-')}`
-      })),
+      // hasDropdown: true,
+      // dropdownItems: categories.map(cat => ({
+      //   name: cat.category_name,
+      //   path: `/products?category=${cat.category_name.toLowerCase().replace(/\s+/g, '-')}`
+      // })),
     },
     { name: "E-CATALOGUE", path: "/catalog" },
     { name: "UTILITIES", path: "/utilities" },
