@@ -11,11 +11,12 @@ interface ProductCardProps {
   size: string;
   image: string;
   href: string;
+  colors?: any[];
   className?: string;
   style?: React.CSSProperties;
 }
 
-const ProductCard = ({ id, name, category, size, image, href, className, style }: ProductCardProps) => {
+const ProductCard = ({ id, name, category, size, image, href, colors = [], className, style }: ProductCardProps) => {
   return (
     <div className={cn("group relative card-product overflow-hidden", className)} style={style}>
       {/* Image Container */}
@@ -63,11 +64,31 @@ const ProductCard = ({ id, name, category, size, image, href, className, style }
           <ProductInquiry productName={name} productCategory={category} />
         </div>
 
+        {/* Colors */}
+        {colors && colors.length > 0 && (
+          <div className="mb-4">
+            <p className="text-xs text-muted-foreground mb-2">Available Colors:</p>
+            <div className="flex items-center space-x-2">
+              {colors.slice(0, 4).map((color) => (
+                <div
+                  key={color.id}
+                  className="w-4 h-4 rounded-full border border-gray-300 shadow-sm"
+                  style={{ backgroundColor: color.color_code || '#ccc' }}
+                  title={color.color_name}
+                ></div>
+              ))}
+              {colors.length > 4 && (
+                <span className="text-xs text-muted-foreground">+{colors.length - 4}</span>
+              )}
+            </div>
+          </div>
+        )}
+
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-orange rounded-full"></div>
             <span className="text-sm text-muted-foreground">
-              Available in Multiple Finishes
+              {colors && colors.length > 0 ? `${colors.length} Colors Available` : 'Available in Multiple Finishes'}
             </span>
           </div>
           
