@@ -1,22 +1,17 @@
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://10.165.67.219';
+import axios from 'axios';
+
+const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export const api = {
   async getCategories() {
     try {
-      const response = await fetch(`${API_URL}/api/product-categories`, {
+      const response = await axios.get(`${API_URL}/api/product-categories`, {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store'
       });
       
-      if (!response.ok) {
-        console.warn(`API returned ${response.status}, using fallback categories`);
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data.data || [];
+      return response.data.data || [];
     } catch (error) {
       console.error('Error fetching categories:', error);
       return [];
@@ -25,40 +20,27 @@ export const api = {
 
   async getProducts() {
     try {
-      const response = await fetch(`${API_URL}/api/products?populate=*`, {
+      const response = await axios.get(`${API_URL}/api/products?populate=*`, {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store'
       });
       
-      if (!response.ok) {
-        console.warn(`API returned ${response.status}, using fallback products`);
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data.data || [];
+      return response.data.data || [];
     } catch (error) {
       console.error('Error fetching products:', error);
       return [];
     }
   },
-   async getSizes() {
+  async getSizes() {
     try {
-      const response = await fetch(`${API_URL}/api/sizes`, {
+      const response = await axios.get(`${API_URL}/api/sizes`, {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store'
       });
       
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data.data || [];
+      return response.data.data || [];
     } catch (error) {
       console.error('Error fetching sizes:', error);
       return [];
@@ -67,42 +49,45 @@ export const api = {
 
   async getColors() {
     try {
-      const response = await fetch(`${API_URL}/api/colors`, {
+      const response = await axios.get(`${API_URL}/api/colors`, {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store'
       });
       
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data.data || [];
+      return response.data.data || [];
     } catch (error) {
       console.error('Error fetching colors:', error);
       return [];
     }
   },
 
-    async getSurfaceType() {
+  async getSurfaceType() {
     try {
-      const response = await fetch(`${API_URL}/api/surface-types`, {
+      const response = await axios.get(`${API_URL}/api/surface-types`, {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store'
       });
       
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data.data || [];
+      return response.data.data || [];
     } catch (error) {
       console.error('Error fetching surface-types:', error);
+      return [];
+    }
+  },
+
+  async getBlogs() {
+    try {
+      const response = await axios.get(`${API_URL}/api/blogs?populate=image`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      return response.data.data || [];
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
       return [];
     }
   }

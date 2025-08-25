@@ -13,6 +13,7 @@ const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
 function ProductsContent() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [showFilters, setShowFilters] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeSize, setActiveSize] = useState("");
   const [activeColor, setActiveColor] = useState("");
@@ -30,22 +31,22 @@ function ProductsContent() {
     try {
       const response = await fetch(`${API_URL}/api/sizes`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        cache: 'no-store'
+        cache: "no-store",
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
-      
+
       const data = await response.json();
-     
-      console.log("malammiya",data);
-      
+
+      console.log("malammiya", data);
+
       return data.data || [];
     } catch (error) {
-      console.error('Error fetching sizes:', error);
+      console.error("Error fetching sizes:", error);
       return [];
     }
   };
@@ -53,7 +54,13 @@ function ProductsContent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoriesData, productsData, sizesData, colorsData, surfaceTypesData] = await Promise.all([
+        const [
+          categoriesData,
+          productsData,
+          sizesData,
+          colorsData,
+          surfaceTypesData,
+        ] = await Promise.all([
           api.getCategories(),
           api.getProducts(),
           getSizes(),
@@ -66,9 +73,20 @@ function ProductsContent() {
         );
         setCategories(["All", ...categoryNames]);
 
-        setSizes(sizesData.map((size: any) => size.size_name || size.name || size));
-        setColors(colorsData.map((color: any) => color.color_name || color.name || color));
-        setSurfaceTypes(surfaceTypesData.map((surface: any) => surface.surface_name || surface.name || surface.surface_type_name));
+        setSizes(
+          sizesData.map((size: any) => size.size_name || size.name || size)
+        );
+        setColors(
+          colorsData.map(
+            (color: any) => color.color_name || color.name || color
+          )
+        );
+        setSurfaceTypes(
+          surfaceTypesData.map(
+            (surface: any) =>
+              surface.surface_name || surface.name || surface.surface_type_name
+          )
+        );
         setProducts(productsData);
         console.log("Products loaded:", productsData.length);
         console.log("Categories:", categoryNames);
@@ -106,7 +124,10 @@ function ProductsContent() {
     const categoryName = product.product_category?.category_name || "";
     const matchesCategory =
       activeCategory === "All" || categoryName === activeCategory;
-    const matchesSize = !activeSize || (product.sizes && product.sizes.some((size: any) => size.size_name === activeSize));
+    const matchesSize =
+      !activeSize ||
+      (product.sizes &&
+        product.sizes.some((size: any) => size.size_name === activeSize));
     const matchesColor =
       !activeColor ||
       (product.colors &&
@@ -115,11 +136,22 @@ function ProductsContent() {
             ? color === activeColor
             : color.color_name === activeColor
         ));
-    const matchesSurfaceType = !activeSurfaceType || (product.surface_types && product.surface_types.some((surface: any) => surface.surface_name === activeSurfaceType));
+    const matchesSurfaceType =
+      !activeSurfaceType ||
+      (product.surface_types &&
+        product.surface_types.some(
+          (surface: any) => surface.surface_name === activeSurfaceType
+        ));
     const matchesSearch =
       product.product_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       false;
-    return matchesCategory && matchesSize && matchesColor && matchesSurfaceType && matchesSearch;
+    return (
+      matchesCategory &&
+      matchesSize &&
+      matchesColor &&
+      matchesSurfaceType &&
+      matchesSearch
+    );
   });
 
   console.log(
@@ -155,10 +187,22 @@ function ProductsContent() {
       {/* Main Content with Sidebar */}
       <section className="py-8 bg-background">
         <div className="container mx-auto px-4">
+          {/* Mobile Filter Toggle */}
+          <div className="lg:hidden mb-4">
+            <Button
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className="w-full flex items-center justify-center gap-2"
+            >
+              <Filter className="w-4 h-4" />
+              {showFilters ? 'Hide Filters' : 'Show Filters'}
+            </Button>
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Sidebar - Filters */}
-            <div className="lg:w-1/4">
-              <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-24">
+            <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
+              <div className="bg-white rounded-lg shadow-sm border p-6 lg:sticky lg:top-24">
                 <h3 className="text-lg font-semibold text-charcoal mb-6 flex items-center gap-2">
                   <Filter className="w-5 h-5" />
                   Filters
@@ -254,8 +298,7 @@ function ProductsContent() {
                         }`}
                         style={{ backgroundColor: color.toLowerCase() }}
                         title={color}
-                      >
-                      </button>
+                      ></button>
                     ))}
                   </div>
                 </div>
@@ -304,10 +347,8 @@ function ProductsContent() {
             <div className="lg:w-3/4">
               {/* Results Header */}
               <div className="flex justify-between items-center mb-6">
-                <div>
-                  <h2 className="text-2xl font-semibold text-charcoal">
-                    {activeCategory === "All" ? "All Products" : activeCategory}
-                  </h2>
+                <div className="text-sm text-gray-600">
+                  {filteredProducts.length} products found
                 </div>
 
                 {/* View Toggle */}
@@ -319,6 +360,7 @@ function ProductsContent() {
                         ? "bg-orange text-white"
                         : "bg-gray-100 text-gray-600 hover:bg-orange/20"
                     }`}
+                    title="Grid View"
                   >
                     <Grid3X3 className="w-5 h-5" />
                   </button>
@@ -329,6 +371,7 @@ function ProductsContent() {
                         ? "bg-orange text-white"
                         : "bg-gray-100 text-gray-600 hover:bg-orange/20"
                     }`}
+                    title="List View"
                   >
                     <List className="w-5 h-5" />
                   </button>
@@ -362,7 +405,8 @@ function ProductsContent() {
                       href={`/product/${product.documentId}`}
                       colors={product.colors || []}
                       surfaceTypes={product.surface_types || []}
-                      className="animate-fade-in cursor-pointer hover:shadow-lg transition-shadow"
+                      viewMode={viewMode}
+                      className="animate-fade-in"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     />
                   ))}

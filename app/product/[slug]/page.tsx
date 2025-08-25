@@ -164,10 +164,10 @@ export default function ProductDetail() {
                 <h1 className="text-3xl font-bold text-charcoal mb-2">
                   {product.product_name}
                 </h1>
-                <p className="text-muted-foreground text-lg">
+                {/* <p className="text-muted-foreground text-lg">
                   {product.description ||
                     "Premium quality tiles perfect for modern spaces."}
-                </p>
+                </p> */}
               </div>
 
               {/* Size & Specifications */}
@@ -212,6 +212,27 @@ export default function ProductDetail() {
                         </span>
                       </div>
                     ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Surface Types */}
+              {product.surface_types && product.surface_types.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-charcoal mb-4">
+                    Surface Types
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {product.surface_types.map(
+                      (surface: any, index: number) => (
+                        <span
+                          key={surface.id || index}
+                          className="px-4 py-2 bg-orange/10 text-orange rounded-lg border border-orange/20 font-medium"
+                        >
+                          {surface.surface_name}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
               )}
