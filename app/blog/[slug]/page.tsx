@@ -9,9 +9,36 @@ import { Calendar, User, ArrowLeft } from "lucide-react";
 import { api } from "@/lib/api";
 import Link from "next/link";
 
+interface ContentChild {
+  text: string;
+}
+
+interface ContentBlock {
+  type: string;
+  children?: ContentChild[];
+}
+
+interface BlogPost {
+  id: number;
+  documentId: string;
+  title: string;
+  content: ContentBlock[];
+  slug: string;
+  meta_title: string;
+  meta_description: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  image?: {
+    id: number;
+    name: string;
+    url: string;
+  };
+}
+
 export default function BlogDetail() {
   const params = useParams();
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +47,7 @@ export default function BlogDetail() {
         const blogs = await api.getBlogs();
         console.log('All blogs:', blogs);
         console.log('Looking for slug:', params.slug);
-        const foundBlog = blogs.find(b => b.slug === params.slug || b.id.toString() === params.slug);
+        const foundBlog = blogs.find((b: BlogPost) => b.slug === params.slug || b.id.toString() === params.slug);
         console.log('Found blog:', foundBlog);
         setBlog(foundBlog);
       } catch (error) {
@@ -80,7 +107,7 @@ export default function BlogDetail() {
 
         {blog.image && (
           <img
-            src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://10.165.67.219'}${blog.image.url}`}
+            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${blog.image.url}`}
             alt={blog.title}
             className="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
           />
@@ -112,7 +139,7 @@ export default function BlogDetail() {
             <div key={index}>
               {block.type === 'paragraph' && (
                 <p className="mb-4 text-gray-700 leading-relaxed">
-                  {block.children?.map((child, childIndex) => (
+                  {block.children?.map((child: ContentChild, childIndex: number) => (
                     <span key={childIndex}>{child.text}</span>
                   ))}
                 </p>
