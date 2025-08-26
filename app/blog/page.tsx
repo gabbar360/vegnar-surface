@@ -91,7 +91,7 @@ export default function Blog() {
                   <div className="relative">
                     {post.image && (
                       <img
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://10.165.67.219'}${post.image.url}`}
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${post.image.url}`}
                         alt={post.title}
                         className="w-full h-48 object-cover"
                       />
