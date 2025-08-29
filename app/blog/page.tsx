@@ -183,7 +183,7 @@ export default function Blog() {
                 return (
                   <div
                     key={post.id}
-                    ref={(el) => (rowRefs.current[post.id] = el)}
+                    ref={(el) => { rowRefs.current[post.id] = el; }}
                     data-id={post.id}
                     className={`grid md:grid-cols-2 gap-8 items-center transition-all duration-700 ease-out ${
                       visibleIds[post.id] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
