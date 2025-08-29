@@ -282,7 +282,7 @@ export default function Inspiration() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-r from-cream to-marble">
+  <section className="relative py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6">
@@ -296,7 +296,7 @@ export default function Inspiration() {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-background border-b">
+  <section className="py-8 marble-pattern border-b">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
@@ -317,7 +317,7 @@ export default function Inspiration() {
       </section>
 
       {/* Gallery */}
-      <section className="py-20 bg-background">
+  <section className="py-20 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {inspirationGallery
@@ -351,7 +351,7 @@ export default function Inspiration() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 marble-pattern">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-charcoal mb-6">
             Need Custom Design Ideas?

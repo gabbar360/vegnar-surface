@@ -57,7 +57,7 @@ const Header = () => {
       // })),
     },
     { name: "E-CATALOGUE", path: "/catalog" },
-    { name: "UTILITIES", path: "/utilities" },
+    // { name: "UTILITIES", path: "/utilities" },
     { name: "BLOG", path: "/blog" },
     { name: "BECOME A PARTNER", path: "/partner", isButton: true },
     { name: "CONTACT", path: "/contact", isButton: true },
@@ -71,9 +71,9 @@ const Header = () => {
       "fixed top-0 w-full z-40 transition-all duration-700 ease-out",
       isHomePage
         ? isScrolled 
-          ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-xl" 
+          ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-xl marble-pattern" 
           : "bg-transparent border-b border-transparent"
-        : "bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-xl"
+        : "bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-xl marble-pattern"
     )}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">

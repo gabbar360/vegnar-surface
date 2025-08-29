@@ -127,7 +127,7 @@ export default function Partner() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className={`relative py-24 bg-gradient-to-r from-charcoal to-charcoal-light text-white transition-all duration-1000 ${
+  className={`relative py-24 marble-pattern text-white transition-all duration-1000 ${
           heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
         style={{
@@ -162,7 +162,7 @@ export default function Partner() {
       {/* Benefits Section */}
       <section
         ref={benefitsRef}
-        className={`py-24 bg-background transition-all duration-1000 delay-200 ${
+  className={`py-24 marble-pattern transition-all duration-1000 delay-200 ${
           benefitsVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10"
@@ -209,7 +209,7 @@ export default function Partner() {
       {/* Process Section */}
       <section
         ref={processRef}
-        className={`py-24 bg-grey-light transition-all duration-1000 delay-400 ${
+        className={`py-24 marble-pattern transition-all duration-1000 delay-400 ${
           processVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10"
@@ -252,7 +252,7 @@ export default function Partner() {
       {/* Partnership Form */}
       <section
         ref={formRef}
-        className={`py-24 bg-background transition-all duration-1000 delay-600 ${
+        className={`py-24 marble-pattern transition-all duration-1000 delay-600 ${
           formVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
