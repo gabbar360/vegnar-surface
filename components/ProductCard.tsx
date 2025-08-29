@@ -64,9 +64,16 @@ const ProductCard = ({
                   </p>
 
                   {sizes && sizes.length > 0 && (
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Sizes: {sizes.map((s) => s.size_name).join(", ")}
-                    </p>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {sizes.map((s, idx) => (
+                        <span
+                          key={s.id || idx}
+                          className="px-3 py-1 bg-orange/10 text-orange text-xs font-semibold rounded-full border border-orange/20 shadow-sm"
+                        >
+                          {s.size_name}
+                        </span>
+                      ))}
+                    </div>
                   )}
 
                   {surfaceTypes && surfaceTypes.length > 0 && (
@@ -136,9 +143,16 @@ const ProductCard = ({
               {name}
             </h3>
             {sizes && sizes.length > 0 && (
-              <p className="text-muted-foreground font-medium mb-2">
-                {sizes.map((s) => s.size_name).join(", ")}
-              </p>
+              <div className="flex flex-wrap gap-2 mb-2">
+                {sizes.map((s, idx) => (
+                  <span
+                    key={s.id || idx}
+                    className="px-3 py-1 bg-orange/10 text-orange text-xs font-semibold rounded-full border border-orange/20 shadow-sm"
+                  >
+                    {s.size_name}
+                  </span>
+                ))}
+              </div>
             )}
             {surfaceTypes && surfaceTypes.length > 0 && (
               <p className="text-muted-foreground text-sm mb-4">

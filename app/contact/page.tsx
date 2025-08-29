@@ -86,7 +86,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 bg-background">
+  <section className="py-16 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16">
             
@@ -212,7 +212,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Full Width Google Map */}
+      {/* Full Width Google Map
       <section className="relative"> 
         <div className="relative h-96 w-full">
           <iframe
@@ -226,7 +226,7 @@ export default function Contact() {
             title="RK Iconic, B623, 150 Feet Ring Rd, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360007"
           ></iframe>
         </div>
-      </section>
+      </section> */}
       <Footer />
     </div>
   );
