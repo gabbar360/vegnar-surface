@@ -99,7 +99,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-24 bg-marble">
+  <section className="py-24 marble-pattern">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">

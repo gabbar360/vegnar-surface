@@ -136,7 +136,7 @@ export default function Home() {
         </section> */}
 
         {/* Featured Inspirations Section */}
-        <section className="py-20 bg-grey-light">
+        <section className="py-20 marble-pattern">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-charcoal mb-4">Design Inspiration</h2>

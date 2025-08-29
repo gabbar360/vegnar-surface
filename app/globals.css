@@ -231,3 +231,33 @@
   .border-gold { border-color: hsl(var(--gold)); }
   .border-orange { border-color: hsl(var(--orange)); }
 }
+
+/* Marble background utilities */
+.marble-pattern {
+  background-image: url("/assets/white-marble-texture.jpg");
+  background-repeat: repeat;
+  background-position: top left;
+  background-size: 640px auto; /* 480–800px works well; adjust if needed */
+}
+
+/* Overlay version for media-heavy sections (keeps text readable) */
+.with-marble-overlay {
+  position: relative;
+}
+.with-marble-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("/assets/white-marble-texture.jpg");
+  background-repeat: repeat;
+  background-position: top left;
+  background-size: 720px auto; /* slightly larger tiles for subtlety */
+  opacity: 0.12; /* low opacity to preserve readability */
+}
+
+/* Responsive tuning */
+@media (max-width: 768px) {
+  .marble-pattern { background-size: 480px auto; }
+  .with-marble-overlay::after { background-size: 540px auto; }
+}

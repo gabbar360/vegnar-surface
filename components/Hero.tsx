@@ -69,7 +69,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative h-screen overflow-hidden with-marble-overlay">
       {/* Background Slides */}
       {slides.map((slide, index) => (
         <div
