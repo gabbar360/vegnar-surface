@@ -5,21 +5,37 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
+import { api } from "@/lib/api";
+import { toast } from 'react-toastify';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    phone: "",
-    company: "",
+    phone_number: "",
+    company_name: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your inquiry! We'll get back to you soon.");
-    setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+    setIsSubmitting(true);
+    
+    console.log('Form Data:', formData);
+    
+    try {
+      const result = await api.submitContact(formData);
+      console.log('Submit result:', result);
+      toast.success("Thank you for your inquiry.");//! We'll get back to you soon
+      setFormData({ full_name: "", email: "", phone_number: "", company_name: "", message: "" });
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      const errorMessage = error.response?.data?.error?.message || error.message || 'Unknown error';
+      toast.error(`Sorry, there was an error: ${errorMessage}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -131,8 +147,8 @@ export default function Contact() {
                       </label>
                       <input
                         type="text"
-                        name="name"
-                        value={formData.name}
+                        name="full_name"
+                        value={formData.full_name}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
@@ -163,8 +179,8 @@ export default function Contact() {
                       </label>
                       <input
                         type="tel"
-                        name="phone"
-                        value={formData.phone}
+                        name="phone_number"
+                        value={formData.phone_number}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
                         placeholder="+91 12345 67890"
@@ -177,8 +193,8 @@ export default function Contact() {
                       </label>
                       <input
                         type="text"
-                        name="company"
-                        value={formData.company}
+                        name="company_name"
+                        value={formData.company_name}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
                         placeholder="Your company"
@@ -201,9 +217,15 @@ export default function Contact() {
                     ></textarea>
                   </div>
 
-                  <Button type="submit" variant="luxury" size="lg" className="w-full group">
+                  <Button 
+                    type="submit" 
+                    variant="luxury" 
+                    size="lg" 
+                    className="w-full group"
+                    disabled={isSubmitting}
+                  >
                     <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </div>
