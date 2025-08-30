@@ -90,5 +90,34 @@ export const api = {
       console.error('Error fetching blogs:', error);
       return [];
     }
+  },
+
+  async submitContact(contactData: {
+    full_name: string;
+    email: string;
+    phone_number: string;
+    company_name: string;
+    message: string;
+  }) {
+    try {
+      console.log('API URL:', API_URL);
+      console.log('Contact Data:', contactData);
+      
+      const response = await axios.post(`${API_URL}/api/contacts`, {
+        data: contactData
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      console.log('Response:', response.data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error submitting contact:', error);
+      console.error('Error response:', error.response?.data);
+      console.error('Error status:', error.response?.status);
+      throw error;
+    }
   }
 };
