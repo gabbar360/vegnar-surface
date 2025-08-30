@@ -185,7 +185,7 @@ function ProductsContent() {
       </section>
 
       {/* Main Content with Sidebar */}
-      <section className="py-8 bg-background">
+  <section className="py-8 marble-pattern">
         <div className="container mx-auto px-4">
           {/* Mobile Filter Toggle */}
           <div className="lg:hidden mb-4">

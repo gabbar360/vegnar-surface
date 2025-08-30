@@ -50,7 +50,7 @@ export default function Utilities() {
     <div className="min-h-screen">
       <Header />
       
-      <section className="relative py-24 bg-gradient-to-r from-cream to-marble">
+  <section className="relative py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6">
@@ -63,7 +63,7 @@ export default function Utilities() {
         </div>
       </section>
 
-      <section className="py-20 bg-background">
+  <section className="py-20 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {utilities.map((utility, index) => {

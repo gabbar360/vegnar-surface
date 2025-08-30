@@ -92,7 +92,7 @@ export default function ProductDetail() {
       <Header />
 
       {/* Breadcrumb */}
-      <section className="py-6 bg-cream border-b">
+  <section className="py-6 marble-pattern border-b">
         <div className="container mx-auto px-4">
           <div className="flex items-center space-x-2 text-sm">
             <Link href="/" className="text-muted-foreground hover:text-orange">
@@ -114,7 +114,7 @@ export default function ProductDetail() {
       </section>
 
       {/* Product Detail */}
-      <section className="py-12">
+  <section className="py-12 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Image Gallery */}
@@ -176,9 +176,19 @@ export default function ProductDetail() {
                   <div className="text-sm text-muted-foreground mb-1">
                     Sizes Available
                   </div>
-                  <div className="text-xl font-semibold text-charcoal">
-                    {product.sizes?.map((s: any) => s.size_name).join(", ") ||
-                      "Multiple Sizes"}
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    {product.sizes && product.sizes.length > 0 ? (
+                      product.sizes.map((s: any, idx: number) => (
+                        <span
+                          key={s.id || idx}
+                          className="px-3 py-1 bg-orange/10 text-orange text-xs font-semibold rounded-full border border-orange/20 shadow-sm"
+                        >
+                          {s.size_name}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-muted-foreground">Multiple Sizes</span>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -266,12 +276,12 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* Product Details Tabs */}
+      {/* Product Details Tabs
       <section className="py-16 bg-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto"></div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       {/* <section className="py-16 bg-charcoal text-white">

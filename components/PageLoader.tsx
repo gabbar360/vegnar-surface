@@ -37,7 +37,7 @@ const PageLoader = ({ onComplete, duration = 700 }: PageLoaderProps) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
+  <div className="fixed inset-0 z-[100] flex items-center justify-center marble-pattern">
       <div className="flex flex-col items-center space-y-8">
         {/* Logo Animation */}
         <div className="relative">

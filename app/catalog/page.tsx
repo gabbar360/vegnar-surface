@@ -413,7 +413,7 @@ export default function Catalog() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-r from-cream to-marble">
+  <section className="relative py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6">
@@ -519,7 +519,7 @@ export default function Catalog() {
       </section> */}
 
       {/* Category Filter */}
-      <section className="py-12 bg-background">
+      <section className="py-12 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {categories.map((category) => (
@@ -541,7 +541,7 @@ export default function Catalog() {
       </section>
 
       {/* Filtered Catalogs */}
-      <section className="  bg-secondary/30">
+      <section className="  marble-pattern">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
             {selectedCategory === "All" ? "All Catalogs" : selectedCategory}
@@ -643,7 +643,7 @@ export default function Catalog() {
       </section>
 
       {/* Quick Links */}
-        <section className="py-20 bg-background">
+        <section className="py-20 marble-pattern">
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
               Quick Access

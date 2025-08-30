@@ -55,7 +55,7 @@ export default function Export() {
       </section>
 
       {/* Export Stats */}
-      <section className="py-20 bg-background">
+  <section className="py-20 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
@@ -94,7 +94,7 @@ export default function Export() {
       </section>
 
       {/* Our Global Presence */}
-      <section className="py-20 bg-secondary/30">
+  <section className="py-20 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold text-charcoal mb-8">
@@ -119,7 +119,7 @@ export default function Export() {
       </section>
 
       {/* Interactive 3D Globe */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 marble-pattern">
         <div className="text-center mb-12 px-4">
           <h2 className="text-4xl font-bold text-charcoal mb-6">
             Interactive Global Presence

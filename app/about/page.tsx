@@ -60,7 +60,7 @@ export default function About() {
       </section>
 
       {/* Company Story */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-background marble-pattern">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -100,7 +100,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-24 bg-cream">
+  <section className="py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">Mission & Vision</h2>
@@ -131,7 +131,7 @@ export default function About() {
       </section>
 
       {/* Company Timeline */}
-      <section className="py-24 bg-background">
+  <section className="py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">Our Journey</h2>
@@ -211,7 +211,7 @@ export default function About() {
       </section>
 
       {/* Core Values */}
-      <section className="py-24 bg-marble">
+      <section className="py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">Our Core Values</h2>
