@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ProductInquiry from "./ProductInquiry";
+import { getImageUrl } from "@/lib/imageHelper";
 
 interface ProductCardProps {
   id: string;
@@ -45,7 +46,7 @@ const ProductCard = ({
             {/* Image Container */}
             <div className="w-48 h-32 flex-shrink-0 overflow-hidden bg-marble">
               <img
-                src={image}
+                src={getImageUrl(image)}
                 alt={`${name} - ${sizes.map((s) => s.size_name).join(", ")}`}
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -129,7 +130,7 @@ const ProductCard = ({
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden bg-marble">
           <img
-            src={image}
+            src={getImageUrl(image)}
             alt={`${name} - ${sizes.map((s) => s.size_name).join(", ")}`}
             className="w-full h-full object-cover"
             loading="lazy"

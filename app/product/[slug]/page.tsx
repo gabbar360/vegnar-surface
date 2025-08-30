@@ -18,6 +18,7 @@ import {
   MapPin,
 } from "lucide-react";
 import Link from "next/link";
+import { getImageUrl } from "@/lib/imageHelper";
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
@@ -84,7 +85,7 @@ export default function ProductDetail() {
   }
 
   const productImages = product.image
-    ? [`${API_URL}${product.image.url}`]
+    ? [getImageUrl(product.image.url)]
     : ["https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800"];
 
   return (
@@ -142,7 +143,7 @@ export default function ProductDetail() {
                       }`}
                     >
                       <img
-                        src={image}
+                        src={getImageUrl(image)}
                         alt={`${product.product_name} ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
