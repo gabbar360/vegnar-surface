@@ -649,37 +649,53 @@ export default function Catalog() {
               Quick Access
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">Price List</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Current pricing for all products
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-orange text-orange"
-                >
-                  Download
-                </Button>
-              </Card>
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"> */}
+              
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
 
+              {/* Plate Packaging PDF */}
               <Card className="text-center p-6 hover:shadow-lg transition-shadow">
                 <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">
-                  Installation Guide
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Step-by-step installation instructions
+                <h3 className="font-semibold text-charcoal mb-2">Plate Packaging</h3>
+                <p className="text-sm text-muted-foreground mb-5">
+                  Vegnar Surfaces plate packaging details
                 </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-orange text-orange"
-                >
-                  Download
-                </Button>
+                <div className="flex items-center justify-center gap-3">
+                  <a
+                    href={encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                  >
+                    <Eye className="w-4 h-4" /> View
+                  </a>
+                  <a
+                    href={encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}
+                    download
+                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                  >
+                    <Download className="w-4 h-4" /> Download
+                  </a>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const url = `${window.location.origin}${encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}`;
+                      try {
+                        if (navigator.share) {
+                          await navigator.share({ title: "Vegnar Surfaces – Plate Packaging", url });
+                        } else {
+                          await navigator.clipboard.writeText(url);
+                          alert("Link copied to clipboard");
+                        }
+                      } catch (e) {
+                        // user cancelled or share not available
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                  >
+                    <Share2 className="w-4 h-4" /> Share
+                  </button>
+                </div>
               </Card>
 
               {/* <Card className="text-center p-6 hover:shadow-lg transition-shadow">
