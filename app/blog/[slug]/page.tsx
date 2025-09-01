@@ -135,32 +135,34 @@ export default function BlogDetail() {
 
       <Header />
 
-      {/* Hero with parallax and overlay */}
-      <section className="relative h-[50vh] min-h-[320px] with-marble-overlay overflow-hidden">
+      {/* Hero redesigned */}
+      <section className="relative h-[65vh] min-h-[380px] overflow-hidden">
         {blog.image && (
           <img
             ref={heroImgRef}
             src={`${process.env.NEXT_PUBLIC_STRAPI_URL || "http://10.165.67.219"}${blog.image.url}`}
             alt={blog.title}
-            className="absolute inset-0 w-full h-full object-contain bg-black/50 will-change-transform"
+            className="absolute inset-0 w-full h-full object-cover will-change-transform"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.06),transparent_40%)]" />
         <div className="relative z-10 h-full container mx-auto px-4 flex items-end pb-10">
-          <div className="text-white max-w-4xl">
-            <div className="flex flex-wrap items-center gap-6 text-sm text-white/90 mb-3">
-              <span className="flex items-center gap-2">
+          <div className="max-w-5xl text-white">
+            <div className="mb-3 inline-flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-white/80">
+              <span className="px-2 py-1 rounded-md bg-white/10 backdrop-blur">Blog</span>
+              <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" /> {new Date(blog.publishedAt).toLocaleDateString()}
               </span>
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-1">
                 <User className="w-4 h-4" /> Admin
               </span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight drop-shadow-sm">
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-md">
               {blog.title}
             </h1>
             {blog.meta_description && (
-              <p className="mt-3 text-white/90 line-clamp-2 md:line-clamp-3">
+              <p className="mt-4 text-white/90 max-w-3xl text-base md:text-lg">
                 {blog.meta_description}
               </p>
             )}
