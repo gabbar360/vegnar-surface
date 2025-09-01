@@ -398,9 +398,7 @@ function ProductsContent() {
                       }
                       sizes={product.sizes}
                       image={
-                        product.image?.url
-                          ? `${API_URL}${product.image.url}`
-                          : "/assets/product-subway.jpg"
+                        product.image?.url || "/assets/product-subway.jpg"
                       }
                       href={`/product/${product.documentId}`}
                       colors={product.colors || []}

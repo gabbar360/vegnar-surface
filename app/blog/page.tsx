@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight, Search } from "lucide-react";
 import { api } from "@/lib/api";
 import Link from "next/link";
+import { getImageUrl } from "@/lib/imageHelper";
 
 interface BlogPost {
   id: number;
@@ -115,7 +116,7 @@ export default function Blog() {
               <div className="group relative rounded-2xl overflow-hidden shadow-elegant cursor-pointer">
                 {featured.image && (
                   <img
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL || "http://10.165.67.219"}${featured.image.url}`}
+                    src={getImageUrl(featured.image.url)}
                     alt={featured.title}
                     className="w-full h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="eager"
@@ -168,7 +169,7 @@ export default function Blog() {
                 return (
                   <div
                     key={post.id}
-                    ref={(el) => (rowRefs.current[post.id] = el)}
+                    ref={(el) => { rowRefs.current[post.id] = el; }}
                     data-id={post.id}
                     className={`grid md:grid-cols-2 gap-8 items-center transition-all duration-700 ease-out ${
                       visibleIds[post.id] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -181,7 +182,7 @@ export default function Blog() {
                         <Link href={`/blog/${post.slug || post.id}`}>
                           <div className="group relative overflow-hidden rounded-2xl shadow-card hover:shadow-hover transition-all duration-500 cursor-pointer">
                             <img
-                              src={`${process.env.NEXT_PUBLIC_STRAPI_URL || "http://10.165.67.219"}${post.image.url}`}
+                              src={getImageUrl(post.image.url)}
                               alt={post.title}
                               className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
                               loading="lazy"
