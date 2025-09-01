@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowLeft, ArrowRight, Share2 } from "lucide-react";
 import { api } from "@/lib/api";
 import Link from "next/link";
+import { getImageUrl } from "@/lib/imageHelper";
 
 interface BlogPost {
   id: number;
@@ -140,7 +141,7 @@ export default function BlogDetail() {
         {blog.image && (
           <img
             ref={heroImgRef}
-            src={`${process.env.NEXT_PUBLIC_STRAPI_URL || "http://10.165.67.219"}${blog.image.url}`}
+            src={getImageUrl(blog.image.url)}
             alt={blog.title}
             className="absolute inset-0 w-full h-full object-contain bg-black/50 will-change-transform"
           />
@@ -235,7 +236,7 @@ export default function BlogDetail() {
                     {p.image && (
                       <div className="relative overflow-hidden">
                         <img
-                          src={`${process.env.NEXT_PUBLIC_STRAPI_URL || "http://10.165.67.219"}${p.image.url}`}
+                          src={getImageUrl(p.image.url)}
                           alt={p.title}
                           className="w-full h-44 object-cover transition-transform duration-700 group-hover:scale-110"
                           loading="lazy"
