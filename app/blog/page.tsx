@@ -94,31 +94,16 @@ export default function Blog() {
       <Header />
 
       {/* Hero */}
-      <section className="relative py-24 with-marble-overlay overflow-hidden">
+      <section className="relative pt-24 with-marble-overlay overflow-hidden">
         <div className="pointer-events-none absolute -top-10 -left-10 w-64 h-64 rounded-full bg-orange/10 blur-3xl animate-pulse" />
         <div className="pointer-events-none absolute -bottom-10 -right-10 w-72 h-72 rounded-full bg-charcoal/10 blur-3xl animate-pulse" />
 
         <div className="container mx-auto px-4">
           <div className="text-center">
-            {/* <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-charcoal via-orange to-charcoal">
-              Insights & Inspiration
-            </h1>
-            <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Latest trends, guides, and stories from the world of premium porcelain surfaces.
-            </p> */}
-
-            {/* Search */}
-            {/* <div className="mt-8 max-w-xl mx-auto">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search articles..."
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-border/60 bg-white/90 backdrop-blur focus:ring-2 focus:ring-orange focus:border-orange outline-none"
-                />
-              </div>
-            </div> */}
+            <h1 className="hero-title text-center">Vegnar Insights</h1>
+            <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+              Trends, guides, and stories from the world of premium surfaces.
+            </p>
           </div>
         </div>
       </section>
