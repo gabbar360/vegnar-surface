@@ -22,6 +22,7 @@ export default function Catalog() {
     "Subway Collection",
     "Outdoor Collection",
     "Mosaics Collection",
+    "200x200MM Collection"
   ];
 
   const catalogs = [
@@ -400,6 +401,56 @@ export default function Catalog() {
       pdfPath:
         "/catalogs/Mosaics Collection/Vegnar Surfaces - Master Collection.pdf",
       thumbnailImage: "/catalogs/thumbnails/Master Collection.png",
+    },
+
+    // 200x200MM Collection (4 PDFs)
+    {
+      id: 40,
+      title: "Bloomora 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - Bloomora 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
+    },
+    {
+      id: 41,
+      title: "MagnaStone 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - MagnaStone 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Mengen.png",
+    },
+    {
+      id: 42,
+      title: "MonoLux 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - MonoLux 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Monopole.png",
+    },
+    {
+      id: 43,
+      title: "OpalTone 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - OpalTone 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Opaque.png",
     },
   ];
 
