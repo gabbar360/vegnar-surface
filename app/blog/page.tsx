@@ -118,13 +118,13 @@ export default function Blog() {
                   <img
                     src={getImageUrl(featured.image.url)}
                     alt={featured.title}
-                    className="w-full h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-64 sm:h-72 md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="eager"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 text-white">
-                  <div className="flex items-center gap-4 text-sm text-white/90 mb-3">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10 text-white">
+                  <div className="flex items-center gap-3 text-xs sm:text-sm text-white/90 mb-2 sm:mb-3">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
                       {new Date(featured.publishedAt).toLocaleDateString()}
@@ -133,10 +133,10 @@ export default function Blog() {
                       <User className="w-4 h-4" /> Admin
                     </span>
                   </div>
-                  <h2 className="text-2xl md:text-4xl font-bold mb-3 leading-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight">
                     {featured.title}
                   </h2>
-                  <p className="max-w-3xl text-white/90 line-clamp-2 md:line-clamp-3">
+                  <p className="max-w-3xl text-white/90 hidden xs:line-clamp-2 sm:line-clamp-3 sm:block">
                     {featured.meta_description}
                   </p>
                   <Button className="mt-5 bg-orange hover:bg-orange/90 text-white">
@@ -184,7 +184,7 @@ export default function Blog() {
                             <img
                               src={getImageUrl(post.image.url)}
                               alt={post.title}
-                              className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
+                              className="w-full h-48 sm:h-60 md:h-72 object-cover transition-transform duration-700 group-hover:scale-105"
                               loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -225,13 +225,13 @@ export default function Blog() {
       </section>
 
       {/* Newsletter */}
-      <section className="py-24 with-marble-overlay">
+      {/* <section className="py-24 with-marble-overlay">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-charcoal mb-4">Stay Updated</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             Subscribe to our newsletter and get the latest tile trends, tips, and industry insights delivered to your inbox.
           </p>
-          <div className="max-w-md mx-auto flex gap-4">
+          <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-4">
             <input
               type="email"
               placeholder="Enter your email"
@@ -240,7 +240,7 @@ export default function Blog() {
             <Button className="bg-orange hover:bg-orange/90 text-white">Subscribe</Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>
