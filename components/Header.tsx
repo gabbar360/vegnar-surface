@@ -47,15 +47,15 @@ const Header = () => {
         { name: "Export", path: "/export" },
       ],
     },
-    {
-      name: "COLLECTION",
-      path: "/products",
-      // hasDropdown: true,
-      // dropdownItems: categories.map(cat => ({
-      //   name: cat.category_name,
-      //   path: `/products?category=${cat.category_name.toLowerCase().replace(/\s+/g, '-')}`
-      // })),
-    },
+    // {
+    //   name: "COLLECTION",
+    //   path: "/products",
+    //   // hasDropdown: true,
+    //   // dropdownItems: categories.map(cat => ({
+    //   //   name: cat.category_name,
+    //   //   path: `/products?category=${cat.category_name.toLowerCase().replace(/\s+/g, '-')}`
+    //   // })),
+    // },
     { name: "E-CATALOGUE", path: "/catalog" },
     // { name: "UTILITIES", path: "/utilities" },
     { name: "BLOG", path: "/blog" },
