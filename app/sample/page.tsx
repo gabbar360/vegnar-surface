@@ -213,22 +213,36 @@ export default function Sample() {
 
                 <div className="bg-white rounded-2xl shadow-card p-8">
                   <h3 className="text-xl font-bold text-charcoal mb-6">Contact Information</h3>
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     <div className="flex items-center">
                       <Phone className="w-5 h-5 text-orange mr-3" />
-                      <span className="text-muted-foreground">+91 98765 43210</span>
+                      <span className="text-muted-foreground">+91 90333 31005</span>
                     </div>
                     <div className="flex items-center">
                       <Mail className="w-5 h-5 text-orange mr-3" />
-                      <span className="text-muted-foreground">samples@vegnarsurfaces.com</span>
+                      <div className="flex flex-col">
+                        <span className="text-muted-foreground">connect@vegnar.com</span>
+                        <span className="text-muted-foreground">germany@vegnar.com</span>
+                      </div>
                     </div>
                     <div className="flex items-start">
                       <MapPin className="w-5 h-5 text-orange mr-3 mt-0.5" />
-                      <span className="text-muted-foreground">
-                        Vegnar Surfaces Pvt. Ltd.<br />
-                        Industrial Area, Morbi<br />
-                        Gujarat, India
-                      </span>
+                      <div className="space-y-3">
+                        <div>
+                          <p className="font-medium text-charcoal">India Office</p>
+                          <span className="text-muted-foreground">
+                            B-623 RK Iconic, Shital Park<br />
+                            Rajkot, Gujarat 360006, India
+                          </span>
+                        </div>
+                        <div>
+                          <p className="font-medium text-charcoal">Germany Office</p>
+                          <span className="text-muted-foreground">
+                            Rheinstraße 10, D-35764 Sinn<br />
+                            Germany
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
