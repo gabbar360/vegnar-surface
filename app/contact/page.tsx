@@ -48,7 +48,8 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: "Visit Our Office",
+      // title: "Visit Our Office",
+      title: "Head Quarter",
       details: [
         "B-623 RK Iconic, Shital Park",
         "Rajkot, Gujarat 360001, India"

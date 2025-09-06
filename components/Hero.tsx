@@ -119,14 +119,22 @@ const Hero = () => {
                       {slide.description}
                     </p>
                     
-                    <div className="flex justify-start">
+                    <div className="flex flex-col sm:flex-row gap-4">
                       {mounted && (
-                        <Link href={`/products?category=${slide.category}`}>
-                          <Button variant="luxury" size="xl" className="group rounded-full">
-                            View Collection
-                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                          </Button>
-                        </Link>
+                        <>
+                          <Link href={`/products?category=${slide.category}`}>
+                            <Button variant="luxury" size="xl" className="group rounded-full">
+                              View Collection
+                              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                            </Button>
+                          </Link>
+                          <Link href="/sample">
+                            <Button variant="outline" size="xl" className="group rounded-full bg-orange border-orange text-white hover:bg-orange/90">
+                              GET A SEMPLE
+                              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                            </Button>
+                          </Link>
+                        </>
                       )}
                     </div>
                   </>
