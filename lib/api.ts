@@ -119,5 +119,31 @@ export const api = {
       console.error('Error status:', error.response?.status);
       throw error;
     }
+  },
+
+  async submitPartnerApplication(partnerData: {
+    full_name: string;
+    company_name: string;
+    email: string;
+    phone: string;
+    country: string;
+    business_type: string;
+    business_experience: string;
+    partnership_interests: string;
+  }) {
+    try {
+      const response = await axios.post(`${API_URL}/api/become-a-parteners`, {
+        data: partnerData
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error submitting partner application:', error);
+      throw error;
+    }
   }
 };

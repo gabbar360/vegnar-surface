@@ -22,6 +22,7 @@ export default function Catalog() {
     "Subway Collection",
     "Outdoor Collection",
     "Mosaics Collection",
+    "200x200MM Collection"
   ];
 
   const catalogs = [
@@ -401,6 +402,56 @@ export default function Catalog() {
         "/catalogs/Mosaics Collection/Vegnar Surfaces - Master Collection.pdf",
       thumbnailImage: "/catalogs/thumbnails/Master Collection.png",
     },
+
+    // 200x200MM Collection (4 PDFs)
+    {
+      id: 40,
+      title: "Bloomora 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - Bloomora 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
+    },
+    {
+      id: 41,
+      title: "MagnaStone 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - MagnaStone 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Mengen.png",
+    },
+    {
+      id: 42,
+      title: "MonoLux 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - MonoLux 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Monopole.png",
+    },
+    {
+      id: 43,
+      title: "OpalTone 200×200 mm",
+      description: "Premium 200×200 mm tiles collection",
+      pages: 12,
+      size: "5 MB",
+      format: "PDF",
+      category: "200x200MM Collection",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
+      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - OpalTone 200×200 mm.pdf",
+      thumbnailImage: "/catalogs/thumbnails/Opaque.png",
+    },
   ];
 
   const filteredCatalogs =
@@ -649,37 +700,53 @@ export default function Catalog() {
               Quick Access
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">Price List</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Current pricing for all products
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-orange text-orange"
-                >
-                  Download
-                </Button>
-              </Card>
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"> */}
+              
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
 
+              {/* Plate Packaging PDF */}
               <Card className="text-center p-6 hover:shadow-lg transition-shadow">
                 <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">
-                  Installation Guide
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Step-by-step installation instructions
+                <h3 className="font-semibold text-charcoal mb-2">Plate Packaging</h3>
+                <p className="text-sm text-muted-foreground mb-5">
+                  Vegnar Surfaces plate packaging details
                 </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-orange text-orange"
-                >
-                  Download
-                </Button>
+                <div className="flex items-center justify-center gap-3">
+                  <a
+                    href={encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                  >
+                    <Eye className="w-4 h-4" /> View
+                  </a>
+                  <a
+                    href={encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}
+                    download
+                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                  >
+                    <Download className="w-4 h-4" /> Download
+                  </a>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const url = `${window.location.origin}${encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}`;
+                      try {
+                        if (navigator.share) {
+                          await navigator.share({ title: "Vegnar Surfaces – Plate Packaging", url });
+                        } else {
+                          await navigator.clipboard.writeText(url);
+                          alert("Link copied to clipboard");
+                        }
+                      } catch (e) {
+                        // user cancelled or share not available
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                  >
+                    <Share2 className="w-4 h-4" /> Share
+                  </button>
+                </div>
               </Card>
 
               {/* <Card className="text-center p-6 hover:shadow-lg transition-shadow">

@@ -30,6 +30,9 @@ import {
   Phone,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { api } from "@/lib/api";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Partner() {
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
@@ -38,6 +41,51 @@ export default function Partner() {
   const { elementRef: processRef, isVisible: processVisible } =
     useScrollAnimation();
   const { elementRef: formRef, isVisible: formVisible } = useScrollAnimation();
+
+  const [formData, setFormData] = useState({
+    full_name: '',
+    company_name: '',
+    email: '',
+    phone: '',
+    country: '',
+    business_type: '',
+    business_experience: '',
+    partnership_interests: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.full_name || !formData.company_name || !formData.email || !formData.phone || !formData.country) {
+      toast.error('Please fill all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await api.submitPartnerApplication(formData);
+      toast.success('Partnership application submitted successfully!');
+      setFormData({
+        full_name: '',
+        company_name: '',
+        email: '',
+        phone: '',
+        country: '',
+        business_type: '',
+        business_experience: '',
+        partnership_interests: ''
+      });
+    } catch (error) {
+      toast.error('Failed to submit application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const benefits = [
     {
@@ -278,95 +326,124 @@ export default function Partner() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="fullName">Full Name *</Label>
-                    <Input id="fullName" placeholder="Your full name" />
+                <form onSubmit={handleSubmit}>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName">Full Name *</Label>
+                      <Input 
+                        id="fullName" 
+                        placeholder="Your full name" 
+                        value={formData.full_name}
+                        onChange={(e) => handleInputChange('full_name', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="companyName">Company Name *</Label>
+                      <Input 
+                        id="companyName" 
+                        placeholder="Your company name" 
+                        value={formData.company_name}
+                        onChange={(e) => handleInputChange('company_name', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="your@email.com"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number *</Label>
+                      <Input 
+                        id="phone" 
+                        placeholder="+1 (555) 123-4567" 
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="country">Country *</Label>
+                      <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your country" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {countries.map((country) => (
+                            <SelectItem
+                              key={country}
+                              value={country.toLowerCase()}
+                            >
+                              {country}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="businessType">Business Type</Label>
+                      <Select value={formData.business_type} onValueChange={(value) => handleInputChange('business_type', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select business type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="distributor">Distributor</SelectItem>
+                          <SelectItem value="retailer">Retailer</SelectItem>
+                          <SelectItem value="contractor">Contractor</SelectItem>
+                          <SelectItem value="architect">
+                            Architect/Designer
+                          </SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="companyName">Company Name *</Label>
-                    <Input id="companyName" placeholder="Your company name" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your@email.com"
+                    <Label htmlFor="experience">Business Experience</Label>
+                    <Textarea
+                      id="experience"
+                      placeholder="Tell us about your experience in tiles/construction industry..."
+                      rows={4}
+                      value={formData.business_experience}
+                      onChange={(e) => handleInputChange('business_experience', e.target.value)}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input id="phone" placeholder="+1 (555) 123-4567" />
+                    <Label htmlFor="interests">Partnership Interests</Label>
+                    <Textarea
+                      id="interests"
+                      placeholder="Which product categories are you interested in? What are your market plans?"
+                      rows={4}
+                      value={formData.partnership_interests}
+                      onChange={(e) => handleInputChange('partnership_interests', e.target.value)}
+                    />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="country">Country *</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your country" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {countries.map((country) => (
-                          <SelectItem
-                            key={country}
-                            value={country.toLowerCase()}
-                          >
-                            {country}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                  <div className="text-center pt-6">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="bg-charcoal text-white hover:bg-charcoal-light px-12"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                    </Button>
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="businessType">Business Type</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select business type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="distributor">Distributor</SelectItem>
-                        <SelectItem value="retailer">Retailer</SelectItem>
-                        <SelectItem value="contractor">Contractor</SelectItem>
-                        <SelectItem value="architect">
-                          Architect/Designer
-                        </SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="experience">Business Experience</Label>
-                  <Textarea
-                    id="experience"
-                    placeholder="Tell us about your experience in tiles/construction industry..."
-                    rows={4}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="interests">Partnership Interests</Label>
-                  <Textarea
-                    id="interests"
-                    placeholder="Which product categories are you interested in? What are your market plans?"
-                    rows={4}
-                  />
-                </div>
-
-                <div className="text-center pt-6">
-                  <Button
-                    size="lg"
-                    className="bg-charcoal text-white hover:bg-charcoal-light px-12"
-                  >
-                    Submit Application
-                  </Button>
-                </div>
+                </form>
               </CardContent>
             </Card>
           </div>
