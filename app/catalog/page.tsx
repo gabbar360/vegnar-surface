@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -12,9 +12,33 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Download, FileText, Eye, Share2 } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Catalog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const router = useRouter();
+
+  // Initialize selected category from URL path if present: /catalog/<Category Name>
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const path = window.location.pathname; // e.g., /catalog/Large%20Slab%20Collection
+    const parts = path.split("/").filter(Boolean);
+    // parts: ["catalog", "Category Name?" ]
+    if (parts[0] === "catalog" && parts[1]) {
+      const decoded = decodeURIComponent(parts.slice(1).join("/"));
+      // Match only if it’s a known category
+      const known = [
+        "All",
+        "Large Slab Collection",
+        "Subway Collection",
+        "Outdoor Collection",
+        "Mosaics Collection",
+        "200x200MM Collection",
+      ];
+      const match = known.find((c) => c.toLowerCase() === decoded.toLowerCase());
+      if (match) setSelectedCategory(match);
+    }
+  }, []);
 
   const categories = [
     "All",
@@ -582,7 +606,13 @@ export default function Catalog() {
                     ? "bg-orange hover:bg-orange/90 text-white"
                     : "border-orange text-orange hover:bg-orange hover:text-white"
                 }
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => {
+                  if (category === "All") {
+                    router.push("/catalog");
+                  } else {
+                    router.push(`/catalog/${encodeURIComponent(category)}`);
+                  }
+                }}
               >
                 {category}
               </Button>
