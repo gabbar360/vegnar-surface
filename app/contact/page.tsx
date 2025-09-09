@@ -48,35 +48,43 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: MapPin,
-      // title: "Visit Our Office",
-      title: "Head Quarter",
+      title: "Head Quarter - India",
       details: [
         "B-623 RK Iconic, Shital Park",
-        "Rajkot, Gujarat 360001, India"
-      ]
+        "Rajkot, Gujarat 360006, India"
+      ],
+      link: "https://maps.google.com/?q=B-623+RK+Iconic+Shital+Park+Rajkot+Gujarat+360006+India"
+    },
+    {
+      icon: MapPin,
+      title: "Office - Germany",
+      details: [
+        "Rheinstraße 10, D-35764 Sinn,",
+        "Germany"
+      ],
+      link: "https://maps.google.com/?q=Rheinstraße+10+D-35764+Sinn+Germany"
     },
     {
       icon: Phone,
       title: "Call Us",
       details: [
-        "+91 9998040370",
-        // "+91 98765 43210"
-      ]
+        "+91 90333 31005",
+        "+91 90333 31031"  ]      
     },
     {
       icon: Mail,
       title: "Email Us", 
       details: [
-        "info@vegnarsurfacesgmail.com",
-        // "sales@sunwinceramica.com"
+        "connect@vegnar.com",
+        "germany@vegnar.com"
       ]
     },
     {
       icon: Clock,
       title: "Business Hours",
       details: [
-        "Monday - Saturday: 10:00 AM - 7:00 PM",
-        "Sunday: Closed"
+        "India: Mon-Sat 10:00 AM - 7:00 PM",
+        "Germany: Mon-Fri 9:00 AM - 6:00 PM"
       ]
     }
   ];
@@ -116,18 +124,58 @@ export default function Contact() {
                 </p>
               </div>
 
-              <div className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="bg-orange/10 p-3 rounded-lg flex-shrink-0">
-                      <info.icon className="w-6 h-6 text-orange" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-charcoal mb-2">{info.title}</h3>
-                      {info.details.map((detail, i) => (
-                        <p key={i} className="text-muted-foreground">{detail}</p>
-                      ))}
-                    </div>
+                  <div key={index} className="group">
+                    {info.link ? (
+                      <a 
+                        href={info.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-start space-x-4 p-4 rounded-xl border border-border/20 hover:border-orange/30 hover:bg-orange/5 transition-all duration-300 hover:shadow-md cursor-pointer"
+                      >
+                        <div className="bg-orange/10 p-3 rounded-lg flex-shrink-0 group-hover:bg-orange group-hover:text-white transition-all duration-300">
+                          <info.icon className="w-6 h-6 text-orange group-hover:text-white transition-colors duration-300" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-charcoal mb-2 group-hover:text-orange transition-colors duration-300">{info.title}</h3>
+                          {info.details.map((detail, i) => (
+                            <p key={i} className="text-muted-foreground group-hover:text-charcoal transition-colors duration-300">{detail}</p>
+                          ))}
+                          <p className="text-xs text-orange mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Click to view on map</p>
+                        </div>
+                      </a>
+                    ) : (
+                      <div className="flex items-start space-x-4 p-4 rounded-xl border border-border/20 hover:border-orange/30 hover:bg-orange/5 transition-all duration-300">
+                        <div className="bg-orange/10 p-3 rounded-lg flex-shrink-0">
+                          <info.icon className="w-6 h-6 text-orange" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-charcoal mb-2">{info.title}</h3>
+                          {info.details.map((detail, i) => (
+                            info.title === "Email Us" ? (
+                              <a 
+                                key={i} 
+                                href={`mailto:${detail}`}
+                                className="block text-muted-foreground hover:text-orange transition-colors duration-200 mb-1"
+                              >
+                                {detail}
+                              </a>
+                            ) : info.title === "Call Us" ? (
+                              <a 
+                                key={i} 
+                                href={`tel:${detail.split(' ')[0]}`}
+                                className="block text-muted-foreground hover:text-orange transition-colors duration-200 mb-1"
+                              >
+                                {detail}
+                              </a>
+                            ) : (
+                              <p key={i} className="text-muted-foreground mb-1">{detail}</p>
+                            )
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
