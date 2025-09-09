@@ -58,6 +58,9 @@ const Footer = () => {
               <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                 <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0 group-hover:text-black transition-all duration-300" />
                 <div>
+                  <p className="text-sm font-semibold text-white group-hover:text-black transition-colors duration-300 mb-1">
+                    Head Quarter
+                  </p>
                   <p className="text-sm text-primary-foreground/80 group-hover:text-black transition-colors duration-300">
                     B-623 RK Iconic, Shital Park
                     <br />
@@ -65,25 +68,42 @@ const Footer = () => {
                   </p>
                 </div>
               </div>
+              
+              <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0 group-hover:text-black transition-all duration-300" />
+                <div>
+                  <p className="text-sm font-semibold text-white group-hover:text-black transition-colors duration-300 mb-1">
+                    Visit Our Office - Germany
+                  </p>
+                  <p className="text-sm text-primary-foreground/80 group-hover:text-black transition-colors duration-300">
+                    Rheinstraße 10, D-35764 Sinn,
+                    <br />
+                    Germany
+                  </p>
+                </div>
+              </div>
 
               <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                 <Phone className="w-5 h-5 text-white flex-shrink-0 group-hover:text-black transition-all duration-300" />
-                <a
-                  href="tel:+91-12345-67890"
-                  className="text-sm text-primary-foreground/80 group-hover:text-black transition-all duration-300"
-                >
-                  +91 9998040370
+                <a href="tel:+91-+91 90333 31005" className="text-sm text-primary-foreground/80 group-hover:text-black transition-all duration-300">
+                  +91 90333 31005
                 </a>
               </div>
 
               <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                 <Mail className="w-5 h-5 text-white flex-shrink-0 group-hover:text-black transition-all duration-300" />
-                <a
-                  href="mailto:info@vegnar.com"
-                  className="text-sm text-primary-foreground/80 hover:text-black transition-all duration-300"
-                >
-                  info@vegnarsurfaces.com
-                </a>
+                <div>
+                  <a
+                    href="mailto:connect@vegnar.com"
+                    className="text-sm text-primary-foreground/80 group-hover:text-black transition-all duration-300 block"
+                  >connect@vegnar.com
+                  </a>
+                  <a href="mailto:germany@vegnar.com" 
+                    className="text-sm text-primary-foreground/80 group-hover:text-black transition-all duration-300 block"
+                  >
+                    germany@vegnar.com
+                  </a>
+                </div>
               </div>
             </div>
 
