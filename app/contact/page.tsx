@@ -57,7 +57,7 @@ export default function Contact() {
     },
     {
       icon: MapPin,
-      title: "Office - Germany",
+      title: "Our Global Presence",
       details: [
         "Rheinstraße 10, D-35764 Sinn,",
         "Germany"

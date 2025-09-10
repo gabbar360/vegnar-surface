@@ -68,7 +68,18 @@ const Footer = () => {
                   </p>
                 </div>
               </div>
+
+              <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                <Phone className="w-5 h-5 text-white flex-shrink-0 group-hover:text-black transition-all duration-300" />
+                <a href="tel:+91-+91 90333 31005" className="text-sm text-primary-foreground/80 group-hover:text-black transition-all duration-300">
+                  +91 90333 31005
+                </a>
+              </div>
               
+              <p className="text-[25px] font-semibold text-white group-hover:text-black transition-colors duration-300 mb-1">
+                    Our Global Presence
+              </p>
+
               <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                 <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0 group-hover:text-black transition-all duration-300" />
                 <div>
@@ -81,13 +92,6 @@ const Footer = () => {
                     Germany
                   </p>
                 </div>
-              </div>
-
-              <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
-                <Phone className="w-5 h-5 text-white flex-shrink-0 group-hover:text-black transition-all duration-300" />
-                <a href="tel:+91-+91 90333 31005" className="text-sm text-primary-foreground/80 group-hover:text-black transition-all duration-300">
-                  +91 90333 31005
-                </a>
               </div>
 
               <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300">
