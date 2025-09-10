@@ -145,5 +145,49 @@ export const api = {
       console.error('Error submitting partner application:', error);
       throw error;
     }
+  },
+
+  async createSampleOrder(orderData: {
+    full_name: string;
+    email: string;
+    shipping_address: string;
+    amount: number;
+    phone_number?: string;
+    company?: string;
+    additional_message?: string;
+    number_of_samples?: number;
+    currency?: string;
+  }) {
+    try {
+      const response = await axios.post(`${API_URL}/api/orders/create`, orderData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error creating sample order:', error);
+      throw error;
+    }
+  },
+
+  async verifyPayment(paymentData: {
+    razorpay_order_id: string;
+    razorpay_payment_id: string;
+    razorpay_signature: string;
+  }) {
+    try {
+      const response = await axios.post(`${API_URL}/api/orders/verify`, paymentData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error verifying payment:', error);
+      throw error;
+    }
   }
 };
