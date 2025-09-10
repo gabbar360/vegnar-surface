@@ -1,10 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
+
+// Razorpay types
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
+const API_BASE = 'http://localhost:1337/api';
 
 export default function Sample() {
   const [formData, setFormData] = useState({
@@ -14,14 +23,112 @@ export default function Sample() {
     company: "",
     address: "",
     productType: "",
-    message: ""
+    message: "",
+    quantity: 1,
+    pricePerSample: 500
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Load Razorpay script
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setLoading(true);
+    
+    try {
+      await createOrder({
+        full_name: formData.name,
+        email: formData.email,
+        shipping_address: formData.address,
+        amount: formData.quantity * formData.pricePerSample,
+        phone_number: formData.phone,
+        company: formData.company,
+        additional_message: formData.message,
+        number_of_samples: formData.quantity,
+        currency: 'INR'
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Order creation failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createOrder = async (orderData: any) => {
+    const response = await fetch(`${API_BASE}/orders/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      initializePayment(result, orderData);
+    } else {
+      throw new Error(result.error || 'Order creation failed');
+    }
+  };
+
+  const initializePayment = (orderResponse: any, customerData: any) => {
+    const options = {
+      key: orderResponse.key,
+      amount: orderResponse.amount,
+      currency: orderResponse.currency,
+      name: 'Vegnar Surfaces',
+      description: 'Sample Request',
+      order_id: orderResponse.order_id,
+      handler: (response: any) => verifyPayment(response),
+      prefill: {
+        name: customerData.full_name,
+        email: customerData.email,
+        contact: formData.phone
+      },
+      theme: { color: '#f97316' },
+      modal: {
+        ondismiss: () => alert('Payment cancelled')
+      }
+    };
+    
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
+  const verifyPayment = async (paymentResponse: any) => {
+    try {
+      const response = await fetch(`${API_BASE}/orders/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          razorpay_order_id: paymentResponse.razorpay_order_id,
+          razorpay_payment_id: paymentResponse.razorpay_payment_id,
+          razorpay_signature: paymentResponse.razorpay_signature
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          window.location.href = '/sample/success';
+        }, 1500);
+      } else {
+        alert('Payment verification failed!');
+      }
+    } catch (error) {
+      console.error('Verification error:', error);
+      alert('Payment verification failed!');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -119,27 +226,6 @@ export default function Sample() {
 
                   <div>
                     <label className="block text-sm font-medium text-charcoal mb-2">
-                      Product Type *
-                    </label>
-                    <select
-                      name="productType"
-                      required
-                      value={formData.productType}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
-                    >
-                      <option value="">Select product type</option>
-                      <option value="subway-tiles">Subway Tiles</option>
-                      <option value="outdoor-tiles">Outdoor Tiles</option>
-                      <option value="large-format">Large Format Slabs</option>
-                      <option value="mosaic-tiles">Mosaic Tiles</option>
-                      <option value="porcelain-floor">Porcelain Floor Tiles</option>
-                      <option value="sanitaryware">Sanitaryware</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-charcoal mb-2">
                       Shipping Address *
                     </label>
                     <textarea
@@ -167,20 +253,49 @@ export default function Sample() {
                     />
                   </div>
 
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-charcoal mb-2">
+                        Number of Samples *
+                      </label>
+                      <input
+                        type="number"
+                        name="quantity"
+                        required
+                        value={formData.quantity}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
+                        placeholder="1"
+                        min="1"
+                        max="10"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-charcoal mb-2">
+                        Total Amount (₹)
+                      </label>
+                      <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-charcoal font-medium">
+                        ₹{formData.quantity * formData.pricePerSample}
+                      </div>
+                    </div>
+                  </div>
+
                   <Button
                     type="submit"
                     className="w-full bg-orange hover:bg-orange/90 text-white py-3"
-                    disabled={submitted}
+                    disabled={submitted || loading}
                   >
                     {submitted ? (
                       <>
                         <CheckCircle className="w-5 h-5 mr-2" />
-                        Request Submitted!
+                        Payment Successful!
                       </>
+                    ) : loading ? (
+                      'Processing...'
                     ) : (
                       <>
                         <Send className="w-5 h-5 mr-2" />
-                        Request Free Sample
+                        Pay ₹{formData.quantity * formData.pricePerSample} for {formData.quantity} Sample{formData.quantity > 1 ? 's' : ''}
                       </>
                     )}
                   </Button>
@@ -250,9 +365,10 @@ export default function Sample() {
                 <div className="bg-charcoal rounded-2xl p-8 text-white">
                   <h3 className="text-xl font-bold mb-4">Sample Policy</h3>
                   <ul className="space-y-2 text-white/90 text-sm">
-                    <li>• Free samples up to 3 pieces per request</li>
+                    <li>• Sample fee: ₹500 (refundable on bulk order)</li>
+                    <li>• Up to 3 pieces per request</li>
                     <li>• Delivery within 5-7 business days</li>
-                    <li>• Shipping charges may apply for international orders</li>
+                    <li>• Secure payment via Razorpay</li>
                     <li>• Samples are for evaluation purposes only</li>
                   </ul>
                 </div>
