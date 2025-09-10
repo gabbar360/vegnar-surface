@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -290,76 +291,15 @@ export default function Sample() {
                 </form>
               </div>
 
-              {/* Info */}
-              <div className="space-y-8">
-                <div className="bg-gradient-to-br from-orange/10 to-orange/5 rounded-2xl p-8">
-                  <h3 className="text-xl font-bold text-charcoal mb-4">Why Request a Sample?</h3>
-                  <ul className="space-y-3 text-muted-foreground">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-orange mt-0.5 mr-3 flex-shrink-0" />
-                      Feel the texture and quality of our premium materials
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-orange mt-0.5 mr-3 flex-shrink-0" />
-                      See how colors look in your actual lighting conditions
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-orange mt-0.5 mr-3 flex-shrink-0" />
-                      Test durability and performance characteristics
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-orange mt-0.5 mr-3 flex-shrink-0" />
-                      Make confident decisions for your project
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-card p-8">
-                  <h3 className="text-xl font-bold text-charcoal mb-6">Contact Information</h3>
-                  <div className="space-y-6">
-                    <div className="flex items-center">
-                      <Phone className="w-5 h-5 text-orange mr-3" />
-                      <span className="text-muted-foreground">+91 90333 31005</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Mail className="w-5 h-5 text-orange mr-3" />
-                      <div className="flex flex-col">
-                        <span className="text-muted-foreground">connect@vegnar.com</span>
-                        <span className="text-muted-foreground">germany@vegnar.com</span>
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <MapPin className="w-5 h-5 text-orange mr-3 mt-0.5" />
-                      <div className="space-y-3">
-                        <div>
-                          <p className="font-medium text-charcoal">India Office</p>
-                          <span className="text-muted-foreground">
-                            B-623 RK Iconic, Shital Park<br />
-                            Rajkot, Gujarat 360006, India
-                          </span>
-                        </div>
-                        <div>
-                          <p className="font-medium text-charcoal">Germany Office</p>
-                          <span className="text-muted-foreground">
-                            Rheinstraße 10, D-35764 Sinn<br />
-                            Germany
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* <div className="bg-charcoal rounded-2xl p-8 text-white">
-                  <h3 className="text-xl font-bold mb-4">Sample Policy</h3>
-                  <ul className="space-y-2 text-white/90 text-sm">
-                    <li>• Sample fee: ₹500 (refundable on bulk order)</li>
-                    <li>• Up to 3 pieces per request</li>
-                    <li>• Delivery within 5-7 business days</li>
-                    <li>• Secure payment via Razorpay</li>
-                    <li>• Samples are for evaluation purposes only</li>
-                  </ul>
-                </div> */}
+              {/* Sample Kit Image */}
+              <div className="flex justify-center">
+                <Image
+                  src="/assets/samplekit.png"
+                  alt="Sample Kit"
+                  width={600}
+                  height={600}
+                  className="rounded-2xl shadow-elegant"
+                />
               </div>
             </div>
           </div>
