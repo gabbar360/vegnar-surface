@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
-import Image from "next/image";
+import { api } from "@/lib/api";
 
 // Razorpay types
 declare global {
@@ -13,8 +13,6 @@ declare global {
     Razorpay: any;
   }
 }
-
-const API_BASE = 'http://localhost:1337/api';
 
 export default function Sample() {
   const [formData, setFormData] = useState({
@@ -45,7 +43,7 @@ export default function Sample() {
     setLoading(true);
     
     try {
-      await createOrder({
+      const result = await api.createSampleOrder({
         full_name: formData.name,
         email: formData.email,
         shipping_address: formData.address,
@@ -56,6 +54,15 @@ export default function Sample() {
         number_of_samples: formData.quantity,
         currency: 'INR'
       });
+      
+      if (result.success) {
+        initializePayment(result, {
+          full_name: formData.name,
+          email: formData.email
+        });
+      } else {
+        throw new Error(result.error || 'Order creation failed');
+      }
     } catch (error) {
       console.error('Error:', error);
       alert('Order creation failed. Please try again.');
@@ -64,21 +71,7 @@ export default function Sample() {
     }
   };
 
-  const createOrder = async (orderData: any) => {
-    const response = await fetch(`${API_BASE}/orders/create`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(orderData)
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      initializePayment(result, orderData);
-    } else {
-      throw new Error(result.error || 'Order creation failed');
-    }
-  };
+
 
   const initializePayment = (orderResponse: any, customerData: any) => {
     const options = {
@@ -106,17 +99,11 @@ export default function Sample() {
 
   const verifyPayment = async (paymentResponse: any) => {
     try {
-      const response = await fetch(`${API_BASE}/orders/verify`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          razorpay_order_id: paymentResponse.razorpay_order_id,
-          razorpay_payment_id: paymentResponse.razorpay_payment_id,
-          razorpay_signature: paymentResponse.razorpay_signature
-        })
+      const result = await api.verifyPayment({
+        razorpay_order_id: paymentResponse.razorpay_order_id,
+        razorpay_payment_id: paymentResponse.razorpay_payment_id,
+        razorpay_signature: paymentResponse.razorpay_signature
       });
-      
-      const result = await response.json();
       
       if (result.success) {
         setSubmitted(true);
@@ -386,7 +373,7 @@ export default function Sample() {
                   </div>
                 </div>
 
-                <div className="bg-charcoal rounded-2xl p-8 text-white">
+                {/* <div className="bg-charcoal rounded-2xl p-8 text-white">
                   <h3 className="text-xl font-bold mb-4">Sample Policy</h3>
                   <ul className="space-y-2 text-white/90 text-sm">
                     <li>• Sample fee: ₹500 (refundable on bulk order)</li>
@@ -395,7 +382,7 @@ export default function Sample() {
                     <li>• Secure payment via Razorpay</li>
                     <li>• Samples are for evaluation purposes only</li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
