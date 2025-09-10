@@ -140,28 +140,7 @@ export default function Sample() {
         </div>
       </section>
 
-      {/* Marketing Banner (Product Image) */}
-      <section className="pt-4 pb-0">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-card bg-white">
-            {/* NOTE: Place your image at public/assets/boxx.jpg */}
-            <div className="relative w-full aspect-[16/9]">
-  <Image
-    src="/assets/boxx.jpg"
-    alt="Vegnar Surfaces Sample Pack — Durability Meets Dazzle"
-    fill
-    priority
-    className="object-cover rounded-t-2xl"
-  />
-</div>
-
-            <div className="p-4 md:p-6 border-t border-gray-100 bg-gradient-to-r from-black/5 to-transparent">
-              <h3 className="text-lg md:text-xl font-semibold text-charcoal">Experience the Premium Vegnar Sample Pack</h3>
-              <p className="text-sm md:text-base text-muted-foreground mt-1">Professional presentation. Real product feel. Make confident choices with our curated sample kit.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Sample Request Form */}
       <section className="py-16 marble-pattern">
