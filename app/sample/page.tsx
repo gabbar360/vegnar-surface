@@ -29,6 +29,7 @@ export default function Sample() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showCancelMessage, setShowCancelMessage] = useState(false);
 
   useEffect(() => {
     // Load Razorpay script
@@ -95,7 +96,7 @@ export default function Sample() {
       },
       theme: { color: '#f97316' },
       modal: {
-        ondismiss: () => alert('Payment cancelled')
+        ondismiss: () => setShowCancelMessage(true)
       }
     };
     
@@ -147,6 +148,29 @@ export default function Sample() {
       </section>
 
       
+
+      {/* Payment Cancel Message */}
+      {showCancelMessage && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-charcoal mb-2">Payment Cancelled</h3>
+            <p className="text-gray-600 mb-6">
+              Your payment was cancelled. You can try again or contact us for assistance.
+            </p>
+            <Button 
+              onClick={() => setShowCancelMessage(false)}
+              className="bg-orange hover:bg-orange/90 text-white px-8 py-2 rounded-full"
+            >
+              OK
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Sample Request Form */}
       <section className="py-16 marble-pattern">
