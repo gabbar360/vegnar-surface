@@ -637,11 +637,11 @@ export default function Catalog() {
                   className="hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="relative">
-                    <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+                    <div className="w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden rounded-t-lg">
                       <img
                         src={catalog.thumbnailImage || catalog.image}
                         alt={catalog.title}
-                        className="max-w-full max-h-full object-contain"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="absolute top-4 right-4 bg-white/90 px-2 py-1 rounded text-xs font-semibold text-charcoal">

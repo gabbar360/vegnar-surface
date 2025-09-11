@@ -9,6 +9,15 @@ import { cn } from "@/lib/utils";
 import SearchBar from "@/components/SearchBar";
 import { api } from "@/lib/api";
 
+interface NavigationItem {
+  name: string;
+  path: string;
+  hasDropdown?: boolean;
+  dropdownItems?: { name: string; path: string }[];
+  isButton?: boolean;
+  isCapsuleButton?: boolean;
+}
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,7 +44,7 @@ const Header = () => {
     fetchCategories();
   }, []);
 
-  const navigationItems = [
+  const navigationItems: NavigationItem[] = [
     { name: "HOME", path: "/" },
     {
       name: "COMPANY",
@@ -59,6 +68,7 @@ const Header = () => {
     { name: "E-CATALOGUE", path: "/catalog" },
     // { name: "UTILITIES", path: "/utilities" },
     { name: "BLOG", path: "/blog" },
+    { name: "GET SAMPLE", path: "/sample", isCapsuleButton: true },
     { name: "BECOME A PARTNER", path: "/partner", isButton: true },
     { name: "CONTACT", path: "/contact", isButton: true },
   ];
@@ -101,7 +111,7 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
             {navigationItems.map((item) => (
               <div key={item.name} className="relative group">
-                {item.hasDropdown ? (
+                {(item as NavigationItem).hasDropdown ? (
                   <div className="relative group">
                     <div className="flex items-center space-x-1 cursor-pointer">
                       <span
@@ -136,6 +146,13 @@ const Header = () => {
                       ))}
                     </div>
                   </div>
+                ) : item.isCapsuleButton ? (
+                  <Link
+                    href={item.path}
+                    className="bg-gradient-to-r from-orange to-orange/90 text-white px-3 xl:px-5 py-2 xl:py-2.5 rounded-full text-xs font-semibold tracking-wide hover:from-orange/90 hover:to-orange/80 transition-all duration-500 hover:scale-110 shadow-2xl hover:shadow-orange/50 whitespace-nowrap"
+                  >
+                    {item.name}
+                  </Link>
                 ) : item.isButton ? (
                   <Link
                     href={item.path}
@@ -198,7 +215,15 @@ const Header = () => {
           <nav className="py-4 px-4 space-y-2 pb-20 min-h-screen">
             {navigationItems.map((item) => (
               <div key={item.name}>
-                {item.isButton ? (
+                {item.isCapsuleButton ? (
+                  <Link
+                    href={item.path}
+                    className="block w-full bg-orange text-white px-4 py-3 rounded-full text-sm font-medium text-center hover:bg-orange/90 transition-colors duration-200 mb-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ) : item.isButton ? (
                   <Link
                     href={item.path}
                     className="block w-full bg-gray-800 text-white px-4 py-3 rounded-lg text-sm font-medium text-center hover:bg-gray-600 transition-colors duration-200 mb-2"
