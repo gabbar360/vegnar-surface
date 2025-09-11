@@ -25,7 +25,7 @@ export default function Sample() {
     productType: "",
     message: "",
     quantity: 1,
-    pricePerSample: 500
+    pricePerSample: 1000
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -266,10 +266,10 @@ export default function Sample() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-charcoal mb-2">
-                        Total Amount (₹)
+                        Total Amount ($)
                       </label>
                       <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-charcoal font-medium">
-                        ₹{formData.quantity * formData.pricePerSample}
+                        ${formData.quantity * formData.pricePerSample}
                       </div>
                     </div>
                   </div>
@@ -289,7 +289,7 @@ export default function Sample() {
                     ) : (
                       <>
                         <Send className="w-5 h-5 mr-2" />
-                        Pay ₹{formData.quantity * formData.pricePerSample} for {formData.quantity} Sample{formData.quantity > 1 ? 's' : ''}
+                        Pay ${formData.quantity * formData.pricePerSample} for {formData.quantity} Sample{formData.quantity > 1 ? 's' : ''}
                       </>
                     )}
                   </Button>
