@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Providers } from "./providers";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import CookieConsent from "@/components/CookieConsent";
+import PageTracker from "@/components/PageTracker";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -56,6 +58,8 @@ export default function RootLayout({
             <Toaster />
             <Sonner />
             <WhatsAppWidget />
+            <CookieConsent />
+            <PageTracker />
             <ToastContainer
               position="top-right"
               autoClose={3000}

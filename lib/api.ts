@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+const ANALYTICS_API_URL = 'http://localhost:1338';
 
 export const api = {
   async getCategories() {
@@ -187,6 +188,59 @@ export const api = {
       return response.data;
     } catch (error: any) {
       console.error('Error verifying payment:', error);
+      throw error;
+    }
+  },
+
+  // User Analytics API
+  async trackUserAnalytics(analyticsData: {
+    consent_type: 'accepted' | 'denied';
+    total_pages?: number;
+    session_duration?: number;
+  }) {
+    try {
+      const response = await axios.post(`${ANALYTICS_API_URL}/api/user-analytics`, {
+        data: analyticsData
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error tracking user analytics:', error);
+      throw error;
+    }
+  },
+
+  async getAllAnalytics() {
+    try {
+      const response = await axios.get(`${ANALYTICS_API_URL}/api/user-analytics`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching analytics:', error);
+      throw error;
+    }
+  },
+
+  async downloadExcelReport() {
+    try {
+      const response = await axios.get(`${ANALYTICS_API_URL}/api/user-analytics/export/excel`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        responseType: 'blob'
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error downloading excel report:', error);
       throw error;
     }
   }
