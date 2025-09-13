@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import SearchBar from "@/components/SearchBar";
+
 import { api } from "@/lib/api";
 
 interface NavigationItem {
@@ -99,13 +99,7 @@ const Header = () => {
             />
           </Link>
 
-          {/* Search Bar - Desktop & Tablet */}
-          <div className="hidden sm:block flex-1 max-w-xs lg:max-w-sm mx-2 sm:mx-4 lg:mx-8">
-            <SearchBar 
-              isHomePage={isHomePage} 
-              isScrolled={isScrolled}
-            />
-          </div>
+
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
@@ -207,10 +201,7 @@ const Header = () => {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-x-0 top-20 bg-white shadow-2xl z-50 max-h-screen overflow-y-auto border-t border-gray-200/50">
-          {/* Mobile Search */}
-          <div className="p-4 border-b border-gray-100">
-            <SearchBar />
-          </div>
+
           
           <nav className="py-4 px-4 space-y-2 pb-20 min-h-screen">
             {navigationItems.map((item) => (
