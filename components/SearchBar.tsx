@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 interface SearchResult {
   id: string;
   name: string;
-  category: string;
+  category: string; // Product | Blog | Catalog
   href: string;
 }
 
@@ -22,32 +22,86 @@ const SearchBar = ({ className, isHomePage, isScrolled }: SearchBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [suggestions, setSuggestions] = useState<{products: string[], blogs: string[], catalogs: string[]}>({ products: [], blogs: [], catalogs: [] });
   const searchRef = useRef<HTMLDivElement>(null);
+  const controllerRef = useRef<AbortController | null>(null);
 
-  const tiles = [
-    { id: "1", name: "Subway Tiles 100x200mm", category: "Subway Tiles", href: "/product/subway-tile-100x200mm" },
-    { id: "2", name: "Subway Tiles 75x150mm", category: "Subway Tiles", href: "/product/subway-tile-75x150mm" },
-    { id: "3", name: "Beveled Subway 100x300mm", category: "Subway Tiles", href: "/product/beveled-subway-100x300mm" },
-    { id: "11", name: "Outdoor Porcelain 600x600mm", category: "Outdoor Tiles", href: "/product/outdoor-porcelain-tiles-600x600" },
-    { id: "12", name: "Outdoor Porcelain 600x900mm", category: "Outdoor Tiles", href: "/product/outdoor-porcelain-tiles-600x900" },
-    { id: "21", name: "Porcelain Floor 800x800mm", category: "Porcelain Floor", href: "/product/porcelain-tiles-800x800mm" },
-    { id: "31", name: "Large Format Slab 1200x2400mm", category: "Slab Tiles", href: "/product/large-format-slab-1200x2400mm" },
-    { id: "41", name: "Fullbody Porcelain 600x600mm", category: "Fullbody Tiles", href: "/product/fullbody-porcelain-600x600mm" },
-    { id: "51", name: "Table Top Basin", category: "Sanitaryware", href: "/product/table-top-basin" },
-  ];
-
+  // Fetch dynamic suggestions from your website
   useEffect(() => {
-    if (searchTerm.length > 0) {
-      const filtered = tiles.filter(tile =>
-        tile.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        tile.category.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setResults(filtered.slice(0, 5));
-    } else {
+    const fetchSuggestions = async () => {
+      try {
+        const res = await fetch('/api/suggestions');
+        if (res.ok) {
+          const data = await res.json();
+          setSuggestions(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch suggestions:', error);
+      }
+    };
+    fetchSuggestions();
+  }, []);
+
+  // Create cycling placeholders from your content
+  const placeholders = [
+    ...suggestions.products,
+    ...suggestions.blogs, 
+    ...suggestions.catalogs
+  ].filter(Boolean);
+
+  // Cycling animation
+  useEffect(() => {
+    if (placeholders.length === 0) return;
+    
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
+        setIsAnimating(false);
+      }, 300);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [placeholders.length]);
+
+  // Debounced dynamic search
+  useEffect(() => {
+    if (!searchTerm.trim()) {
       setResults([]);
+      return;
     }
+
+    setLoading(true);
+    const handler = setTimeout(async () => {
+      // Cancel previous request
+      if (controllerRef.current) controllerRef.current.abort();
+      const controller = new AbortController();
+      controllerRef.current = controller;
+
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}` , {
+          signal: controller.signal,
+          cache: "no-store",
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data: SearchResult[] = await res.json();
+        setResults(data);
+      } catch (e) {
+        if ((e as any).name !== "AbortError") {
+          setResults([]);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }, 300); // debounce 300ms
+
+    return () => clearTimeout(handler);
   }, [searchTerm]);
 
+  // Close when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -69,7 +123,8 @@ const SearchBar = ({ className, isHomePage, isScrolled }: SearchBarProps) => {
     <div ref={searchRef} className={cn("relative", className)}>
       <div className="relative">
         <Search className={cn(
-          "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-colors",
+          "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-all duration-300",
+          isAnimating ? "scale-110 rotate-12" : "scale-100 rotate-0",
           isHomePage
             ? isScrolled
               ? "text-gray-500"
@@ -78,7 +133,7 @@ const SearchBar = ({ className, isHomePage, isScrolled }: SearchBarProps) => {
         )} />
         <input
           type="text"
-          placeholder="Search tiles..."
+          placeholder={placeholders.length > 0 ? placeholders[currentPlaceholder] : "Search products, blogs, catalogs..."}
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -87,13 +142,16 @@ const SearchBar = ({ className, isHomePage, isScrolled }: SearchBarProps) => {
           onFocus={() => setIsOpen(true)}
           className={cn(
             "w-full pl-10 pr-10 py-2 text-sm rounded-full border transition-all duration-300 focus:outline-none focus:ring-2",
-            "min-w-0", // Prevent input from growing too large
+            "min-w-0",
             isHomePage
               ? isScrolled
                 ? "bg-white border-gray-200 text-gray-900 placeholder-gray-500 focus:ring-orange/50"
                 : "bg-white/10 border-white/20 text-white placeholder-white/70 backdrop-blur-sm focus:ring-white/30 focus:bg-white/20"
               : "bg-white border-gray-200 text-gray-900 placeholder-gray-500 focus:ring-orange/50"
           )}
+          style={{
+            transition: 'all 0.3s ease'
+          }}
         />
         {searchTerm && (
           <button
@@ -115,7 +173,9 @@ const SearchBar = ({ className, isHomePage, isScrolled }: SearchBarProps) => {
       {/* Search Results Dropdown */}
       {isOpen && (searchTerm.length > 0 || results.length > 0) && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-xl z-50 max-h-80 overflow-y-auto">
-          {results.length > 0 ? (
+          {loading ? (
+            <div className="px-4 py-3 text-sm text-gray-500">Searching...</div>
+          ) : results.length > 0 ? (
             <>
               {results.map((result) => (
                 <Link
@@ -144,7 +204,7 @@ const SearchBar = ({ className, isHomePage, isScrolled }: SearchBarProps) => {
             </>
           ) : searchTerm.length > 0 ? (
             <div className="px-4 py-6 text-center text-gray-500 text-sm">
-              No tiles found for "{searchTerm}"
+              No results for "{searchTerm}"
             </div>
           ) : null}
         </div>

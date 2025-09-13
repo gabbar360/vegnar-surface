@@ -197,7 +197,7 @@ export default function SampleSuccess() {
                 <Link href="/sample">
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto border-2 hover:bg-gray-50"
+                    className="w-full sm:w-auto border-2 hover:bg-gray-900 hover:border-gray-300 transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Request More Samples
@@ -214,7 +214,7 @@ export default function SampleSuccess() {
                 <Link href="/contact">
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto border-2 border-orange text-orange hover:bg-orange/10"
+                    className="w-full sm:w-auto border-2 border-orange text-orange hover:bg-orange hover:text-white transition-colors"
                   >
                     <Mail className="w-4 h-4 mr-2" />
                     Contact Support
