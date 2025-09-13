@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-const ANALYTICS_API_URL = 'http://localhost:1338';
+
 
 export const api = {
   async getCategories() {
@@ -199,7 +199,7 @@ export const api = {
     session_duration?: number;
   }) {
     try {
-      const response = await axios.post(`${ANALYTICS_API_URL}/api/user-analytics`, {
+      const response = await axios.post(`${API_URL}/api/user-analytics`, {
         data: analyticsData
       }, {
         headers: {
@@ -216,7 +216,7 @@ export const api = {
 
   async getAllAnalytics() {
     try {
-      const response = await axios.get(`${ANALYTICS_API_URL}/api/user-analytics`, {
+      const response = await axios.get(`${API_URL}/api/user-analytics`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -231,7 +231,7 @@ export const api = {
 
   async downloadExcelReport() {
     try {
-      const response = await axios.get(`${ANALYTICS_API_URL}/api/user-analytics/export/excel`, {
+      const response = await axios.get(`${API_URL}/api/user-analytics/export/excel`, {
         headers: {
           'Content-Type': 'application/json',
         },
