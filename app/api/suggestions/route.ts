@@ -11,16 +11,16 @@ export async function GET() {
       fetch(`${API_URL}/api/products?pagination[limit]=10&sort=createdAt:desc`, {
         headers: { 'Content-Type': 'application/json' },
         cache: 'no-store'
-      }).catch(() => ({ ok: false })),
+      }).catch(() => null),
       fetch(`${API_URL}/api/blogs?pagination[limit]=10&sort=createdAt:desc`, {
         headers: { 'Content-Type': 'application/json' },
         cache: 'no-store'
-      }).catch(() => ({ ok: false }))
+      }).catch(() => null)
     ]);
 
     const [productsJson, blogsJson] = await Promise.all([
-      productsRes.ok ? productsRes.json() : Promise.resolve({ data: [] }),
-      blogsRes.ok ? blogsRes.json() : Promise.resolve({ data: [] })
+      productsRes?.ok ? productsRes.json() : Promise.resolve({ data: [] }),
+      blogsRes?.ok ? blogsRes.json() : Promise.resolve({ data: [] })
     ]);
 
     // Extract product names
