@@ -11,11 +11,11 @@ export async function GET() {
       fetch(`${API_URL}/api/products?pagination[limit]=10&sort=createdAt:desc`, {
         headers: { 'Content-Type': 'application/json' },
         cache: 'no-store'
-      }),
+      }).catch(() => ({ ok: false })),
       fetch(`${API_URL}/api/blogs?pagination[limit]=10&sort=createdAt:desc`, {
         headers: { 'Content-Type': 'application/json' },
         cache: 'no-store'
-      })
+      }).catch(() => ({ ok: false }))
     ]);
 
     const [productsJson, blogsJson] = await Promise.all([

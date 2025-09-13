@@ -28,16 +28,16 @@ export async function GET(request: NextRequest) {
         )}&filters[$or][1][description][$containsi]=${encodeURIComponent(
           q
         )}&populate=product_category&pagination[limit]=5`,
-        { headers: { 'Content-Type': 'application/json' }, cache: 'no-store' }
-      ),
+        { headers: { 'Content-Type': 'application/json' }, cache: 'no-store', timeout: 5000 }
+      ).catch(() => ({ ok: false })),
       fetch(
         `${API_URL}/api/blogs?filters[$or][0][title][$containsi]=${encodeURIComponent(
           q
         )}&filters[$or][1][meta_description][$containsi]=${encodeURIComponent(
           q
         )}&pagination[limit]=5`,
-        { headers: { 'Content-Type': 'application/json' }, cache: 'no-store' }
-      ),
+        { headers: { 'Content-Type': 'application/json' }, cache: 'no-store', timeout: 5000 }
+      ).catch(() => ({ ok: false })),
     ]);
 
     const [productsJson, blogsJson] = await Promise.all([
