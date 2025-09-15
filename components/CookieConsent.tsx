@@ -9,22 +9,35 @@ export default function CookieConsent() {
   const { trackEvent } = useAnalytics();
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      setIsVisible(true);
+    if (typeof window !== 'undefined') {
+      try {
+        const consent = localStorage.getItem('cookie-consent');
+        if (!consent) {
+          setIsVisible(true);
+        }
+      } catch (error) {
+        console.warn('localStorage not available:', error);
+        setIsVisible(true);
+      }
     }
   }, []);
 
   const handleConsent = async (consentType: 'accepted' | 'denied') => {
     try {
       await trackEvent(consentType);
-      localStorage.setItem('cookie-consent', consentType);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cookie-consent', consentType);
+      }
       setIsVisible(false);
     } catch (error) {
       console.error('Error tracking analytics:', error);
-      // Still hide the banner even if tracking fails
-      localStorage.setItem('cookie-consent', consentType);
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem('cookie-consent', consentType);
+        } catch (storageError) {
+          console.warn('localStorage not available:', storageError);
+        }
+      }
       setIsVisible(false);
     }
   };

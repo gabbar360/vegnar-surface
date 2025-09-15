@@ -9,68 +9,68 @@ import { Button } from "@/components/ui/button";
 import { Eye, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export default function Home() {
-  // Sample products from each category for home page
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Premium Outdoor Pavers 2cm",
-      category: "Porcelain Pavers (2 cm)",
-      size: "600x600 MM",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600",
-      categoryId: "porcelain-pavers"
-    },
-    {
-      id: 2,
-      name: "Classic White Subway Tiles",
-      category: "Subway Tiles",
-      size: "100x200 MM", 
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600",
-      categoryId: "subway-tiles"
-    },
-    {
-      id: 3,
-      name: "Marble Effect Mosaic",
-      category: "Mosaic Tiles",
-      size: "300x300 MM",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600",
-      categoryId: "mosaic-tiles"
-    },
-    {
-      id: 4,
-      name: "Large Format Floor Tiles",
-      category: "Porcelain Tiles", 
-      size: "800x800 MM",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-      categoryId: "porcelain-tiles"
-    },
-    {
-      id: 5,
-      name: "Ultra-thin Porcelain Slabs",
-      category: "Large Format Porcelain Slabs",
-      size: "1600x3200 MM",
-      image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600",
-      categoryId: "large-format-slabs"
-    },
-    {
-      id: 6,
-      name: "Bendable Ceramic Tiles",
-      category: "Flexible Tiles",
-      size: "500x1000 MM",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600",
-      categoryId: "flexible-tiles"
-    }
-  ];
+// Move static data outside component to prevent recreation
+const FEATURED_PRODUCTS = [
+  {
+    id: 1,
+    name: "Premium Outdoor Pavers 2cm",
+    category: "Porcelain Pavers (2 cm)",
+    size: "600x600 MM",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600",
+    categoryId: "porcelain-pavers"
+  },
+  {
+    id: 2,
+    name: "Classic White Subway Tiles",
+    category: "Subway Tiles",
+    size: "100x200 MM", 
+    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600",
+    categoryId: "subway-tiles"
+  },
+  {
+    id: 3,
+    name: "Marble Effect Mosaic",
+    category: "Mosaic Tiles",
+    size: "300x300 MM",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600",
+    categoryId: "mosaic-tiles"
+  },
+  {
+    id: 4,
+    name: "Large Format Floor Tiles",
+    category: "Porcelain Tiles", 
+    size: "800x800 MM",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
+    categoryId: "porcelain-tiles"
+  },
+  {
+    id: 5,
+    name: "Ultra-thin Porcelain Slabs",
+    category: "Large Format Porcelain Slabs",
+    size: "1600x3200 MM",
+    image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600",
+    categoryId: "large-format-slabs"
+  },
+  {
+    id: 6,
+    name: "Bendable Ceramic Tiles",
+    category: "Flexible Tiles",
+    size: "500x1000 MM",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600",
+    categoryId: "flexible-tiles"
+  }
+];
 
-  // One inspiration item from each category
-  const featuredInspirations = [
-    { id: 1, title: "Outdoor Patio Design", image: "/assets/product-outdoor.jpg", description: "Modern outdoor space with 2cm porcelain pavers", category: "Porcelain Pavers" },
-    { id: 2, title: "Kitchen Backsplash", image: "/assets/product-subway.jpg", description: "Classic white subway tile kitchen", category: "Subway Tiles" },
-    { id: 3, title: "Bathroom Feature Wall", image: "/assets/about-tiles-test.jpg", description: "Stunning mosaic feature wall", category: "Mosaic Tiles" },
-    { id: 4, title: "Living Room Floor", image: "/assets/hero-marble-bg.jpg", description: "Elegant living room flooring", category: "Porcelain Tiles" },
-    { id: 5, title: "Kitchen Countertop", image: "/assets/product-slab.jpg", description: "Seamless kitchen countertop design", category: "Large Format Slabs" },
-    { id: 6, title: "Curved Wall Design", image: "/assets/about-tiles-test.jpg", description: "Innovative curved wall installation", category: "Flexible Tiles" }
-  ];
+const FEATURED_INSPIRATIONS = [
+  { id: 1, title: "Outdoor Patio Design", image: "/assets/product-outdoor.jpg", description: "Modern outdoor space with 2cm porcelain pavers", category: "Porcelain Pavers" },
+  { id: 2, title: "Kitchen Backsplash", image: "/assets/product-subway.jpg", description: "Classic white subway tile kitchen", category: "Subway Tiles" },
+  { id: 3, title: "Bathroom Feature Wall", image: "/assets/about-tiles-test.jpg", description: "Stunning mosaic feature wall", category: "Mosaic Tiles" },
+  { id: 4, title: "Living Room Floor", image: "/assets/hero-marble-bg.jpg", description: "Elegant living room flooring", category: "Porcelain Tiles" },
+  { id: 5, title: "Kitchen Countertop", image: "/assets/product-slab.jpg", description: "Seamless kitchen countertop design", category: "Large Format Slabs" },
+  { id: 6, title: "Curved Wall Design", image: "/assets/about-tiles-test.jpg", description: "Innovative curved wall installation", category: "Flexible Tiles" }
+];
+
+export default function Home() {
 
   return (
     <div className="min-h-screen">
@@ -146,7 +146,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredInspirations.map((item) => (
+              {FEATURED_INSPIRATIONS.map((item) => (
                 <Card key={item.id} className="group overflow-hidden hover:shadow-lg transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
@@ -173,7 +173,7 @@ export default function Home() {
             </div>
 
             <div className="text-center mt-12">
-              <Link href="/inspiration">
+              <Link href="/inspiration" prefetch={true}>
                 <Button size="lg" className="bg-charcoal text-white hover:bg-charcoal-light">
                   View All Inspiration
                 </Button>

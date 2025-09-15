@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -13,20 +13,18 @@ import {
 } from "@/components/ui/card";
 import { Download, FileText, Eye, Share2 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Catalog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const router = useRouter();
 
-  // Initialize selected category from URL path if present: /catalog/<Category Name>
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const path = window.location.pathname; // e.g., /catalog/Large%20Slab%20Collection
+    const path = window.location.pathname;
     const parts = path.split("/").filter(Boolean);
-    // parts: ["catalog", "Category Name?" ]
     if (parts[0] === "catalog" && parts[1]) {
       const decoded = decodeURIComponent(parts.slice(1).join("/"));
-      // Match only if it’s a known category
       const known = [
         "All",
         "Large Slab Collection",
@@ -35,7 +33,9 @@ export default function Catalog() {
         "Mosaics Collection",
         "200x200MM Collection",
       ];
-      const match = known.find((c) => c.toLowerCase() === decoded.toLowerCase());
+      const match = known.find(
+        (c) => c.toLowerCase() === decoded.toLowerCase()
+      );
       if (match) setSelectedCategory(match);
     }
   }, []);
@@ -46,25 +46,22 @@ export default function Catalog() {
     "Subway Collection",
     "Outdoor Collection",
     "Mosaics Collection",
-    "200x200MM Collection"
+    "200x200MM Collection",
   ];
 
-  const catalogs = [
-    // Large Slab Collection (16 PDFs)
+  const catalogs = useMemo(() => [
     {
       id: 1,
       title: "Porceluxe Collection",
-      description:
-        "Premium porcelain tiles collection with elegant designs and superior quality",
+      description: "Premium porcelain tiles collection with elegant designs and superior quality",
       pages: 24,
       size: "8 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
+      image: "/catalogs/thumbnails/poreluxe.png",
       featured: true,
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Porceluxe Collection.pdf",
+      driveViewLink: "https://drive.google.com/file/d/18jRkqKhIOy_4DocQrJJn4PQoIXkzds18/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/18jRkqKhIOy_4DocQrJJn4PQoIXkzds18/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/poreluxe.png",
     },
     {
@@ -75,38 +72,35 @@ export default function Catalog() {
       size: "6 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Artisan Carve Series A.pdf",
+      image: "/catalogs/thumbnails/carving.png",
+      driveViewLink: "https://drive.google.com/file/d/1eBrsM5NYZbzk7Ijc63w4k8bV8rkh2P66/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1eBrsM5NYZbzk7Ijc63w4k8bV8rkh2P66/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/carving.png",
     },
     {
       id: 3,
       title: "Artisan Carve Series B",
-      description:
-        "Extended collection of carved tiles with unique surface textures",
+      description: "Extended collection of carved tiles with unique surface textures",
       pages: 18,
       size: "7 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Artisan Carve Series B.pdf",
+      image: "/catalogs/thumbnails/carving.png",
+      driveViewLink: "https://drive.google.com/file/d/10i9c8OPZOFJDzsdQRkgM1AkYf6WhV8GH/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/10i9c8OPZOFJDzsdQRkgM1AkYf6WhV8GH/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/carving.png",
     },
     {
       id: 4,
       title: "GrooveStone A",
-      description:
-        "Natural stone-inspired tiles with distinctive groove patterns",
+      description: "Natural stone-inspired tiles with distinctive groove patterns",
       pages: 20,
       size: "8 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - GrooveStone A.pdf",
+      image: "/catalogs/thumbnails/1600mm.png",
+      driveViewLink: "https://drive.google.com/file/d/1A1Pdi-FHfSg9rbJFW9dsWEtQWMaYifH8/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1A1Pdi-FHfSg9rbJFW9dsWEtQWMaYifH8/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/1600mm.png",
     },
     {
@@ -117,25 +111,22 @@ export default function Catalog() {
       size: "9 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - GrooveStone B.pdf",
+      image: "/catalogs/thumbnails/800-1600mm.png",
+      driveViewLink: "https://drive.google.com/file/d/13pvxGijiLSEejB3Fs0OKniOB5Sel2oLr/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/13pvxGijiLSEejB3Fs0OKniOB5Sel2oLr/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/800-1600mm.png",
     },
     {
       id: 6,
       title: "GrooveStone C",
-      description:
-        "Complete GrooveStone range with premium stone-like appearances",
+      description: "Complete GrooveStone range with premium stone-like appearances",
       pages: 24,
       size: "10 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - GrooveStone C.pdf",
+      image: "/catalogs/thumbnails/rediant.png",
+      driveViewLink: "https://drive.google.com/file/d/19nXyepOdNHz7CqbPywYUbvyogHRRZEDo/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/19nXyepOdNHz7CqbPywYUbvyogHRRZEDo/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/rediant.png",
     },
     {
@@ -146,10 +137,9 @@ export default function Catalog() {
       size: "7 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Lumora Pearl A.pdf",
+      image: "/catalogs/thumbnails/ambiens.png",
+      driveViewLink: "https://drive.google.com/file/d/1N1LFvnWbb0nZLMZF_zBjYXWgioD3wJPx/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1N1LFvnWbb0nZLMZF_zBjYXWgioD3wJPx/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/ambiens.png",
     },
     {
@@ -160,9 +150,9 @@ export default function Catalog() {
       size: "8 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Lumora Pearl B.pdf",
+      image: "/catalogs/thumbnails/ambiens.png",
+      driveViewLink: "https://drive.google.com/file/d/1gI0UcDZklPzLHa8mBlRSMkxgIs9TQHXt/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1gI0UcDZklPzLHa8mBlRSMkxgIs9TQHXt/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/ambiens.png",
     },
     {
@@ -173,9 +163,9 @@ export default function Catalog() {
       size: "9 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Lumora Pearl C.pdf",
+      image: "/catalogs/thumbnails/ambiens.png",
+      driveViewLink: "https://drive.google.com/file/d/1dFNsu_np1L_KNHaK5Q6YtASO5pubyTUU/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1dFNsu_np1L_KNHaK5Q6YtASO5pubyTUU/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/ambiens.png",
     },
     {
@@ -186,9 +176,9 @@ export default function Catalog() {
       size: "6 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      pdfPath: "/catalogs/Large Slab Collection/Vegnar Surfaces - Matt.pdf",
+      image: "/catalogs/thumbnails/Matt Collection.png",
+      driveViewLink: "https://drive.google.com/file/d/1x7I1ewezocZKcx2KE9xX0F_Bon56TN4i/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1x7I1ewezocZKcx2KE9xX0F_Bon56TN4i/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Matt Collection.png",
     },
     {
@@ -199,10 +189,9 @@ export default function Catalog() {
       size: "6 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Obsidian Shine A.pdf",
+      image: "/catalogs/thumbnails/highgloss.png",
+      driveViewLink: "https://drive.google.com/file/d/1WAJgCQbHaaNLSv6B7kWoq4JrNk5NVQfK/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1WAJgCQbHaaNLSv6B7kWoq4JrNk5NVQfK/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/highgloss.png",
     },
     {
@@ -213,10 +202,9 @@ export default function Catalog() {
       size: "7 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Obsidian Shine B.pdf",
+      image: "/catalogs/thumbnails/highgloss.png",
+      driveViewLink: "https://drive.google.com/file/d/1Q9ZDDLaQGTnp83AmhwPow_8sUt98MiL5/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1Q9ZDDLaQGTnp83AmhwPow_8sUt98MiL5/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/highgloss.png",
     },
     {
@@ -227,10 +215,9 @@ export default function Catalog() {
       size: "8 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Pearl Shine.pdf",
+      image: "/catalogs/thumbnails/peralshine.png",
+      driveViewLink: "https://drive.google.com/file/d/1bii5wIenYeIJYcR3DEqFh3TWVPUcqFa3/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1bii5wIenYeIJYcR3DEqFh3TWVPUcqFa3/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/peralshine.png",
     },
     {
@@ -241,9 +228,9 @@ export default function Catalog() {
       size: "10 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Radiance Luxe.pdf",
+      image: "/catalogs/thumbnails/redianceluxe.png",
+      driveViewLink: "https://drive.google.com/file/d/1VThQvyq4JJxkGmdDMuHw9h5b91XtSrtK/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1VThQvyq4JJxkGmdDMuHw9h5b91XtSrtK/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/redianceluxe.png",
     },
     {
@@ -254,9 +241,9 @@ export default function Catalog() {
       size: "9 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Vellura Luxe A.pdf",
+      image: "/catalogs/thumbnails/luxeA.png",
+      driveViewLink: "https://drive.google.com/file/d/1lKPvyVJ00gkwJQmLCmbEmMNi_ID7gSr_/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1lKPvyVJ00gkwJQmLCmbEmMNi_ID7gSr_/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/luxeA.png",
     },
     {
@@ -267,13 +254,11 @@ export default function Catalog() {
       size: "10 MB",
       format: "PDF",
       category: "Large Slab Collection",
-      image:
-        "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      pdfPath:
-        "/catalogs/Large Slab Collection/Vegnar Surfaces - Vellura Luxe B.pdf",
+      image: "/catalogs/thumbnails/luxeA.png",
+      driveViewLink: "https://drive.google.com/file/d/1_5EAOy5M23gUfQksbdPlsLH1KiiJp-wf/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1_5EAOy5M23gUfQksbdPlsLH1KiiJp-wf/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/luxeA.png",
     },
-    // Subway Collection (4 PDFs)
     {
       id: 21,
       title: "FluteLuxe Series 75×300 mm",
@@ -282,9 +267,9 @@ export default function Catalog() {
       size: "7 MB",
       format: "PDF",
       category: "Subway Collection",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      pdfPath:
-        "/catalogs/Subway Collection/Vegnar Surfaces - FluteLuxe Series 75×300 mm.pdf",
+      image: "/catalogs/thumbnails/FluteLuxe Series 75×300 mm.png",
+      driveViewLink: "https://drive.google.com/file/d/1uqsF8FT7pKoGKgF6BttKhj36fk57Vwe8/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1uqsF8FT7pKoGKgF6BttKhj36fk57Vwe8/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/FluteLuxe Series 75×300 mm.png",
     },
     {
@@ -295,10 +280,9 @@ export default function Catalog() {
       size: "6 MB",
       format: "PDF",
       category: "Subway Collection",
-      image:
-        "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      pdfPath:
-        "/catalogs/Subway Collection/Vegnar Surfaces - MetroLuxe 65×260 mm.pdf",
+      image: "/catalogs/thumbnails/MetroLuxe 65×260 mm.png",
+      driveViewLink: "https://drive.google.com/file/d/1EOY7uTKqNpIXlFlAQB9bKnW8aoXYi6UT/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1EOY7uTKqNpIXlFlAQB9bKnW8aoXYi6UT/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/MetroLuxe 65×260 mm.png",
     },
     {
@@ -309,10 +293,9 @@ export default function Catalog() {
       size: "5 MB",
       format: "PDF",
       category: "Subway Collection",
-      image:
-        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      pdfPath:
-        "/catalogs/Subway Collection/Vegnar Surfaces - MetroLuxe Pente 65×260 mm.pdf",
+      image: "/catalogs/thumbnails/MetroLuxe Pente 65×260 mm.png",
+      driveViewLink: "https://drive.google.com/file/d/1gfVp7jg5UlFgotKqpCFPlXRfWGwlw-jx/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1gfVp7jg5UlFgotKqpCFPlXRfWGwlw-jx/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/MetroLuxe Pente 65×260 mm.png",
     },
     {
@@ -323,14 +306,11 @@ export default function Catalog() {
       size: "8 MB",
       format: "PDF",
       category: "Subway Collection",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-      pdfPath:
-        "/catalogs/Subway Collection/Vegnar Surfaces - MetroLuxe Series 75×300 mm.pdf",
+      image: "/catalogs/thumbnails/MetroLuxe Series 75×300 mm.png",
+      driveViewLink: "https://drive.google.com/file/d/1xgYYOnTieJHhIFirJZrjAhii7C4Q9IY9/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1xgYYOnTieJHhIFirJZrjAhii7C4Q9IY9/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/MetroLuxe Series 75×300 mm.png",
     },
-
-    // Outdoor Collection (5 PDFs)
     {
       id: 25,
       title: "Outdoor Collection A",
@@ -339,9 +319,9 @@ export default function Catalog() {
       size: "9 MB",
       format: "PDF",
       category: "Outdoor Collection",
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
-      pdfPath: "/catalogs/Outdoor Collection/Vegnar Surfaces Outdoor -A.pdf",
+      image: "/catalogs/thumbnails/Outdoor Collection A.png",
+      driveViewLink: "https://drive.google.com/file/d/1yq6RcQitw-xnYhc-pPmi1-BeBqOLw4-d/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1yq6RcQitw-xnYhc-pPmi1-BeBqOLw4-d/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
     },
     {
@@ -352,8 +332,9 @@ export default function Catalog() {
       size: "8 MB",
       format: "PDF",
       category: "Outdoor Collection",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-      pdfPath: "/catalogs/Outdoor Collection/Vegnar Surfaces Outdoor -B.pdf",
+      image: "/catalogs/thumbnails/Outdoor Collection A.png",
+      driveViewLink: "https://drive.google.com/file/d/1iBbk3vYJ6xeQH0XxwwtOp73aX92NpNCD/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1iBbk3vYJ6xeQH0XxwwtOp73aX92NpNCD/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
     },
     {
@@ -364,8 +345,9 @@ export default function Catalog() {
       size: "10 MB",
       format: "PDF",
       category: "Outdoor Collection",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      pdfPath: "/catalogs/Outdoor Collection/Vegnar Surfaces Outdoor -C.pdf",
+      image: "/catalogs/thumbnails/Outdoor Collection A.png",
+      driveViewLink: "https://drive.google.com/file/d/1Y__d2wa56IoYXA4I3cHDEjZlGA7lXDfs/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1Y__d2wa56IoYXA4I3cHDEjZlGA7lXDfs/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
     },
     {
@@ -376,9 +358,9 @@ export default function Catalog() {
       size: "11 MB",
       format: "PDF",
       category: "Outdoor Collection",
-      image:
-        "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      pdfPath: "/catalogs/Outdoor Collection/Vegnar Surfaces Outdoor -D.pdf",
+      image: "/catalogs/thumbnails/Outdoor Collection A.png",
+      driveViewLink: "https://drive.google.com/file/d/1_p0phH2_ubuZHoxRMt4oPMRPGobbTURV/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1_p0phH2_ubuZHoxRMt4oPMRPGobbTURV/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
     },
     {
@@ -389,45 +371,37 @@ export default function Catalog() {
       size: "12 MB",
       format: "PDF",
       category: "Outdoor Collection",
-      image:
-        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      pdfPath: "/catalogs/Outdoor Collection/Vegnar Surfaces Outdoor -E.pdf",
+      image: "/catalogs/thumbnails/Outdoor Collection A.png",
+      driveViewLink: "https://drive.google.com/file/d/1x9Fxa-r01l8hrYQLG5xn_ipYuyAaJaAK/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1x9Fxa-r01l8hrYQLG5xn_ipYuyAaJaAK/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
     },
-
-    // Mosaics Collection (2 PDFs)
     {
       id: 30,
       title: "AquaVista Pool Collection",
-      description:
-        "Specialized pool and spa mosaic tiles with water-resistant properties",
+      description: "Specialized pool and spa mosaic tiles with water-resistant properties",
       pages: 24,
       size: "12 MB",
       format: "PDF",
       category: "Mosaics Collection",
-      image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-      pdfPath:
-        "/catalogs/Mosaics Collection/Vegnar Surfaces - AquaVista Pool Collection.pdf",
+      image: "/catalogs/thumbnails/AquaVista Pool Collection.png",
+      driveViewLink: "https://drive.google.com/file/d/17ZG1nZfa2k_-6L9A3_80-bO6vXDZtMox/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/17ZG1nZfa2k_-6L9A3_80-bO6vXDZtMox/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/AquaVista Pool Collection.png",
     },
     {
       id: 31,
       title: "Master Collection",
-      description:
-        "Comprehensive mosaic collection with artistic patterns and designs",
+      description: "Comprehensive mosaic collection with artistic patterns and designs",
       pages: 32,
       size: "15 MB",
       format: "PDF",
       category: "Mosaics Collection",
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
-      pdfPath:
-        "/catalogs/Mosaics Collection/Vegnar Surfaces - Master Collection.pdf",
+      image: "/catalogs/thumbnails/Master Collection.png",
+      driveViewLink: "https://drive.google.com/file/d/1yLZ640fV1hlNhEWdO3zIwsIdoSti9Gu1/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1yLZ640fV1hlNhEWdO3zIwsIdoSti9Gu1/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Master Collection.png",
     },
-
-    // 200x200MM Collection (4 PDFs)
     {
       id: 40,
       title: "Bloomora 200×200 mm",
@@ -436,8 +410,9 @@ export default function Catalog() {
       size: "5 MB",
       format: "PDF",
       category: "200x200MM Collection",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - Bloomora 200×200 mm.pdf",
+      image: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
+      driveViewLink: "https://drive.google.com/file/d/1SJDXP5n7LuHm_yl94PE5_VRDmca8vfK9/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1SJDXP5n7LuHm_yl94PE5_VRDmca8vfK9/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
     },
     {
@@ -448,8 +423,9 @@ export default function Catalog() {
       size: "5 MB",
       format: "PDF",
       category: "200x200MM Collection",
-      image: "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=400",
-      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - MagnaStone 200×200 mm.pdf",
+      image: "/catalogs/thumbnails/Mengen.png",
+      driveViewLink: "https://drive.google.com/file/d/1hSf4ifqAiMbNH1uUf75XlEdpZsIDbNA2/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1hSf4ifqAiMbNH1uUf75XlEdpZsIDbNA2/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Mengen.png",
     },
     {
@@ -460,8 +436,9 @@ export default function Catalog() {
       size: "5 MB",
       format: "PDF",
       category: "200x200MM Collection",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - MonoLux 200×200 mm.pdf",
+      image: "/catalogs/thumbnails/Monopole.png",
+      driveViewLink: "https://drive.google.com/file/d/1T-YRn_4TBv5vJd-NopJbUogbXyg5BPVO/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1T-YRn_4TBv5vJd-NopJbUogbXyg5BPVO/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Monopole.png",
     },
     {
@@ -472,128 +449,37 @@ export default function Catalog() {
       size: "5 MB",
       format: "PDF",
       category: "200x200MM Collection",
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400",
-      pdfPath: "/catalogs/200x200MM Collection/Vegnar Surfaces - OpalTone 200×200 mm.pdf",
+      image: "/catalogs/thumbnails/Opaque.png",
+      driveViewLink: "https://drive.google.com/file/d/1tPSl6ZF1HPGYDVTNBEyjsA5P7ko5Kvsx/view?usp=sharing",
+      driveDownloadLink: "https://drive.google.com/file/d/1tPSl6ZF1HPGYDVTNBEyjsA5P7ko5Kvsx/view?usp=sharing",
       thumbnailImage: "/catalogs/thumbnails/Opaque.png",
     },
-  ];
+  ], []);
 
-  const filteredCatalogs =
+  const filteredCatalogs = useMemo(() => 
     selectedCategory === "All"
       ? catalogs
-      : catalogs.filter((catalog) => catalog.category === selectedCategory);
+      : catalogs.filter((catalog) => catalog.category === selectedCategory),
+    [catalogs, selectedCategory]
+  );
 
   return (
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-  <section className="relative py-24 marble-pattern">
+      <section className="relative py-24 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6">
               E-Catalogue
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Download our comprehensive product catalogs and technical
-              specifications
+              Download our comprehensive product catalogs and technical specifications
             </p>
           </div>
         </div>
       </section>
 
-      {/* Featured Catalog */}
-      {/* <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
-            Featured Catalog
-          </h2>
-
-          <div className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden">
-              <div className="md:flex">
-                <div className="md:w-1/2">
-                  <div className="w-full h-64 md:h-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                    <img
-                      src={catalogs[0].thumbnailImage || catalogs[0].image}
-                      alt={catalogs[0].title}
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </div>
-                </div>
-                <div className="md:w-1/2 p-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      Featured
-                    </span>
-                    <span className="bg-secondary text-charcoal px-3 py-1 rounded-full text-sm">
-                      2025 Edition
-                    </span>
-                  </div>
-                  <h3 className="text-3xl font-bold text-charcoal mb-4">
-                    {catalogs[0].title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6">
-                    {catalogs[0].description}
-                  </p>
-
-                  <div className="flex gap-6 mb-6">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-orange">
-                        {catalogs[0].pages}
-                      </div>
-                      <div className="text-sm text-muted-foreground">Pages</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-orange">
-                        {catalogs[0].size}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        File Size
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-orange">
-                        {catalogs[0].format}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Format
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Button
-                      size="lg"
-                      className="bg-orange hover:bg-orange/90 text-white flex-1"
-                      onClick={() => {
-                        const link = document.createElement("a");
-                        link.href = catalogs[0].pdfPath;
-                        link.download = `${catalogs[0].title}.pdf`;
-                        link.click();
-                      }}
-                    >
-                      <Download className="w-5 h-5 mr-2" />
-                      Download Now
-                    </Button>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-orange text-orange flex-1 min-w-0"
-                      onClick={() => window.open(catalogs[0].pdfPath, "_blank")}
-                    >
-                      <Eye className="w-5 h-5 mr-2" />
-                      Preview
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Category Filter */}
       <section className="py-12 marble-pattern">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -621,8 +507,7 @@ export default function Catalog() {
         </div>
       </section>
 
-      {/* Filtered Catalogs */}
-      <section className="  marble-pattern">
+      <section className="marble-pattern">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
             {selectedCategory === "All" ? "All Catalogs" : selectedCategory}
@@ -637,11 +522,14 @@ export default function Catalog() {
                   className="hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="relative">
-                    <div className="w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden rounded-t-lg">
-                      <img
+                    <div className="w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden rounded-t-lg relative">
+                      <Image
                         src={catalog.thumbnailImage || catalog.image}
                         alt={catalog.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                     <div className="absolute top-4 right-4 bg-white/90 px-2 py-1 rounded text-xs font-semibold text-charcoal">
@@ -661,10 +549,7 @@ export default function Catalog() {
                       <Button
                         className="flex-1 bg-orange hover:bg-orange/90 text-white h-10"
                         onClick={() => {
-                          const link = document.createElement("a");
-                          link.href = catalog.pdfPath;
-                          link.download = `${catalog.title}.pdf`;
-                          link.click();
+                          window.open(catalog.driveDownloadLink, "_blank");
                         }}
                       >
                         <Download className="w-4 h-4 mr-1" />
@@ -673,7 +558,9 @@ export default function Catalog() {
                       <Button
                         variant="outline"
                         className="border-orange text-orange h-10 w-10 p-0 flex items-center justify-center"
-                        onClick={() => window.open(catalog.pdfPath, "_blank")}
+                        onClick={() =>
+                          window.open(catalog.driveViewLink, "_blank")
+                        }
                       >
                         <Eye className="w-4 h-4" />
                       </Button>
@@ -681,8 +568,7 @@ export default function Catalog() {
                         variant="outline"
                         className="border-orange text-orange h-10 w-10 p-0 flex items-center justify-center"
                         onClick={() => {
-                          const shareUrl =
-                            window.location.origin + catalog.pdfPath;
+                          const shareUrl = catalog.driveViewLink;
                           const shareText = `Check out ${catalog.title} - ${catalog.description}`;
 
                           if (navigator.share) {
@@ -692,7 +578,6 @@ export default function Catalog() {
                               url: shareUrl,
                             });
                           } else {
-                            // Fallback: Create share options
                             const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
                               shareText + " " + shareUrl
                             )}`;
@@ -702,7 +587,6 @@ export default function Catalog() {
                               shareText + "\n\n" + shareUrl
                             )}`;
 
-                            // Show options or default to WhatsApp
                             if (
                               confirm("Share via WhatsApp? (Cancel for Email)")
                             ) {
@@ -723,98 +607,71 @@ export default function Catalog() {
         </div>
       </section>
 
-      {/* Quick Links */}
-        <section className="py-20 marble-pattern">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
-              Quick Access
-            </h2>
+      <section className="py-20 marble-pattern">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-charcoal text-center mb-12">
+            Quick Access
+          </h2>
 
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"> */}
-              
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-
-              {/* Plate Packaging PDF */}
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">Plate Packaging</h3>
-                <p className="text-sm text-muted-foreground mb-5">
-                  Vegnar Surfaces plate packaging details
-                </p>
-                <div className="flex items-center justify-center gap-3">
-                  <a
-                    href={encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
-                  >
-                    <Eye className="w-4 h-4" /> View
-                  </a>
-                  <a
-                    href={encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}
-                    download
-                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
-                  >
-                    <Download className="w-4 h-4" /> Download
-                  </a>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      const url = `${window.location.origin}${encodeURI("/catalogs/Vegnar Surfaces Plate Packaging.pdf")}`;
-                      try {
-                        if (navigator.share) {
-                          await navigator.share({ title: "Vegnar Surfaces – Plate Packaging", url });
-                        } else {
-                          await navigator.clipboard.writeText(url);
-                          alert("Link copied to clipboard");
-                        }
-                      } catch (e) {
-                        // user cancelled or share not available
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+              <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
+              <h3 className="font-semibold text-charcoal mb-2">
+                Plate Packaging
+              </h3>
+              <p className="text-sm text-muted-foreground mb-5">
+                Vegnar Surfaces plate packaging details
+              </p>
+              <div className="flex items-center justify-center gap-3">
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://drive.google.com/file/d/YOUR_PLATE_PACKAGING_FILE_ID/view",
+                      "_blank"
+                    )
+                  }
+                  className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                >
+                  <Eye className="w-4 h-4" /> View
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://drive.google.com/uc?export=download&id=YOUR_PLATE_PACKAGING_FILE_ID",
+                      "_blank"
+                    )
+                  }
+                  className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
+                >
+                  <Download className="w-4 h-4" /> Download
+                </button>
+                <button
+                  onClick={async () => {
+                    const url =
+                      "https://drive.google.com/file/d/YOUR_PLATE_PACKAGING_FILE_ID/view";
+                    try {
+                      if (navigator.share) {
+                        await navigator.share({
+                          title: "Vegnar Surfaces – Plate Packaging",
+                          url,
+                        });
+                      } else {
+                        await navigator.clipboard.writeText(url);
+                        alert("Link copied to clipboard");
                       }
-                    }}
-                    className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
-                  >
-                    <Share2 className="w-4 h-4" /> Share
-                  </button>
-                </div>
-              </Card>
-
-              {/* <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">
-                  Care & Maintenance
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Keep your tiles looking perfect
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-orange text-orange"
+                    } catch (e) {
+                      // user cancelled or share not available
+                    }
+                  }}
+                  className="inline-flex items-center gap-2 rounded-md border border-orange text-orange px-3 py-2 text-sm hover:bg-orange/10 transition-colors"
                 >
-                  Download
-                </Button>
-              </Card> */}
-
-              {/* <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <FileText className="w-12 h-12 text-orange mx-auto mb-4" />
-                <h3 className="font-semibold text-charcoal mb-2">
-                  Warranty Terms
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Product warranty information
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-orange text-orange"
-                >
-                  Download
-                </Button>
-              </Card> */}
-            </div>
+                  <Share2 className="w-4 h-4" /> Share
+                </button>
+              </div>
+            </Card>
           </div>
-        </section>
+        </div>
+      </section>
 
       <Footer />
     </div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useMemo } from 'react';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -29,11 +30,11 @@ const AnimatedSection = ({
     }
   };
 
-  const transition = {
+  const transition = useMemo(() => ({
     duration: 0.8,
-    delay: delay,
+    delay,
     ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
-  };
+  }), [delay]);
 
   return (
     <motion.div

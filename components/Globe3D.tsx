@@ -142,12 +142,13 @@ const Globe3D: React.FC<GlobeProps> = ({ rotationSpeed = 0.5 }) => {
   const getGlobeSize = () => {
     if (typeof window === 'undefined') return { width: 1200, height: 600 };
     const isMobile = window.innerWidth < 768;
-    const width = window.innerWidth;
+    const width = Math.min(window.innerWidth, 1200);
     const height = isMobile ? 400 : 600;
     return { width, height };
   };
 
   const { width, height } = getGlobeSize();
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <div className="relative w-full h-[400px] md:h-[600px] bg-gradient-to-r from-gray-900 to-black overflow-hidden">
@@ -163,9 +164,9 @@ const Globe3D: React.FC<GlobeProps> = ({ rotationSpeed = 0.5 }) => {
         atmosphereColor="#87CEEB"
         atmosphereAltitude={0.25}
         rendererConfig={{
-          antialias: true,
+          antialias: !isMobile,
           alpha: true,
-          powerPreference: 'high-performance'
+          powerPreference: isMobile ? 'low-power' : 'high-performance'
         }}
         
         // Countries data
