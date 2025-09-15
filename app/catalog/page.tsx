@@ -49,417 +49,494 @@ export default function Catalog() {
     "200x200MM Collection",
   ];
 
-  const catalogs = useMemo(() => [
-    {
-      id: 1,
-      title: "Porceluxe Collection",
-      description: "Premium porcelain tiles collection with elegant designs and superior quality",
-      pages: 24,
-      size: "8 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/poreluxe.png",
-      featured: true,
-      driveViewLink: "https://drive.google.com/file/d/18jRkqKhIOy_4DocQrJJn4PQoIXkzds18/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/18jRkqKhIOy_4DocQrJJn4PQoIXkzds18/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/poreluxe.png",
-    },
-    {
-      id: 2,
-      title: "Artisan Carve Series A",
-      description: "Handcrafted textured tiles with artistic carving patterns",
-      pages: 16,
-      size: "6 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/carving.png",
-      driveViewLink: "https://drive.google.com/file/d/1eBrsM5NYZbzk7Ijc63w4k8bV8rkh2P66/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1eBrsM5NYZbzk7Ijc63w4k8bV8rkh2P66/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/carving.png",
-    },
-    {
-      id: 3,
-      title: "Artisan Carve Series B",
-      description: "Extended collection of carved tiles with unique surface textures",
-      pages: 18,
-      size: "7 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/carving.png",
-      driveViewLink: "https://drive.google.com/file/d/10i9c8OPZOFJDzsdQRkgM1AkYf6WhV8GH/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/10i9c8OPZOFJDzsdQRkgM1AkYf6WhV8GH/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/carving.png",
-    },
-    {
-      id: 4,
-      title: "GrooveStone A",
-      description: "Natural stone-inspired tiles with distinctive groove patterns",
-      pages: 20,
-      size: "8 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/1600mm.png",
-      driveViewLink: "https://drive.google.com/file/d/1A1Pdi-FHfSg9rbJFW9dsWEtQWMaYifH8/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1A1Pdi-FHfSg9rbJFW9dsWEtQWMaYifH8/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/1600mm.png",
-    },
-    {
-      id: 5,
-      title: "GrooveStone B",
-      description: "Continuation of GrooveStone series with varied textures",
-      pages: 22,
-      size: "9 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/800-1600mm.png",
-      driveViewLink: "https://drive.google.com/file/d/13pvxGijiLSEejB3Fs0OKniOB5Sel2oLr/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/13pvxGijiLSEejB3Fs0OKniOB5Sel2oLr/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/800-1600mm.png",
-    },
-    {
-      id: 6,
-      title: "GrooveStone C",
-      description: "Complete GrooveStone range with premium stone-like appearances",
-      pages: 24,
-      size: "10 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/rediant.png",
-      driveViewLink: "https://drive.google.com/file/d/19nXyepOdNHz7CqbPywYUbvyogHRRZEDo/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/19nXyepOdNHz7CqbPywYUbvyogHRRZEDo/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/rediant.png",
-    },
-    {
-      id: 7,
-      title: "Lumora Pearl A",
-      description: "Lustrous pearl-finish tiles with sophisticated elegance",
-      pages: 18,
-      size: "7 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/ambiens.png",
-      driveViewLink: "https://drive.google.com/file/d/1N1LFvnWbb0nZLMZF_zBjYXWgioD3wJPx/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1N1LFvnWbb0nZLMZF_zBjYXWgioD3wJPx/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/ambiens.png",
-    },
-    {
-      id: 8,
-      title: "Lumora Pearl B",
-      description: "Extended Lumora Pearl range with varied pearl textures",
-      pages: 20,
-      size: "8 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/ambiens.png",
-      driveViewLink: "https://drive.google.com/file/d/1gI0UcDZklPzLHa8mBlRSMkxgIs9TQHXt/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1gI0UcDZklPzLHa8mBlRSMkxgIs9TQHXt/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/ambiens.png",
-    },
-    {
-      id: 9,
-      title: "Lumora Pearl C",
-      description: "Complete Lumora Pearl series with premium finishes",
-      pages: 22,
-      size: "9 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/ambiens.png",
-      driveViewLink: "https://drive.google.com/file/d/1dFNsu_np1L_KNHaK5Q6YtASO5pubyTUU/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1dFNsu_np1L_KNHaK5Q6YtASO5pubyTUU/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/ambiens.png",
-    },
-    {
-      id: 10,
-      title: "Matt Collection",
-      description: "Sophisticated matte finish tiles for modern interiors",
-      pages: 16,
-      size: "6 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/Matt Collection.png",
-      driveViewLink: "https://drive.google.com/file/d/1x7I1ewezocZKcx2KE9xX0F_Bon56TN4i/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1x7I1ewezocZKcx2KE9xX0F_Bon56TN4i/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Matt Collection.png",
-    },
-    {
-      id: 11,
-      title: "Obsidian Shine A",
-      description: "Dark, glossy tiles with obsidian-like reflective surfaces",
-      pages: 16,
-      size: "6 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/highgloss.png",
-      driveViewLink: "https://drive.google.com/file/d/1WAJgCQbHaaNLSv6B7kWoq4JrNk5NVQfK/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1WAJgCQbHaaNLSv6B7kWoq4JrNk5NVQfK/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/highgloss.png",
-    },
-    {
-      id: 12,
-      title: "Obsidian Shine B",
-      description: "Extended Obsidian Shine range with varied dark finishes",
-      pages: 18,
-      size: "7 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/highgloss.png",
-      driveViewLink: "https://drive.google.com/file/d/1Q9ZDDLaQGTnp83AmhwPow_8sUt98MiL5/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1Q9ZDDLaQGTnp83AmhwPow_8sUt98MiL5/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/highgloss.png",
-    },
-    {
-      id: 13,
-      title: "Pearl Shine Collection",
-      description: "Elegant pearl-shine tiles with subtle luminous effects",
-      pages: 20,
-      size: "8 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/peralshine.png",
-      driveViewLink: "https://drive.google.com/file/d/1bii5wIenYeIJYcR3DEqFh3TWVPUcqFa3/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1bii5wIenYeIJYcR3DEqFh3TWVPUcqFa3/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/peralshine.png",
-    },
-    {
-      id: 14,
-      title: "Radiance Luxe Collection",
-      description: "Luxurious tiles with radiant finishes and premium quality",
-      pages: 24,
-      size: "10 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/redianceluxe.png",
-      driveViewLink: "https://drive.google.com/file/d/1VThQvyq4JJxkGmdDMuHw9h5b91XtSrtK/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1VThQvyq4JJxkGmdDMuHw9h5b91XtSrtK/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/redianceluxe.png",
-    },
-    {
-      id: 15,
-      title: "Vellura Luxe A",
-      description: "Premium Vellura tiles with luxurious textures and finishes",
-      pages: 22,
-      size: "9 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/luxeA.png",
-      driveViewLink: "https://drive.google.com/file/d/1lKPvyVJ00gkwJQmLCmbEmMNi_ID7gSr_/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1lKPvyVJ00gkwJQmLCmbEmMNi_ID7gSr_/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/luxeA.png",
-    },
-    {
-      id: 16,
-      title: "Vellura Luxe B",
-      description: "Extended Vellura Luxe range with sophisticated designs",
-      pages: 24,
-      size: "10 MB",
-      format: "PDF",
-      category: "Large Slab Collection",
-      image: "/catalogs/thumbnails/luxeA.png",
-      driveViewLink: "https://drive.google.com/file/d/1_5EAOy5M23gUfQksbdPlsLH1KiiJp-wf/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1_5EAOy5M23gUfQksbdPlsLH1KiiJp-wf/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/luxeA.png",
-    },
-    {
-      id: 21,
-      title: "FluteLuxe Series 75×300 mm",
-      description: "Elegant fluted subway tiles in premium 75x300mm format",
-      pages: 16,
-      size: "7 MB",
-      format: "PDF",
-      category: "Subway Collection",
-      image: "/catalogs/thumbnails/FluteLuxe Series 75×300 mm.png",
-      driveViewLink: "https://drive.google.com/file/d/1uqsF8FT7pKoGKgF6BttKhj36fk57Vwe8/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1uqsF8FT7pKoGKgF6BttKhj36fk57Vwe8/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/FluteLuxe Series 75×300 mm.png",
-    },
-    {
-      id: 22,
-      title: "MetroLuxe 65×260 mm",
-      description: "Classic metro-style tiles in versatile 65x260mm dimensions",
-      pages: 14,
-      size: "6 MB",
-      format: "PDF",
-      category: "Subway Collection",
-      image: "/catalogs/thumbnails/MetroLuxe 65×260 mm.png",
-      driveViewLink: "https://drive.google.com/file/d/1EOY7uTKqNpIXlFlAQB9bKnW8aoXYi6UT/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1EOY7uTKqNpIXlFlAQB9bKnW8aoXYi6UT/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/MetroLuxe 65×260 mm.png",
-    },
-    {
-      id: 23,
-      title: "MetroLuxe Pente 65×260 mm",
-      description: "Pentagonal metro tiles with unique geometric appeal",
-      pages: 12,
-      size: "5 MB",
-      format: "PDF",
-      category: "Subway Collection",
-      image: "/catalogs/thumbnails/MetroLuxe Pente 65×260 mm.png",
-      driveViewLink: "https://drive.google.com/file/d/1gfVp7jg5UlFgotKqpCFPlXRfWGwlw-jx/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1gfVp7jg5UlFgotKqpCFPlXRfWGwlw-jx/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/MetroLuxe Pente 65×260 mm.png",
-    },
-    {
-      id: 24,
-      title: "MetroLuxe Series 75×300 mm",
-      description: "Premium metro series in larger 75x300mm format",
-      pages: 18,
-      size: "8 MB",
-      format: "PDF",
-      category: "Subway Collection",
-      image: "/catalogs/thumbnails/MetroLuxe Series 75×300 mm.png",
-      driveViewLink: "https://drive.google.com/file/d/1xgYYOnTieJHhIFirJZrjAhii7C4Q9IY9/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1xgYYOnTieJHhIFirJZrjAhii7C4Q9IY9/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/MetroLuxe Series 75×300 mm.png",
-    },
-    {
-      id: 25,
-      title: "Outdoor Collection A",
-      description: "Weather-resistant outdoor tiles for terraces and patios",
-      pages: 20,
-      size: "9 MB",
-      format: "PDF",
-      category: "Outdoor Collection",
-      image: "/catalogs/thumbnails/Outdoor Collection A.png",
-      driveViewLink: "https://drive.google.com/file/d/1yq6RcQitw-xnYhc-pPmi1-BeBqOLw4-d/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1yq6RcQitw-xnYhc-pPmi1-BeBqOLw4-d/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
-    },
-    {
-      id: 26,
-      title: "Outdoor Collection B",
-      description: "Extended outdoor range with anti-slip properties",
-      pages: 18,
-      size: "8 MB",
-      format: "PDF",
-      category: "Outdoor Collection",
-      image: "/catalogs/thumbnails/Outdoor Collection A.png",
-      driveViewLink: "https://drive.google.com/file/d/1iBbk3vYJ6xeQH0XxwwtOp73aX92NpNCD/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1iBbk3vYJ6xeQH0XxwwtOp73aX92NpNCD/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
-    },
-    {
-      id: 27,
-      title: "Outdoor Collection C",
-      description: "Frost-resistant outdoor tiles for harsh climates",
-      pages: 22,
-      size: "10 MB",
-      format: "PDF",
-      category: "Outdoor Collection",
-      image: "/catalogs/thumbnails/Outdoor Collection A.png",
-      driveViewLink: "https://drive.google.com/file/d/1Y__d2wa56IoYXA4I3cHDEjZlGA7lXDfs/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1Y__d2wa56IoYXA4I3cHDEjZlGA7lXDfs/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
-    },
-    {
-      id: 28,
-      title: "Outdoor Collection D",
-      description: "Commercial-grade outdoor tiles for heavy traffic areas",
-      pages: 24,
-      size: "11 MB",
-      format: "PDF",
-      category: "Outdoor Collection",
-      image: "/catalogs/thumbnails/Outdoor Collection A.png",
-      driveViewLink: "https://drive.google.com/file/d/1_p0phH2_ubuZHoxRMt4oPMRPGobbTURV/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1_p0phH2_ubuZHoxRMt4oPMRPGobbTURV/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
-    },
-    {
-      id: 29,
-      title: "Outdoor Collection E",
-      description: "Premium outdoor collection with natural stone textures",
-      pages: 26,
-      size: "12 MB",
-      format: "PDF",
-      category: "Outdoor Collection",
-      image: "/catalogs/thumbnails/Outdoor Collection A.png",
-      driveViewLink: "https://drive.google.com/file/d/1x9Fxa-r01l8hrYQLG5xn_ipYuyAaJaAK/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1x9Fxa-r01l8hrYQLG5xn_ipYuyAaJaAK/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
-    },
-    {
-      id: 30,
-      title: "AquaVista Pool Collection",
-      description: "Specialized pool and spa mosaic tiles with water-resistant properties",
-      pages: 24,
-      size: "12 MB",
-      format: "PDF",
-      category: "Mosaics Collection",
-      image: "/catalogs/thumbnails/AquaVista Pool Collection.png",
-      driveViewLink: "https://drive.google.com/file/d/17ZG1nZfa2k_-6L9A3_80-bO6vXDZtMox/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/17ZG1nZfa2k_-6L9A3_80-bO6vXDZtMox/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/AquaVista Pool Collection.png",
-    },
-    {
-      id: 31,
-      title: "Master Collection",
-      description: "Comprehensive mosaic collection with artistic patterns and designs",
-      pages: 32,
-      size: "15 MB",
-      format: "PDF",
-      category: "Mosaics Collection",
-      image: "/catalogs/thumbnails/Master Collection.png",
-      driveViewLink: "https://drive.google.com/file/d/1yLZ640fV1hlNhEWdO3zIwsIdoSti9Gu1/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1yLZ640fV1hlNhEWdO3zIwsIdoSti9Gu1/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Master Collection.png",
-    },
-    {
-      id: 40,
-      title: "Bloomora 200×200 mm",
-      description: "Premium 200×200 mm tiles collection",
-      pages: 12,
-      size: "5 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
-      driveViewLink: "https://drive.google.com/file/d/1SJDXP5n7LuHm_yl94PE5_VRDmca8vfK9/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1SJDXP5n7LuHm_yl94PE5_VRDmca8vfK9/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
-    },
-    {
-      id: 41,
-      title: "MagnaStone 200×200 mm",
-      description: "Premium 200×200 mm tiles collection",
-      pages: 12,
-      size: "5 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image: "/catalogs/thumbnails/Mengen.png",
-      driveViewLink: "https://drive.google.com/file/d/1hSf4ifqAiMbNH1uUf75XlEdpZsIDbNA2/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1hSf4ifqAiMbNH1uUf75XlEdpZsIDbNA2/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Mengen.png",
-    },
-    {
-      id: 42,
-      title: "MonoLux 200×200 mm",
-      description: "Premium 200×200 mm tiles collection",
-      pages: 12,
-      size: "5 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image: "/catalogs/thumbnails/Monopole.png",
-      driveViewLink: "https://drive.google.com/file/d/1T-YRn_4TBv5vJd-NopJbUogbXyg5BPVO/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1T-YRn_4TBv5vJd-NopJbUogbXyg5BPVO/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Monopole.png",
-    },
-    {
-      id: 43,
-      title: "OpalTone 200×200 mm",
-      description: "Premium 200×200 mm tiles collection",
-      pages: 12,
-      size: "5 MB",
-      format: "PDF",
-      category: "200x200MM Collection",
-      image: "/catalogs/thumbnails/Opaque.png",
-      driveViewLink: "https://drive.google.com/file/d/1tPSl6ZF1HPGYDVTNBEyjsA5P7ko5Kvsx/view?usp=sharing",
-      driveDownloadLink: "https://drive.google.com/file/d/1tPSl6ZF1HPGYDVTNBEyjsA5P7ko5Kvsx/view?usp=sharing",
-      thumbnailImage: "/catalogs/thumbnails/Opaque.png",
-    },
-  ], []);
+  const catalogs = useMemo(
+    () => [
+      {
+        id: 1,
+        title: "Porceluxe Collection",
+        description:
+          "Premium porcelain tiles collection with elegant designs and superior quality",
+        pages: 24,
+        size: "8 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/poreluxe.png",
+        featured: true,
+        driveViewLink:
+          "https://drive.google.com/file/d/18jRkqKhIOy_4DocQrJJn4PQoIXkzds18/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/18jRkqKhIOy_4DocQrJJn4PQoIXkzds18/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/poreluxe.png",
+      },
+      {
+        id: 2,
+        title: "Artisan Carve Series A",
+        description:
+          "Handcrafted textured tiles with artistic carving patterns",
+        pages: 16,
+        size: "6 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/carving.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1eBrsM5NYZbzk7Ijc63w4k8bV8rkh2P66/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1eBrsM5NYZbzk7Ijc63w4k8bV8rkh2P66/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/carving.png",
+      },
+      {
+        id: 3,
+        title: "Artisan Carve Series B",
+        description:
+          "Extended collection of carved tiles with unique surface textures",
+        pages: 18,
+        size: "7 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/carving.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/10i9c8OPZOFJDzsdQRkgM1AkYf6WhV8GH/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/10i9c8OPZOFJDzsdQRkgM1AkYf6WhV8GH/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/carving.png",
+      },
+      {
+        id: 4,
+        title: "GrooveStone A",
+        description:
+          "Natural stone-inspired tiles with distinctive groove patterns",
+        pages: 20,
+        size: "8 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/1600mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1A1Pdi-FHfSg9rbJFW9dsWEtQWMaYifH8/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1A1Pdi-FHfSg9rbJFW9dsWEtQWMaYifH8/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/1600mm.png",
+      },
+      {
+        id: 5,
+        title: "GrooveStone B",
+        description: "Continuation of GrooveStone series with varied textures",
+        pages: 22,
+        size: "9 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/800-1600mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/13pvxGijiLSEejB3Fs0OKniOB5Sel2oLr/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/13pvxGijiLSEejB3Fs0OKniOB5Sel2oLr/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/800-1600mm.png",
+      },
+      {
+        id: 6,
+        title: "GrooveStone C",
+        description:
+          "Complete GrooveStone range with premium stone-like appearances",
+        pages: 24,
+        size: "10 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/rediant.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/19nXyepOdNHz7CqbPywYUbvyogHRRZEDo/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/19nXyepOdNHz7CqbPywYUbvyogHRRZEDo/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/rediant.png",
+      },
+      {
+        id: 7,
+        title: "Lumora Pearl A",
+        description: "Lustrous pearl-finish tiles with sophisticated elegance",
+        pages: 18,
+        size: "7 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/ambiens.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1N1LFvnWbb0nZLMZF_zBjYXWgioD3wJPx/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1N1LFvnWbb0nZLMZF_zBjYXWgioD3wJPx/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/ambiens.png",
+      },
+      {
+        id: 8,
+        title: "Lumora Pearl B",
+        description: "Extended Lumora Pearl range with varied pearl textures",
+        pages: 20,
+        size: "8 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/ambiens.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1gI0UcDZklPzLHa8mBlRSMkxgIs9TQHXt/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1gI0UcDZklPzLHa8mBlRSMkxgIs9TQHXt/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/ambiens.png",
+      },
+      {
+        id: 9,
+        title: "Lumora Pearl C",
+        description: "Complete Lumora Pearl series with premium finishes",
+        pages: 22,
+        size: "9 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/ambiens.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1dFNsu_np1L_KNHaK5Q6YtASO5pubyTUU/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1dFNsu_np1L_KNHaK5Q6YtASO5pubyTUU/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/ambiens.png",
+      },
+      {
+        id: 10,
+        title: "Matt Collection",
+        description: "Sophisticated matte finish tiles for modern interiors",
+        pages: 16,
+        size: "6 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/Matt Collection.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1x7I1ewezocZKcx2KE9xX0F_Bon56TN4i/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1x7I1ewezocZKcx2KE9xX0F_Bon56TN4i/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Matt Collection.png",
+      },
+      {
+        id: 11,
+        title: "Obsidian Shine A",
+        description:
+          "Dark, glossy tiles with obsidian-like reflective surfaces",
+        pages: 16,
+        size: "6 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/highgloss.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1WAJgCQbHaaNLSv6B7kWoq4JrNk5NVQfK/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1WAJgCQbHaaNLSv6B7kWoq4JrNk5NVQfK/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/highgloss.png",
+      },
+      {
+        id: 12,
+        title: "Obsidian Shine B",
+        description: "Extended Obsidian Shine range with varied dark finishes",
+        pages: 18,
+        size: "7 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/highgloss.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1Q9ZDDLaQGTnp83AmhwPow_8sUt98MiL5/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1Q9ZDDLaQGTnp83AmhwPow_8sUt98MiL5/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/highgloss.png",
+      },
+      {
+        id: 13,
+        title: "Pearl Shine Collection",
+        description: "Elegant pearl-shine tiles with subtle luminous effects",
+        pages: 20,
+        size: "8 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/peralshine.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1bii5wIenYeIJYcR3DEqFh3TWVPUcqFa3/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1bii5wIenYeIJYcR3DEqFh3TWVPUcqFa3/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/peralshine.png",
+      },
+      {
+        id: 14,
+        title: "Radiance Luxe Collection",
+        description:
+          "Luxurious tiles with radiant finishes and premium quality",
+        pages: 24,
+        size: "10 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/redianceluxe.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1VThQvyq4JJxkGmdDMuHw9h5b91XtSrtK/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1VThQvyq4JJxkGmdDMuHw9h5b91XtSrtK/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/redianceluxe.png",
+      },
+      {
+        id: 15,
+        title: "Vellura Luxe A",
+        description:
+          "Premium Vellura tiles with luxurious textures and finishes",
+        pages: 22,
+        size: "9 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/luxeA.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1lKPvyVJ00gkwJQmLCmbEmMNi_ID7gSr_/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1lKPvyVJ00gkwJQmLCmbEmMNi_ID7gSr_/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/luxeA.png",
+      },
+      {
+        id: 16,
+        title: "Vellura Luxe B",
+        description: "Extended Vellura Luxe range with sophisticated designs",
+        pages: 24,
+        size: "10 MB",
+        format: "PDF",
+        category: "Large Slab Collection",
+        image: "/catalogs/thumbnails/luxeA.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1_5EAOy5M23gUfQksbdPlsLH1KiiJp-wf/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1_5EAOy5M23gUfQksbdPlsLH1KiiJp-wf/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/luxeA.png",
+      },
+      {
+        id: 21,
+        title: "FluteLuxe Series 75×300 mm",
+        description: "Elegant fluted subway tiles in premium 75x300mm format",
+        pages: 16,
+        size: "7 MB",
+        format: "PDF",
+        category: "Subway Collection",
+        image: "/catalogs/thumbnails/FluteLuxe Series 75×300 mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1uqsF8FT7pKoGKgF6BttKhj36fk57Vwe8/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1uqsF8FT7pKoGKgF6BttKhj36fk57Vwe8/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/FluteLuxe Series 75×300 mm.png",
+      },
+      {
+        id: 22,
+        title: "MetroLuxe 65×260 mm",
+        description:
+          "Classic metro-style tiles in versatile 65x260mm dimensions",
+        pages: 14,
+        size: "6 MB",
+        format: "PDF",
+        category: "Subway Collection",
+        image: "/catalogs/thumbnails/MetroLuxe 65×260 mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1EOY7uTKqNpIXlFlAQB9bKnW8aoXYi6UT/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1EOY7uTKqNpIXlFlAQB9bKnW8aoXYi6UT/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/MetroLuxe 65×260 mm.png",
+      },
+      {
+        id: 23,
+        title: "MetroLuxe Pente 65×260 mm",
+        description: "Pentagonal metro tiles with unique geometric appeal",
+        pages: 12,
+        size: "5 MB",
+        format: "PDF",
+        category: "Subway Collection",
+        image: "/catalogs/thumbnails/MetroLuxe Pente 65×260 mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1gfVp7jg5UlFgotKqpCFPlXRfWGwlw-jx/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1gfVp7jg5UlFgotKqpCFPlXRfWGwlw-jx/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/MetroLuxe Pente 65×260 mm.png",
+      },
+      {
+        id: 24,
+        title: "MetroLuxe Series 75×300 mm",
+        description: "Premium metro series in larger 75x300mm format",
+        pages: 18,
+        size: "8 MB",
+        format: "PDF",
+        category: "Subway Collection",
+        image: "/catalogs/thumbnails/MetroLuxe Series 75×300 mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1xgYYOnTieJHhIFirJZrjAhii7C4Q9IY9/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1xgYYOnTieJHhIFirJZrjAhii7C4Q9IY9/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/MetroLuxe Series 75×300 mm.png",
+      },
+      {
+        id: 25,
+        title: "Outdoor Collection A",
+        description: "Weather-resistant outdoor tiles for terraces and patios",
+        pages: 20,
+        size: "9 MB",
+        format: "PDF",
+        category: "Outdoor Collection",
+        image: "/catalogs/thumbnails/Outdoor Collection A.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1yq6RcQitw-xnYhc-pPmi1-BeBqOLw4-d/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1yq6RcQitw-xnYhc-pPmi1-BeBqOLw4-d/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
+      },
+      {
+        id: 26,
+        title: "Outdoor Collection B",
+        description: "Extended outdoor range with anti-slip properties",
+        pages: 18,
+        size: "8 MB",
+        format: "PDF",
+        category: "Outdoor Collection",
+        image: "/catalogs/thumbnails/Outdoor Collection A.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1iBbk3vYJ6xeQH0XxwwtOp73aX92NpNCD/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1iBbk3vYJ6xeQH0XxwwtOp73aX92NpNCD/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
+      },
+      {
+        id: 27,
+        title: "Outdoor Collection C",
+        description: "Frost-resistant outdoor tiles for harsh climates",
+        pages: 22,
+        size: "10 MB",
+        format: "PDF",
+        category: "Outdoor Collection",
+        image: "/catalogs/thumbnails/Outdoor Collection A.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1Y__d2wa56IoYXA4I3cHDEjZlGA7lXDfs/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1Y__d2wa56IoYXA4I3cHDEjZlGA7lXDfs/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
+      },
+      {
+        id: 28,
+        title: "Outdoor Collection D",
+        description: "Commercial-grade outdoor tiles for heavy traffic areas",
+        pages: 24,
+        size: "11 MB",
+        format: "PDF",
+        category: "Outdoor Collection",
+        image: "/catalogs/thumbnails/Outdoor Collection A.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1_p0phH2_ubuZHoxRMt4oPMRPGobbTURV/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1_p0phH2_ubuZHoxRMt4oPMRPGobbTURV/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
+      },
+      {
+        id: 29,
+        title: "Outdoor Collection E",
+        description: "Premium outdoor collection with natural stone textures",
+        pages: 26,
+        size: "12 MB",
+        format: "PDF",
+        category: "Outdoor Collection",
+        image: "/catalogs/thumbnails/Outdoor Collection A.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1x9Fxa-r01l8hrYQLG5xn_ipYuyAaJaAK/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1x9Fxa-r01l8hrYQLG5xn_ipYuyAaJaAK/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Outdoor Collection A.png",
+      },
+      {
+        id: 30,
+        title: "AquaVista Pool Collection",
+        description:
+          "Specialized pool and spa mosaic tiles with water-resistant properties",
+        pages: 24,
+        size: "12 MB",
+        format: "PDF",
+        category: "Mosaics Collection",
+        image: "/catalogs/thumbnails/AquaVista Pool Collection.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/17ZG1nZfa2k_-6L9A3_80-bO6vXDZtMox/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/17ZG1nZfa2k_-6L9A3_80-bO6vXDZtMox/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/AquaVista Pool Collection.png",
+      },
+      {
+        id: 31,
+        title: "Master Collection",
+        description:
+          "Comprehensive mosaic collection with artistic patterns and designs",
+        pages: 32,
+        size: "15 MB",
+        format: "PDF",
+        category: "Mosaics Collection",
+        image: "/catalogs/thumbnails/Master Collection.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1yLZ640fV1hlNhEWdO3zIwsIdoSti9Gu1/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1yLZ640fV1hlNhEWdO3zIwsIdoSti9Gu1/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Master Collection.png",
+      },
+      {
+        id: 40,
+        title: "Bloomora 200×200 mm",
+        description: "Premium 200×200 mm tiles collection",
+        pages: 12,
+        size: "5 MB",
+        format: "PDF",
+        category: "200x200MM Collection",
+        image: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1SJDXP5n7LuHm_yl94PE5_VRDmca8vfK9/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1SJDXP5n7LuHm_yl94PE5_VRDmca8vfK9/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Bloomora 200×200 mm.png",
+      },
+      {
+        id: 41,
+        title: "MagnaStone 200×200 mm",
+        description: "Premium 200×200 mm tiles collection",
+        pages: 12,
+        size: "5 MB",
+        format: "PDF",
+        category: "200x200MM Collection",
+        image: "/catalogs/thumbnails/Mengen.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1hSf4ifqAiMbNH1uUf75XlEdpZsIDbNA2/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1hSf4ifqAiMbNH1uUf75XlEdpZsIDbNA2/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Mengen.png",
+      },
+      {
+        id: 42,
+        title: "MonoLux 200×200 mm",
+        description: "Premium 200×200 mm tiles collection",
+        pages: 12,
+        size: "5 MB",
+        format: "PDF",
+        category: "200x200MM Collection",
+        image: "/catalogs/thumbnails/Monopole.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1T-YRn_4TBv5vJd-NopJbUogbXyg5BPVO/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1T-YRn_4TBv5vJd-NopJbUogbXyg5BPVO/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Monopole.png",
+      },
+      {
+        id: 43,
+        title: "OpalTone 200×200 mm",
+        description: "Premium 200×200 mm tiles collection",
+        pages: 12,
+        size: "5 MB",
+        format: "PDF",
+        category: "200x200MM Collection",
+        image: "/catalogs/thumbnails/Opaque.png",
+        driveViewLink:
+          "https://drive.google.com/file/d/1tPSl6ZF1HPGYDVTNBEyjsA5P7ko5Kvsx/view?usp=sharing",
+        driveDownloadLink:
+          "https://drive.google.com/file/d/1tPSl6ZF1HPGYDVTNBEyjsA5P7ko5Kvsx/view?usp=sharing",
+        thumbnailImage: "/catalogs/thumbnails/Opaque.png",
+      },
+    ],
+    []
+  );
 
-  const filteredCatalogs = useMemo(() => 
-    selectedCategory === "All"
-      ? catalogs
-      : catalogs.filter((catalog) => catalog.category === selectedCategory),
+  const filteredCatalogs = useMemo(
+    () =>
+      selectedCategory === "All"
+        ? catalogs
+        : catalogs.filter((catalog) => catalog.category === selectedCategory),
     [catalogs, selectedCategory]
   );
 
@@ -474,7 +551,8 @@ export default function Catalog() {
               E-Catalogue
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Download our comprehensive product catalogs and technical specifications
+              Download our comprehensive product catalogs and technical
+              specifications
             </p>
           </div>
         </div>
@@ -626,7 +704,7 @@ export default function Catalog() {
                 <button
                   onClick={() =>
                     window.open(
-                      "https://drive.google.com/file/d/YOUR_PLATE_PACKAGING_FILE_ID/view",
+                      "https://drive.google.com/file/d/1MU8mk9SZ0hRCWBG65s0uEcmVSJ-AK5DZ/view?usp=sharing",
                       "_blank"
                     )
                   }
@@ -637,7 +715,7 @@ export default function Catalog() {
                 <button
                   onClick={() =>
                     window.open(
-                      "https://drive.google.com/uc?export=download&id=YOUR_PLATE_PACKAGING_FILE_ID",
+                      "https://drive.google.com/file/d/1MU8mk9SZ0hRCWBG65s0uEcmVSJ-AK5DZ/view?usp=sharing",
                       "_blank"
                     )
                   }
@@ -648,7 +726,7 @@ export default function Catalog() {
                 <button
                   onClick={async () => {
                     const url =
-                      "https://drive.google.com/file/d/YOUR_PLATE_PACKAGING_FILE_ID/view";
+                      "https://drive.google.com/file/d/1MU8mk9SZ0hRCWBG65s0uEcmVSJ-AK5DZ/view?usp=sharing";
                     try {
                       if (navigator.share) {
                         await navigator.share({
