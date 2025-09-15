@@ -13,20 +13,20 @@ const Hero = () => {
 
   const slides = [
     {
-      id: 1,
-      image: "/assets/large-formate-tiles.png",
-      title: "Large Format",
-      subtitle: "Porcelain Slabs",
-      description: "Large format porcelain slab tiles characterized by their large size and thin profile for seamless installations.",
-      category: "large-format-slabs"
-    },
-    {
       id: 3,
       image: "/assets/20mm-outdoor-tiles.png",
       title: "Outdoor Porcelain",
       subtitle: "Pavers 2cm",
       description: "Weather-resistant outdoor porcelain pavers designed for terraces and commercial spaces.",
       category: "porcelain-pavers"
+    },
+    {
+      id: 1,
+      image: "/assets/large-formate-tiles.png",
+      title: "Large Format",
+      subtitle: "Porcelain Slabs",
+      description: "Large format porcelain slab tiles characterized by their large size and thin profile for seamless installations.",
+      category: "large-format-slabs"
     },
     {
       id: 4,
@@ -52,13 +52,31 @@ const Hero = () => {
 
   useEffect(() => {
     if (!mounted) return;
-    
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000);
 
     return () => clearInterval(timer);
-  }, [slides.length, mounted]);
+  }, [slides.length, mounted, currentSlide]);
+
+  // Keyboard navigation: ArrowLeft / ArrowRight
+  useEffect(() => {
+    if (!mounted) return;
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [mounted, slides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -68,6 +86,28 @@ const Hero = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  // Progress bar state synced to slide duration (6s)
+  const SLIDE_DURATION = 6000;
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    let rafId: number;
+    let start = performance.now();
+
+    const step = (now: number) => {
+      const elapsed = now - start;
+      // progress from 0 to 100 within SLIDE_DURATION
+      const pct = Math.min(((elapsed % SLIDE_DURATION) / SLIDE_DURATION) * 100, 100);
+      setProgress(pct);
+      rafId = requestAnimationFrame(step);
+    };
+
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
+  }, [mounted, currentSlide]);
+
   return (
     <section className="relative h-screen overflow-hidden with-marble-overlay">
       {/* Background Slides */}
@@ -75,7 +115,7 @@ const Hero = () => {
         <div
           key={slide.id}
           className={cn(
-            "absolute inset-0 transition-opacity duration-1000",
+            "absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-transform",
             index === currentSlide ? "opacity-100" : "opacity-0"
           )}
         >
@@ -102,10 +142,10 @@ const Hero = () => {
               <div
                 key={slide.id}
                 className={cn(
-                  "transition-all duration-1000 ease-out",
+                  "transition-all duration-1000 ease-in-out will-change-transform",
                   index === currentSlide
                     ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 translate-y-12 scale-95"
+                    : "opacity-0 translate-y-6 scale-95"
                 )}
               >
                 {index === currentSlide && (
@@ -143,37 +183,35 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Navigation Controls */}
+      {/* Navigation Controls (arrows removed, progress capsules added) */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={prevSlide}
-            className="p-3 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110"
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-          
-          <div className="flex space-x-2">
-            {slides.map((_, index) => (
+        <div className="flex items-center space-x-3">
+          {slides.map((_, index) => {
+            const isActive = index === currentSlide;
+            return (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => {
+                  // Smoothly jump and reset progress animation baseline
+                  setCurrentSlide(index);
+                }}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300",
-                  index === currentSlide
-                    ? "bg-charcoal w-8"
-                    : "bg-white/40 hover:bg-white/60"
+                  "relative h-2 w-12 rounded-full overflow-hidden transition-all",
+                  isActive ? "bg-white/30" : "bg-white/20 hover:bg-white/30"
                 )}
-              />
-            ))}
-          </div>
-          
-          <button
-            onClick={nextSlide}
-            className="p-3 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
+                aria-label={`Go to slide ${index + 1}`}
+              >
+                {/* Progress fill inside capsule */}
+                <span
+                  className={cn(
+                    "absolute left-0 top-0 h-full bg-charcoal transition-[width]",
+                    isActive ? "" : "w-0"
+                  )}
+                  style={{ width: isActive ? `${progress}%` : "0%" }}
+                />
+              </button>
+            );
+          })}
         </div>
       </div>
 
