@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { api } from "@/lib/api";
+
 
 interface NavigationItem {
   name: string;
@@ -21,7 +21,7 @@ interface NavigationItem {
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [categories, setCategories] = useState<any[]>([]);
+
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,17 +32,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const categoriesData = await api.getCategories();
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error('Error loading categories:', error);
-      }
-    };
-    fetchCategories();
-  }, []);
+
 
   const navigationItems: NavigationItem[] = [
     { name: "HOME", path: "/" },

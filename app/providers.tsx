@@ -1,35 +1,42 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
-import PageLoader from "@/components/PageLoader";
-import { usePageLoader } from "@/hooks/usePageLoader";
 
-function AppContent({ children }: { children: React.ReactNode }) {
-  const { isLoading } = usePageLoader();
+// Create QueryClient outside component to prevent recreation
+let browserQueryClient: QueryClient | undefined = undefined;
 
-  return (
-    <>
-      {isLoading && <PageLoader />}
-      {children}
-    </>
-  );
+function getQueryClient() {
+  if (typeof window === 'undefined') {
+    return new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 60 * 1000,
+          retry: 1,
+          refetchOnWindowFocus: false,
+        },
+      },
+    });
+  }
+  if (!browserQueryClient) {
+    browserQueryClient = new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 60 * 1000,
+          retry: 1,
+          refetchOnWindowFocus: false,
+        },
+      },
+    });
+  }
+  return browserQueryClient;
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000, // 1 minute
-      },
-    },
-  }));
+  const queryClient = getQueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppContent>
-        {children}
-      </AppContent>
+      {children}
     </QueryClientProvider>
   );
 }

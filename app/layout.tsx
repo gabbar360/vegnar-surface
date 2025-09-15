@@ -4,11 +4,10 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Providers } from "./providers";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
-import CookieConsent from "@/components/CookieConsent";
-import PageTracker from "@/components/PageTracker";
+import { LazyWhatsAppWidget, LazyCookieConsent, LazyPageTracker, LazyRoutePreloader } from "@/components/ClientComponents";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import NavigationProgress from "@/components/NavigationProgress";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,27 +51,31 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
-        <Providers>
-          <TooltipProvider>
-            {children}
-            <Toaster />
-            <Sonner />
-            <WhatsAppWidget />
-            <CookieConsent />
-            <PageTracker />
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-          </TooltipProvider>
-        </Providers>
+        <NavigationProgress />
+        <ErrorBoundary>
+          <Providers>
+            <TooltipProvider>
+              {children}
+              <Toaster />
+              <Sonner />
+              <LazyWhatsAppWidget />
+              <LazyCookieConsent />
+              <LazyPageTracker />
+              <LazyRoutePreloader />
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            </TooltipProvider>
+          </Providers>
+        </ErrorBoundary>
       </body>
     </html>
   );

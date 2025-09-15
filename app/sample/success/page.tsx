@@ -15,7 +15,12 @@ import {
   Check,
 } from "lucide-react";
 import Link from "next/link";
-import Confetti from "react-confetti";
+import dynamic from "next/dynamic";
+
+const Confetti = dynamic(() => import("react-confetti"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function SampleSuccess() {
   const [showConfetti, setShowConfetti] = useState(false);
@@ -33,11 +38,11 @@ export default function SampleSuccess() {
     setShowConfetti(true);
     setShowConfirmationOverlay(true);
 
-    // Hide confetti and overlay after 4 seconds
+    // Hide confetti and overlay after 2 seconds
     const timer = setTimeout(() => {
       setShowConfetti(false);
       setShowConfirmationOverlay(false);
-    }, 4000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -54,11 +59,12 @@ export default function SampleSuccess() {
               width={windowDimension.width}
               height={windowDimension.height}
               recycle={false}
-              numberOfPieces={2000}
-              gravity={0.3}
+              numberOfPieces={200}
+              gravity={0.5}
+              run={showConfetti}
             />
           )}
-          <div className="relative bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 transform animate-pulse">
+          <div className="relative bg-white rounded-2xl shadow-xl p-8 max-w-md w-full mx-4">
             {/* Close button */}
             <button
               onClick={() => {
@@ -72,10 +78,8 @@ export default function SampleSuccess() {
 
             {/* Success Icon with Animation */}
             <div className="text-center mb-6">
-              <div className="relative inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4 animate-bounce">
-                <CheckCircle className="w-10 h-10 text-green-600" />
-                {/* Pulse ring animation */}
-                <div className="absolute inset-0 rounded-full bg-green-400 opacity-20 animate-ping"></div>
+              <div className="relative inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+                <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
 
               {/* Main heading */}
@@ -115,10 +119,7 @@ export default function SampleSuccess() {
               </div>
             </div>
 
-            {/* Decorative elements */}
-            <div className="absolute -top-2 -left-2 w-4 h-4 bg-green-400 rounded-full opacity-60 animate-pulse"></div>
-            <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-blue-400 rounded-full opacity-40 animate-pulse delay-300"></div>
-            <div className="absolute top-1/2 -right-1 w-3 h-3 bg-yellow-400 rounded-full opacity-50 animate-pulse delay-700"></div>
+
           </div>
         </div>
       )}
@@ -126,12 +127,12 @@ export default function SampleSuccess() {
       <section className="py-24 marble-pattern relative z-10">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl shadow-2xl p-12 border border-gray-100">
-              <div className="animate-bounce">
-                <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-8" />
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+              <div>
+                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-charcoal mb-6 animate-fade-in">
+              <h1 className="text-3xl md:text-4xl font-bold text-charcoal mb-6">
                 Payment Successful!
               </h1>
 
@@ -228,21 +229,7 @@ export default function SampleSuccess() {
 
       <Footer />
 
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-      `}</style>
+
     </div>
   );
 }
