@@ -68,9 +68,9 @@ const WhyChooseUs = () => {
   const features = [
     {
       icon: Clock,
-      title: "On-Time Delivery",
+      title: "Dependable & On-Time Delivery",
       description:
-        "We are the top manufacturer because of our on-time and secure deliveries. You can be certain that when you work with us, your cargo will arrive on schedule, undamaged, and in the best possible shape.",
+        "In B2B trade, timing is everything. With a 99.5% on-time delivery rate and secure export packing, we ensure every shipment of Outdoor Pavers, large slabs Tiles, Subway Tiles and Mosaic tiles reaches you on schedule, in perfect condition.",
       image:
         "/assets/about1.jpg"
     },
@@ -78,14 +78,14 @@ const WhyChooseUs = () => {
       icon: Package,
       title: "Extensive Product Line",
       description:
-        "Vegnar Ceramic is aware everybody has different tastes. To satisfy the various needs of our customers, we provide a varied and distinctive range of tiles and sanitaryware products.",
+        "Vegnar Surfaces offers a comprehensive range of premium tiles to meet the needs of global markets. Our portfolio includes 20mm Outdoor Tiles, Large-format Slabs, Subway Tiles, and Mosaic Tiles, each crafted to deliver exceptional quality, durability, and aesthetic versatility for diverse residential and commercial projects.",
       image: "/assets/about2.jpg",
     },
     {
       icon: Award,
-      title: "Excellent Quality",
+      title: "International Quality Standards",
       description:
-        "We utilize cutting-edge technologies and maintain international standards throughout the whole manufacturing and testing process to guarantee that our goods are of the highest quality.",
+        "We manufacture with advanced technology and strict QC processes to deliver tiles that meet European, North American, and Middle Eastern standards, guaranteeing long-term performance and market acceptance.",
       image:
         "/assets/about3.jpg",
     },
@@ -103,10 +103,9 @@ const WhyChooseUs = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="section-title mb-6">Why Choose Us</h2>
+          <h2 className="section-title mb-6">Why Partner with Us</h2>
           <p className="section-subtitle max-w-3xl mx-auto">
-            We distinguish ourselves from other tile manufacturers through our
-            commitment to quality, innovation, and customer satisfaction.
+           At Vegnar Surfaces, we specialize in outdoor porcelain solutions engineered for global markets. Our commitment to quality, reliability, and innovation makes us a trusted supplier for distributors, importers, and project contractors worldwide.
           </p>
         </div>
 
