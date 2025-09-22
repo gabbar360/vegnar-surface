@@ -22,6 +22,7 @@ const Footer = () => {
     { name: "Export", href: "/export" },
     { name: "Blog", href: "/blog" },
     { name: "Utilities", href: "/utilities" },
+    { name: "Sitemap", href: "/sitemap-page" },
   ];
 
   const productCategories = [

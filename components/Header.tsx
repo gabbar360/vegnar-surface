@@ -58,6 +58,7 @@ const Header = () => {
     { name: "E-CATALOGUE", path: "/catalog" },
     // { name: "UTILITIES", path: "/utilities" },
     { name: "BLOG", path: "/blog" },
+    { name: "SITEMAP", path: "/sitemap-page" },
     { name: "GET SAMPLE", path: "/sample", isCapsuleButton: true },
     { name: "BECOME A PARTNER", path: "/partner", isButton: true },
     { name: "CONTACT", path: "/contact", isButton: true },
