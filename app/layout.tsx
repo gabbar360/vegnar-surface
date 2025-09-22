@@ -8,6 +8,7 @@ import { Providers } from "./providers";
 import { LazyWhatsAppWidget, LazyCookieConsent, LazyPageTracker, LazyRoutePreloader } from "@/components/ClientComponents";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import NavigationProgress from "@/components/NavigationProgress";
+import StructuredData from "@/components/StructuredData";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -47,6 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <StructuredData />
+      </head>
       <body
         className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
         suppressHydrationWarning
