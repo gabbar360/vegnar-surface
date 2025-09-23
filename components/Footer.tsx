@@ -21,8 +21,8 @@ const Footer = () => {
     { name: "Contact", href: "/contact" },
     { name: "Export", href: "/export" },
     { name: "Blog", href: "/blog" },
-    { name: "Utilities", href: "/utilities" },
-    { name: "Sitemap", href: "/sitemap-page" },
+    { name: "Utilities", href: "/utilities" }
+    // { name: "Sitemap", href: "/sitemap-page" },
   ];
 
   const productCategories = [
