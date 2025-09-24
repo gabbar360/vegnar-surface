@@ -5,8 +5,14 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle, ChevronDown } from "lucide-react";
 import { api } from "@/lib/api";
+import countriesData from "@/data/countries.json";
+
+interface Country {
+  code: string;
+  name: string;
+}
 
 // Razorpay types
 declare global {
@@ -32,6 +38,9 @@ export default function Sample() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showCancelMessage, setShowCancelMessage] = useState(false);
+  const [countries] = useState<Country[]>(countriesData);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
 
   useEffect(() => {
     // Load Razorpay script
@@ -46,6 +55,24 @@ export default function Sample() {
       }
     };
   }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.country-dropdown')) {
+        setIsCountryDropdownOpen(false);
+      }
+    };
+
+    if (isCountryDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isCountryDropdownOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,7 +258,7 @@ export default function Sample() {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-charcoal mb-2">
                         Phone Number *
@@ -244,11 +271,10 @@ export default function Sample() {
                         onChange={(e) => {
                           const value = e.target.value;
                           if (/^\d*$/.test(value)) {
-                            // sirf digits allow honge
                             handleChange(e);
                           }
                         }}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange transition-colors"
                         placeholder="+91 9963587456"
                       />
                     </div>
@@ -261,10 +287,13 @@ export default function Sample() {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange transition-colors"
                         placeholder="Company name"
                       />
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-charcoal mb-2">
                         Pin Code *
@@ -277,67 +306,75 @@ export default function Sample() {
                         onChange={(e) => {
                           const value = e.target.value;
                           if (/^\d*$/.test(value)) {
-                            // sirf digits allow honge
                             handleChange(e);
                           }
                         }}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange transition-colors"
                         placeholder="Your pin code"
                       />
                     </div>
-                    <div>
+                    <div className="relative country-dropdown">
                       <label className="block text-sm font-medium text-charcoal mb-2">
                         Country *
                       </label>
-                      <select
-                        name="country"
-                        required
-                        value={formData.country}
-                        onChange={(e) => {
-                          handleChange(e);
-                          setFormData((prev) => ({
-                            ...prev,
-                            countryInput: e.target.value,
-                          }));
-                        }}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
-                      >
-                        <option value="" disabled>
-                          Select your country
-                        </option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Brazil">Brazil</option>
-                        <option value="Canada">Canada</option>
-                        <option value="China">China</option>
-                        <option value="Denmark">Denmark</option>
-                        <option value="Finland">Finland</option>
-                        <option value="France">France</option>
-                        <option value="Germany">Germany</option>
-                        <option value="India">India</option>
-                        <option value="Indonesia">Indonesia</option>
-                        <option value="Ireland">Ireland</option>
-                        <option value="Italy">Italy</option>
-                        <option value="Japan">Japan</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="Mexico">Mexico</option>
-                        <option value="Netherlands">Netherlands</option>
-                        <option value="New Zealand">New Zealand</option>
-                        <option value="Norway">Norway</option>
-                        <option value="Saudi Arabia">Saudi Arabia</option>
-                        <option value="Singapore">Singapore</option>
-                        <option value="South Africa">South Africa</option>
-                        <option value="South Korea">South Korea</option>
-                        <option value="Spain">Spain</option>
-                        <option value="Sweden">Sweden</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="Thailand">Thailand</option>
-                        <option value="United Arab Emirates">
-                          United Arab Emirates
-                        </option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="United States">United States</option>
-                      </select>
+                      <div className="relative">
+                        <button
+                          type="button"
+                          onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange bg-white text-left flex items-center justify-between hover:border-orange transition-colors"
+                        >
+                          <span className={formData.country ? "text-charcoal" : "text-gray-500"}>
+                            {formData.country || "Select your country"}
+                          </span>
+                          <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {isCountryDropdownOpen && (
+                          <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-2xl max-h-60 overflow-hidden">
+                            <div className="p-3 border-b border-gray-100">
+                              <input
+                                type="text"
+                                placeholder="Search countries..."
+                                value={countrySearch}
+                                onChange={(e) => setCountrySearch(e.target.value)}
+                                className="w-full px-3 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-orange focus:border-orange text-sm"
+                              />
+                            </div>
+                            <div className="max-h-48 overflow-y-auto">
+                              {countries
+                                .filter(country => 
+                                  country.name.toLowerCase().includes(countrySearch.toLowerCase())
+                                )
+                                .map((country) => (
+                                <button
+                                  key={country.code}
+                                  type="button"
+                                  onClick={() => {
+                                    setFormData(prev => ({ ...prev, country: country.name }));
+                                    setIsCountryDropdownOpen(false);
+                                    setCountrySearch("");
+                                  }}
+                                  className="w-full px-4 py-3 text-left hover:bg-orange/10 focus:bg-orange/10 transition-colors text-sm border-b border-gray-50 last:border-b-0"
+                                >
+                                  <div className="flex items-center space-x-3">
+                                    <span className="text-xs bg-gray-100 px-2 py-1 rounded font-mono">
+                                      {country.code}
+                                    </span>
+                                    <span className="text-charcoal">{country.name}</span>
+                                  </div>
+                                </button>
+                              ))}
+                              {countries.filter(country => 
+                                country.name.toLowerCase().includes(countrySearch.toLowerCase())
+                              ).length === 0 && (
+                                <div className="px-4 py-3 text-gray-500 text-sm text-center">
+                                  No countries found
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -357,7 +394,7 @@ export default function Sample() {
                   </div>
                   {/*  */}
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-charcoal mb-2">
                         Number of Samples *
@@ -368,7 +405,7 @@ export default function Sample() {
                         required
                         value={formData.quantity}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange transition-colors"
                         placeholder="1"
                         min="1"
                         max="10"
@@ -378,7 +415,7 @@ export default function Sample() {
                       <label className="block text-sm font-medium text-charcoal mb-2">
                         Total Amount ($)
                       </label>
-                      <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-charcoal font-medium">
+                      <div className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gradient-to-r from-orange/5 to-orange/10 text-charcoal font-bold text-lg">
                         ${formData.quantity * formData.pricePerSample}
                       </div>
                     </div>
