@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://vegnarsurfaces.com'),
   alternates: {
-    canonical: 'https://vegnarsurfaces.com/',
+    canonical: '/',
   },
   openGraph: {
     title: "Vegnar Surfaces - India's Leading Premium Tile Manufacturer",
@@ -98,8 +99,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://vegnarsurfaces.com" />
         <link rel="canonical" href="https://vegnarsurfaces.com/" />
-        <meta name="google-site-verification" content="" />
-        <meta property="og:url" content="https://vegnarsurfaces.com/" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Vegnar Surfaces" />
         <meta name="publisher" content="Vegnar Surfaces" />
