@@ -176,9 +176,9 @@ function ProductsContent() {
         </div>
         <div className="relative z-10 container mx-auto px-4">
           <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">Our Product Collection</h1>
+            <h1 className="text-5xl font-bold mb-4">Premium Tiles Collection</h1>
             <p className="text-xl opacity-90">
-              Discover premium ceramic tiles and sanitaryware
+              Discover 1000+ premium marble, ceramic, granite & porcelain tiles
             </p>
           </div>
         </div>
