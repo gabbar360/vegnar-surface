@@ -8,6 +8,32 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Eye, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "#1 Outdoor Tiles Manufacturer in India | 20mm Outdoor Tiles| Vegnar Surfaces",
+  description: "#1 Outdoor tiles manufacturer in India. Premium porcelain pavers, 2cm tiles, heavy-duty R11 surface tiles for garden, swimming pool & outdoor spaces.",
+  keywords: "#1 outdoor tiles manufacturer in India, outdoor tiles manufacturer, outdoor tile manufacturers in India, outdoor tile companies, outdoor tile company, exterior tile manufacturers, premium outdoor tiles, outdoor tiles in India, commercial outdoor tile, outdoor tiles wholesale, buy outdoor tile, big outdoor tile, custom outdoor tiles, outdoor tiles best price, premium exterior wall tiles, wholesale outdoor tile flooring, premium porcelain outdoor tiles, premium ceramic tile company, outdoor floor tiles companies, premium tile brand, premium tiles brand in India, premium tiles company, premium tiles in India, premium brand tiles, premium tile outlet, premium tile & stone, premium tile inc, premium tiles near me, q tiles India, outdoor tiles Miami, outdoor tiles Doral, yard tiles, 2x2 outdoor tiles, 4x4 outdoor tiles, bathroom outdoor tiles, kitchen outdoor tiles, luxury outdoor tiles, porcelain pavers, 2cm tiles, heavy duty tiles, tiles for swimming pool area, garden tiles, R11 surface tiles, Vegnar Tiles",
+  openGraph: {
+    title: "Premium Tiles Manufacturer India | Vegnar Surfaces",
+    description: "India's leading tiles manufacturer. Premium marble, ceramic, granite tiles. 1000+ designs, export quality, wholesale prices. Free samples available.",
+    images: [{
+      url: '/assets/hero-marble-bg.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'Premium tiles collection by Vegnar Surfaces'
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Premium Tiles Manufacturer India | Vegnar Surfaces",
+    description: "India's leading tiles manufacturer. Premium marble, ceramic, granite tiles. 1000+ designs, export quality.",
+    images: ['/assets/hero-marble-bg.jpg'],
+  },
+  alternates: {
+    canonical: 'https://vegnarsurfaces.com',
+  },
+};
 
 // Move static data outside component to prevent recreation
 const FEATURED_PRODUCTS = [
@@ -71,11 +97,52 @@ const FEATURED_INSPIRATIONS = [
 ];
 
 export default function Home() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Premium Tiles Manufacturer India - Vegnar Surfaces',
+    description: 'India\'s leading tiles manufacturer offering premium marble, ceramic, granite, porcelain tiles with 1000+ designs and export quality.',
+    url: 'https://vegnarsurfaces.com',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'Vegnar Surfaces',
+      description: 'Premium tiles manufacturer in India',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Premium Tiles Collection',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Product',
+              name: 'Marble Tiles',
+              category: 'Building Materials',
+              description: 'Premium marble tiles for luxury interiors'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Product',
+              name: 'Ceramic Tiles',
+              category: 'Building Materials',
+              description: 'High-quality ceramic tiles for all applications'
+            }
+          }
+        ]
+      }
+    }
+  };
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen">
+        <Header />
+        <main>
         <Hero />
         <AboutSection />
         <WhyChooseUs />
@@ -181,9 +248,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
-      <CustomizationSection />
-      <Footer />
-    </div>
+        </main>
+        <CustomizationSection />
+        <Footer />
+      </div>
+    </>
   );
 }

@@ -100,9 +100,9 @@ export default function Blog() {
 
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h1 className="hero-title text-center">Vegnar Insights</h1>
+            <h1 className="hero-title text-center">Tiles Design Blog & Expert Tips</h1>
             <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-              Trends, guides, and stories from the world of premium surfaces.
+              Latest trends, installation guides, design ideas and expert tips for marble, ceramic & granite tiles.
             </p>
           </div>
         </div>
