@@ -160,8 +160,7 @@ export const api = {
     additional_message?: string;
     number_of_samples?: number;
     currency?: string;
-    pin_code?: string;
-    country?: string;
+
   }) {
     try {
       const response = await axios.post(`${API_URL}/api/orders/create`, orderData, {
