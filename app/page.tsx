@@ -11,27 +11,38 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "#1 Outdoor Tiles Manufacturer in India | 20mm Outdoor Tiles| Vegnar Surfaces",
-  description: "#1 Outdoor tiles manufacturer in India. Premium porcelain pavers, 2cm tiles, heavy-duty R11 surface tiles for garden, swimming pool & outdoor spaces.",
-  keywords: "#1 outdoor tiles manufacturer in India, outdoor tiles manufacturer, outdoor tile manufacturers in India, outdoor tile companies, outdoor tile company, exterior tile manufacturers, premium outdoor tiles, outdoor tiles in India, commercial outdoor tile, outdoor tiles wholesale, buy outdoor tile, big outdoor tile, custom outdoor tiles, outdoor tiles best price, premium exterior wall tiles, wholesale outdoor tile flooring, premium porcelain outdoor tiles, premium ceramic tile company, outdoor floor tiles companies, premium tile brand, premium tiles brand in India, premium tiles company, premium tiles in India, premium brand tiles, premium tile outlet, premium tile & stone, premium tile inc, premium tiles near me, q tiles India, outdoor tiles Miami, outdoor tiles Doral, yard tiles, 2x2 outdoor tiles, 4x4 outdoor tiles, bathroom outdoor tiles, kitchen outdoor tiles, luxury outdoor tiles, porcelain pavers, 2cm tiles, heavy duty tiles, tiles for swimming pool area, garden tiles, R11 surface tiles, Vegnar Tiles",
+  title: "Vegnar Surfaces - Premium Ceramic & Tiles Solutions | India's Leading Manufacturer",
+  description: "Discover premium ceramic tiles, porcelain pavers, and luxury surfaces from Vegnar Surface. Quality craftsmanship meets modern design. India's trusted tile manufacturer.",
+  keywords: "Vegnar Surfaces, Vegnar Surface, premium ceramic tiles, porcelain pavers, luxury surfaces, tiles manufacturer India, ceramic tiles, outdoor tiles, marble tiles, granite tiles, mosaic tiles, subway tiles, large format tiles, quality craftsmanship, modern design, premium tiles India",
   openGraph: {
-    title: "Premium Tiles Manufacturer India | Vegnar Surfaces",
-    description: "India's leading tiles manufacturer. Premium marble, ceramic, granite tiles. 1000+ designs, export quality, wholesale prices. Free samples available.",
+    title: "Vegnar Surfaces - Premium Ceramic & Tiles Solutions",
+    description: "Discover premium ceramic tiles, porcelain pavers, and luxury surfaces from Vegnar Surface. Quality craftsmanship meets modern design.",
+    url: 'https://vegnarsurfaces.com',
+    siteName: 'Vegnar Surfaces',
     images: [{
-      url: '/assets/hero-marble-bg.jpg',
+      url: 'https://vegnarsurfaces.com/assets/hero-marble-bg.jpg',
       width: 1200,
       height: 630,
-      alt: 'Premium tiles collection by Vegnar Surfaces'
+      alt: 'Vegnar Surfaces - Premium Ceramic & Tiles Solutions'
     }],
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Premium Tiles Manufacturer India | Vegnar Surfaces",
-    description: "India's leading tiles manufacturer. Premium marble, ceramic, granite tiles. 1000+ designs, export quality.",
-    images: ['/assets/hero-marble-bg.jpg'],
+    title: "Vegnar Surfaces - Premium Ceramic & Tiles Solutions",
+    description: "Discover premium ceramic tiles, porcelain pavers, and luxury surfaces from Vegnar Surface. Quality craftsmanship meets modern design.",
+    images: ['https://vegnarsurfaces.com/assets/hero-marble-bg.jpg'],
   },
   alternates: {
-    canonical: 'https://vegnarsurfaces.com',
+    canonical: 'https://vegnarsurfaces.com/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -100,33 +111,47 @@ export default function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Premium Tiles Manufacturer India - Vegnar Surfaces',
-    description: 'India\'s leading tiles manufacturer offering premium marble, ceramic, granite, porcelain tiles with 1000+ designs and export quality.',
-    url: 'https://vegnarsurfaces.com',
+    name: 'Vegnar Surfaces - Premium Ceramic & Tiles Solutions',
+    description: 'Discover premium ceramic tiles, porcelain pavers, and luxury surfaces from Vegnar Surface. Quality craftsmanship meets modern design.',
+    url: 'https://vegnarsurfaces.com/',
     mainEntity: {
       '@type': 'Organization',
       name: 'Vegnar Surfaces',
-      description: 'Premium tiles manufacturer in India',
+      alternateName: 'Vegnar Surface',
+      description: 'Premium Ceramic & Tiles Solutions - Quality craftsmanship meets modern design',
+      url: 'https://vegnarsurfaces.com/',
+      sameAs: [
+        'https://vegnarsurfaces.com'
+      ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Premium Tiles Collection',
+        name: 'Premium Ceramic & Tiles Collection',
         itemListElement: [
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Product',
-              name: 'Marble Tiles',
+              name: 'Premium Ceramic Tiles',
               category: 'Building Materials',
-              description: 'Premium marble tiles for luxury interiors'
+              description: 'Premium ceramic tiles with quality craftsmanship'
             }
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Product',
-              name: 'Ceramic Tiles',
+              name: 'Porcelain Pavers',
               category: 'Building Materials',
-              description: 'High-quality ceramic tiles for all applications'
+              description: 'Luxury porcelain pavers for modern design'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Product',
+              name: 'Luxury Surfaces',
+              category: 'Building Materials',
+              description: 'Premium luxury surfaces for contemporary spaces'
             }
           }
         ]
