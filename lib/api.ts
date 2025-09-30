@@ -154,6 +154,8 @@ export const api = {
     shipping_address: string;
     amount: number;
     phone_number?: string;
+    pin_code?: string;
+    country?: string;
     company?: string;
     additional_message?: string;
     number_of_samples?: number;
