@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL;
 
 
 export const api = {
   async getCategories() {
     try {
-      const response = await axios.get(`${API_URL}/api/product-categories`, {
+      const response = await axios.get(`${STRAPI_URL}/api/product-categories`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -21,7 +22,7 @@ export const api = {
 
   async getProducts() {
     try {
-      const response = await axios.get(`${API_URL}/api/products?populate=*`, {
+      const response = await axios.get(`${STRAPI_URL}/api/products?populate=*`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -33,9 +34,10 @@ export const api = {
       return [];
     }
   },
+
   async getSizes() {
     try {
-      const response = await axios.get(`${API_URL}/api/sizes`, {
+      const response = await axios.get(`${STRAPI_URL}/api/sizes`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -50,7 +52,7 @@ export const api = {
 
   async getColors() {
     try {
-      const response = await axios.get(`${API_URL}/api/colors`, {
+      const response = await axios.get(`${STRAPI_URL}/api/colors`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -65,7 +67,7 @@ export const api = {
 
   async getSurfaceType() {
     try {
-      const response = await axios.get(`${API_URL}/api/surface-types`, {
+      const response = await axios.get(`${STRAPI_URL}/api/surface-types`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -80,16 +82,81 @@ export const api = {
 
   async getBlogs() {
     try {
-      const response = await axios.get(`${API_URL}/api/blogs?populate=image`, {
+      const response = await axios.get('http://cms.vegnarsurfaces.com/wp-json/wp/v2/posts?_embed', {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       
-      return response.data.data || [];
+      // Transform WordPress data to match existing structure
+      const transformedData = response.data.map((post: any) => ({
+        id: post.id,
+        documentId: post.id.toString(),
+        title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
+        content: [{ type: 'paragraph', children: [{ text: post.content?.rendered || post.excerpt?.rendered || '' }] }],
+        slug: post.slug,
+        meta_title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
+        meta_description: post.excerpt.rendered.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…').trim(),
+        createdAt: post.date,
+        updatedAt: post.modified,
+        publishedAt: post.date,
+        image: post._embedded?.['wp:featuredmedia']?.[0] ? {
+          id: post._embedded['wp:featuredmedia'][0].id,
+          name: post._embedded['wp:featuredmedia'][0].alt_text || post.title.rendered,
+          url: post._embedded['wp:featuredmedia'][0].source_url
+        } : {
+          id: 0,
+          name: 'Default Blog Image',
+          url: '/assets/tiles-bg.jpg'
+        }
+      }));
+      
+      return transformedData;
     } catch (error) {
       console.error('Error fetching blogs:', error);
       return [];
+    }
+  },
+
+  async getBlogBySlug(slug: string) {
+    try {
+      const response = await axios.get(`http://cms.vegnarsurfaces.com/wp-json/wp/v2/posts?slug=${slug}&_embed`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (!response.data || response.data.length === 0) {
+        return null;
+      }
+      
+      const post = response.data[0];
+      
+      // Transform WordPress data to match existing structure
+      return {
+        id: post.id,
+        documentId: post.id.toString(),
+        title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
+        content: [{ type: 'paragraph', children: [{ text: post.content.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…') }] }],
+        slug: post.slug,
+        meta_title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
+        meta_description: post.excerpt.rendered.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…').trim(),
+        createdAt: post.date,
+        updatedAt: post.modified,
+        publishedAt: post.date,
+        image: post._embedded?.['wp:featuredmedia']?.[0] ? {
+          id: post._embedded['wp:featuredmedia'][0].id,
+          name: post._embedded['wp:featuredmedia'][0].alt_text || post.title.rendered,
+          url: post._embedded['wp:featuredmedia'][0].source_url
+        } : {
+          id: 0,
+          name: 'Default Blog Image',
+          url: '/assets/tiles-bg.jpg'
+        }
+      };
+    } catch (error) {
+      console.error('Error fetching blog by slug:', error);
+      return null;
     }
   },
 
@@ -101,10 +168,10 @@ export const api = {
     message: string;
   }) {
     try {
-      console.log('API URL:', API_URL);
+      console.log('API URL:', STRAPI_URL);
       console.log('Contact Data:', contactData);
       
-      const response = await axios.post(`${API_URL}/api/contacts`, {
+      const response = await axios.post(`${STRAPI_URL}/api/contacts`, {
         data: contactData
       }, {
         headers: {
@@ -133,7 +200,7 @@ export const api = {
     partnership_interests: string;
   }) {
     try {
-      const response = await axios.post(`${API_URL}/api/become-a-parteners`, {
+      const response = await axios.post(`${STRAPI_URL}/api/become-a-parteners`, {
         data: partnerData
       }, {
         headers: {
@@ -163,7 +230,7 @@ export const api = {
 
   }) {
     try {
-      const response = await axios.post(`${API_URL}/api/orders/create`, orderData, {
+      const response = await axios.post(`${STRAPI_URL}/api/orders/create`, orderData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -182,7 +249,7 @@ export const api = {
     razorpay_signature: string;
   }) {
     try {
-      const response = await axios.post(`${API_URL}/api/orders/verify`, paymentData, {
+      const response = await axios.post(`${STRAPI_URL}/api/orders/verify`, paymentData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -202,7 +269,7 @@ export const api = {
     session_duration?: number;
   }) {
     try {
-      const response = await axios.post(`${API_URL}/api/user-analytics`, {
+      const response = await axios.post(`${STRAPI_URL}/api/user-analytics`, {
         data: analyticsData
       }, {
         headers: {
@@ -219,7 +286,7 @@ export const api = {
 
   async getAllAnalytics() {
     try {
-      const response = await axios.get(`${API_URL}/api/user-analytics`, {
+      const response = await axios.get(`${STRAPI_URL}/api/user-analytics`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -234,7 +301,7 @@ export const api = {
 
   async downloadExcelReport() {
     try {
-      const response = await axios.get(`${API_URL}/api/user-analytics/export/excel`, {
+      const response = await axios.get(`${STRAPI_URL}/api/user-analytics/export/excel`, {
         headers: {
           'Content-Type': 'application/json',
         },

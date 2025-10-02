@@ -1,0 +1,279 @@
+/* Blog Typography Scale */
+.blog-content h1 {
+  @apply text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6;
+}
+
+.blog-content h2 {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4;
+}
+
+.blog-content h3 {
+  @apply text-2xl md:text-3xl font-semibold text-gray-900 leading-tight mb-3;
+}
+
+.blog-content h4 {
+  @apply text-xl md:text-2xl font-semibold text-gray-900 leading-tight mb-3;
+}
+
+.blog-content h5 {
+  @apply text-lg md:text-xl font-medium text-gray-900 leading-tight mb-2;
+}
+
+.blog-content h6 {
+  @apply text-base md:text-lg font-medium text-gray-900 leading-tight mb-2;
+}
+
+.blog-content p {
+  @apply text-gray-700 leading-relaxed mb-4;
+}
+
+.blog-content a {
+  @apply text-charcoal no-underline hover:underline transition-colors duration-200;
+}
+
+.blog-content ul, 
+.blog-content ol {
+  @apply mb-4 pl-6 space-y-1;
+}
+
+.blog-content li {
+  @apply text-gray-700 leading-relaxed;
+}
+
+.blog-content strong, 
+.blog-content b {
+  @apply font-semibold text-gray-900;
+}
+
+.blog-content em, 
+.blog-content i {
+  @apply italic;
+}
+
+/* WordPress Block Styling */
+.blog-content {
+  @apply text-gray-700 leading-relaxed;
+}
+
+/* WordPress Block: Lists */
+.blog-content .wp-block-list {
+  @apply mb-4 pl-6 space-y-2;
+}
+
+.blog-content .wp-block-list li {
+  @apply text-gray-700 mb-2 leading-relaxed relative;
+}
+
+.blog-content .wp-block-list li::marker {
+  @apply text-charcoal;
+}
+
+/* WordPress Block: Images and Figures */
+.blog-content img {
+  @apply rounded-lg shadow-md my-6 max-w-full h-auto;
+}
+
+.blog-content figure {
+  @apply my-6;
+}
+
+.blog-content figure img {
+  @apply rounded-lg shadow-md;
+}
+
+.blog-content figcaption {
+  @apply text-sm text-gray-500 mt-2 text-center italic;
+}
+
+/* WordPress Block: Button */
+.blog-content .wp-block-button {
+  @apply my-6;
+}
+
+.blog-content .wp-block-button__link,
+.blog-content .wp-element-button,
+.blog-content button,
+.blog-content input[type="submit"],
+.blog-content input[type="button"] {
+  @apply inline-flex items-center justify-center px-6 py-3 bg-orange text-white font-semibold rounded-lg no-underline transition-all duration-300 border-2 border-orange cursor-pointer;
+}
+
+.blog-content .wp-block-button__link:hover,
+.blog-content .wp-element-button:hover,
+.blog-content button:hover,
+.blog-content input[type="submit"]:hover,
+.blog-content input[type="button"]:hover {
+  @apply bg-orange/90 border-orange/90 text-white shadow-lg transform -translate-y-0.5;
+}
+
+/* Secondary Button Style */
+.blog-content .wp-block-button.is-style-outline .wp-block-button__link,
+.blog-content .secondary-button {
+  @apply bg-transparent text-charcoal border-charcoal;
+}
+
+.blog-content .wp-block-button.is-style-outline .wp-block-button__link:hover,
+.blog-content .secondary-button:hover {
+  @apply bg-charcoal text-white border-charcoal;
+}
+
+/* WordPress Block: Quote */
+.blog-content blockquote,
+.blog-content .wp-block-quote {
+  @apply border-l-4 border-charcoal bg-gray-50 p-4 my-6 italic text-gray-800;
+}
+
+/* WordPress Block: Code */
+.blog-content code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+}
+
+.blog-content pre {
+  @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto my-6;
+}
+
+.blog-content pre code {
+  @apply bg-transparent p-0;
+}
+
+/* WordPress Block: Table */
+.blog-content table,
+.blog-content .wp-block-table {
+  @apply w-full border-collapse my-6 shadow-sm rounded-lg overflow-hidden;
+}
+
+.blog-content th {
+  @apply bg-gray-100 px-4 py-3 font-semibold text-left text-gray-900 border-b;
+}
+
+.blog-content td {
+  @apply px-4 py-3 border-b border-gray-200 text-gray-700;
+}
+
+.blog-content tbody tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+/* WordPress Block: Separator */
+.blog-content .wp-block-separator {
+  @apply border-t border-gray-300 my-8 mx-auto w-24;
+}
+
+/* WordPress Block: Spacer */
+.blog-content .wp-block-spacer {
+  @apply my-4;
+}
+
+/* WordPress Block: Columns */
+.blog-content .wp-block-columns {
+  @apply flex flex-wrap gap-6 my-6;
+}
+
+.blog-content .wp-block-column {
+  @apply flex-1 min-w-0;
+}
+
+/* WordPress Block: Group */
+.blog-content .wp-block-group {
+  @apply my-6;
+}
+
+/* WordPress Block: Cover */
+.blog-content .wp-block-cover {
+  @apply relative rounded-lg overflow-hidden my-6;
+}
+
+/* WordPress Block: Gallery */
+.blog-content .wp-block-gallery {
+  @apply grid grid-cols-2 md:grid-cols-3 gap-4 my-6;
+}
+
+.blog-content .wp-block-gallery img {
+  @apply w-full h-auto rounded-lg shadow-sm;
+}
+
+/* WordPress Block: Embed */
+.blog-content .wp-block-embed {
+  @apply my-6;
+}
+
+.blog-content .wp-block-embed iframe {
+  @apply w-full rounded-lg;
+}
+
+/* Form Elements */
+.blog-content form {
+  @apply my-6;
+}
+
+.blog-content input[type="text"],
+.blog-content input[type="email"],
+.blog-content input[type="tel"],
+.blog-content input[type="url"],
+.blog-content textarea,
+.blog-content select {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-orange transition-colors;
+}
+
+.blog-content label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+/* Call to Action Boxes */
+.blog-content .cta-box,
+.blog-content .wp-block-group.has-background {
+  @apply bg-gray-50 border border-gray-200 rounded-lg p-6 my-6;
+}
+
+.blog-content .cta-box.orange,
+.blog-content .wp-block-group.has-orange-background-color {
+  @apply bg-orange text-white;
+}
+
+.blog-content .cta-box.charcoal,
+.blog-content .wp-block-group.has-charcoal-background-color {
+  @apply bg-charcoal text-white;
+}
+
+/* Alert/Notice Boxes */
+.blog-content .alert,
+.blog-content .notice {
+  @apply p-4 rounded-lg my-4 border-l-4;
+}
+
+.blog-content .alert.info,
+.blog-content .notice.info {
+  @apply bg-blue-50 border-blue-400 text-blue-800;
+}
+
+.blog-content .alert.warning,
+.blog-content .notice.warning {
+  @apply bg-yellow-50 border-yellow-400 text-yellow-800;
+}
+
+.blog-content .alert.success,
+.blog-content .notice.success {
+  @apply bg-green-50 border-green-400 text-green-800;
+}
+
+.blog-content .alert.error,
+.blog-content .notice.error {
+  @apply bg-red-50 border-red-400 text-red-800;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .blog-content .wp-block-columns {
+    @apply flex-col;
+  }
+  
+  .blog-content .wp-block-gallery {
+    @apply grid-cols-1;
+  }
+  
+  .blog-content .wp-block-button__link,
+  .blog-content .wp-element-button,
+  .blog-content button {
+    @apply w-full text-center;
+  }
+}
