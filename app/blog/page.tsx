@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowRight, Search } from "lucide-react";
+import { Calendar, User, ArrowRight } from "lucide-react";
 import { api } from "@/lib/api";
 import Link from "next/link";
 import { getImageUrl } from "@/lib/imageHelper";
+import "./blog.css";
 
 interface BlogPost {
   id: number;
@@ -24,15 +24,12 @@ interface BlogPost {
     id: number;
     name: string;
     url: string;
-  };
+  } | null;
 }
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [visibleIds, setVisibleIds] = useState<Record<number, boolean>>({});
-  const rowRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -49,198 +46,84 @@ export default function Blog() {
     fetchBlogs();
   }, []);
 
-  // Filtered posts based on search
-  const filtered = useMemo(() => {
-    if (!searchQuery.trim()) return blogPosts;
-    const q = searchQuery.toLowerCase();
-    return blogPosts.filter(
-      (p) =>
-        p.title?.toLowerCase().includes(q) ||
-        p.meta_description?.toLowerCase().includes(q)
-    );
-  }, [blogPosts, searchQuery]);
-
-  const featured = filtered[0];
-  const others = filtered.slice(1);
-
-  // Reveal on scroll animations for rows
-  useEffect(() => {
-    if (!others.length) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const idAttr = entry.target.getAttribute("data-id");
-          if (!idAttr) return;
-          const id = Number(idAttr);
-          if (entry.isIntersecting) {
-            setVisibleIds((prev) => ({ ...prev, [id]: true }));
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    others.forEach((p) => {
-      const el = rowRefs.current[p.id!];
-      if (el) io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, [others]);
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero */}
-      <section className="relative pt-24 with-marble-overlay overflow-hidden">
-        <div className="pointer-events-none absolute -top-10 -left-10 w-64 h-64 rounded-full bg-orange/10 blur-3xl animate-pulse" />
-        <div className="pointer-events-none absolute -bottom-10 -right-10 w-72 h-72 rounded-full bg-charcoal/10 blur-3xl animate-pulse" />
-
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="hero-title text-center">Tiles Design Blog & Expert Tips</h1>
-            <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-              Latest trends, installation guides, design ideas and expert tips for marble, ceramic & granite tiles.
-            </p>
-          </div>
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+            Design Blog
+          </h1>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Latest trends, installation guides, and expert tips for tiles & surfaces
+          </p>
         </div>
       </section>
 
-      {/* Featured post */}
-      {loading ? null : featured ? (
-        <section className="py-10 marble-pattern">
-          <div className="container mx-auto px-4">
-            <Link href={`/blog/${featured.slug || featured.id}`}>
-              <div className="group relative rounded-2xl overflow-hidden shadow-elegant cursor-pointer">
-                {featured.image && (
-                  <img
-                    src={getImageUrl(featured.image.url)}
-                    alt={featured.title}
-                    className="w-full h-64 sm:h-72 md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="eager"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10 text-white">
-                  <div className="flex items-center gap-3 text-xs sm:text-sm text-white/90 mb-2 sm:mb-3">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(featured.publishedAt).toLocaleDateString()}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <User className="w-4 h-4" /> Admin
-                    </span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight">
-                    {featured.title}
-                  </h2>
-                  <p className="max-w-3xl text-white/90 hidden xs:line-clamp-2 sm:line-clamp-3 sm:block">
-                    {featured.meta_description}
-                  </p>
-                  <Button className="mt-5 bg-orange hover:bg-orange/90 text-white">
-                    Read Article
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </section>
-      ) : null}
-
-      {/* Alternating list (image/text, then text/image) */}
-      <section className="py-16 marble-pattern">
-        <div className="container mx-auto px-4">
+      {/* Blog Grid */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6">
           {loading ? (
-            <div className="text-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange mx-auto"></div>
-              <p className="mt-4 text-muted-foreground">Loading blogs...</p>
-            </div>
-          ) : others.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-muted-foreground">{filtered.length === 0 ? "No results found." : "No more blogs available."}</p>
+            <div className="flex justify-center py-20">
+              <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin"></div>
             </div>
           ) : (
-            <div className="space-y-14">
-              {others.map((post, idx) => {
-                const rightImage = idx % 2 === 1; // odd index -> image on right
-                return (
-                  <div
-                    key={post.id}
-                    ref={(el) => { rowRefs.current[post.id] = el; }}
-                    data-id={post.id}
-                    className={`grid md:grid-cols-2 gap-8 items-center transition-all duration-700 ease-out ${
-                      visibleIds[post.id] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                    }`}
-                    style={{ transitionDelay: `${idx * 80}ms` }}
-                  >
-                    {/* Image */}
-                    <div className={`${rightImage ? "md:order-2" : "md:order-1"}`}>
-                      {post.image && (
-                        <Link href={`/blog/${post.slug || post.id}`}>
-                          <div className="group relative overflow-hidden rounded-2xl shadow-card hover:shadow-hover transition-all duration-500 cursor-pointer">
-                            <img
-                              src={getImageUrl(post.image.url)}
-                              alt={post.title}
-                              className="w-full h-48 sm:h-60 md:h-72 object-cover transition-transform duration-700 group-hover:scale-105"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          </div>
-                        </Link>
-                      )}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {blogPosts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <article className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    {/* Featured Image */}
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={getImageUrl(post.image?.url || '/assets/tiles-bg.jpg')}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
-
+                    
                     {/* Content */}
-                    <div className={`${rightImage ? "md:order-1" : "md:order-2"}`}>
-                      <div className="text-sm text-muted-foreground mb-3 flex items-center gap-4">
+                    <div className="p-6">
+                      {/* Meta */}
+                      <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" /> {new Date(post.publishedAt).toLocaleDateString()}
+                          <Calendar className="w-4 h-4" />
+                          {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+                            month: 'short', 
+                            day: 'numeric', 
+                            year: 'numeric' 
+                          })}
                         </span>
                         <span className="flex items-center gap-1">
-                          <User className="w-4 h-4" /> Admin
+                          <User className="w-4 h-4" />
+                          Admin
                         </span>
                       </div>
-                      <h3 className="text-2xl font-bold text-charcoal mb-3 leading-tight">
+                      
+                      {/* Title */}
+                      <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-charcoal transition-colors">
                         {post.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-6 line-clamp-3">
+                      </h2>
+                      
+                      {/* Excerpt */}
+                      <p className="text-gray-600 line-clamp-3 mb-4 leading-relaxed">
                         {post.meta_description}
                       </p>
-                      <Link href={`/blog/${post.slug || post.id}`}>
-                        <Button variant="ghost" className="text-orange hover:text-orange hover:bg-orange/10">
-                          Read More
-                          <ArrowRight className="w-4 h-4 ml-1" />
-                        </Button>
-                      </Link>
+                      
+                      {/* Read More */}
+                      <div className="flex items-center text-charcoal font-medium group-hover:gap-2 transition-all">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  </article>
+                </Link>
+              ))}
             </div>
           )}
         </div>
       </section>
-
-      {/* Newsletter */}
-      {/* <section className="py-24 with-marble-overlay">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-charcoal mb-4">Stay Updated</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter and get the latest tile trends, tips, and industry insights delivered to your inbox.
-          </p>
-          <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange focus:border-orange"
-            />
-            <Button className="bg-orange hover:bg-orange/90 text-white">Subscribe</Button>
-          </div>
-        </div>
-      </section> */}
 
       <Footer />
     </div>
