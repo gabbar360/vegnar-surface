@@ -33,11 +33,37 @@
 
 .blog-content ul, 
 .blog-content ol {
-  @apply mb-4 pl-6 space-y-1;
+  @apply mb-6 pl-8 space-y-3;
+}
+
+.blog-content ul {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.blog-content ol {
+  list-style-type: decimal;
+  list-style-position: outside;
 }
 
 .blog-content li {
-  @apply text-gray-700 leading-relaxed;
+  @apply text-gray-700 leading-relaxed mb-2 pl-2;
+}
+
+.blog-content ul li::marker {
+  @apply text-orange;
+  font-size: 1.2em;
+}
+
+.blog-content ol li::marker {
+  @apply text-charcoal font-semibold;
+}
+
+.blog-content ul ul,
+.blog-content ol ol,
+.blog-content ul ol,
+.blog-content ol ul {
+  @apply mt-2 mb-2 pl-6;
 }
 
 .blog-content strong, 
@@ -57,15 +83,18 @@
 
 /* WordPress Block: Lists */
 .blog-content .wp-block-list {
-  @apply mb-4 pl-6 space-y-2;
+  @apply mb-6 pl-8 space-y-3;
+  list-style-type: disc;
+  list-style-position: outside;
 }
 
 .blog-content .wp-block-list li {
-  @apply text-gray-700 mb-2 leading-relaxed relative;
+  @apply text-gray-700 mb-2 leading-relaxed pl-2;
 }
 
 .blog-content .wp-block-list li::marker {
-  @apply text-charcoal;
+  @apply text-orange;
+  font-size: 1.2em;
 }
 
 /* WordPress Block: Images and Figures */
@@ -139,19 +168,39 @@
 /* WordPress Block: Table */
 .blog-content table,
 .blog-content .wp-block-table {
-  @apply w-full border-collapse my-6 shadow-sm rounded-lg overflow-hidden;
+  @apply w-full border-collapse my-6 shadow-lg rounded-lg overflow-hidden border border-gray-300;
+}
+
+.blog-content table {
+  border-spacing: 0;
 }
 
 .blog-content th {
-  @apply bg-gray-100 px-4 py-3 font-semibold text-left text-gray-900 border-b;
+  @apply bg-charcoal px-4 py-3 font-semibold text-left text-white border-b border-r border-gray-300;
+}
+
+.blog-content th:last-child {
+  @apply border-r-0;
 }
 
 .blog-content td {
-  @apply px-4 py-3 border-b border-gray-200 text-gray-700;
+  @apply px-4 py-3 border-b border-r border-gray-300 text-gray-700 bg-white;
 }
 
-.blog-content tbody tr:nth-child(even) {
+.blog-content td:last-child {
+  @apply border-r-0;
+}
+
+.blog-content tbody tr:nth-child(even) td {
   @apply bg-gray-50;
+}
+
+.blog-content tbody tr:hover td {
+  @apply bg-orange/10 transition-colors duration-200;
+}
+
+.blog-content tbody tr:last-child td {
+  @apply border-b-0;
 }
 
 /* WordPress Block: Separator */
@@ -275,5 +324,11 @@
   .blog-content .wp-element-button,
   .blog-content button {
     @apply w-full text-center;
+  }
+  
+  .blog-content ul,
+  .blog-content ol,
+  .blog-content .wp-block-list {
+    @apply pl-6;
   }
 }
