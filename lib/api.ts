@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-const WORDPRESS_URL = 'http://cms.vegnarsurfaces.com';
+const WORDPRESS_URL = 'https://cms.vegnarsurfaces.com';
 
 
 export const api = {
