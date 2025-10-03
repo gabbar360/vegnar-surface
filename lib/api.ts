@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-const WORDPRESS_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL;
+const WORDPRESS_URL = 'http://cms.vegnarsurfaces.com';
 
 
 export const api = {
@@ -82,7 +82,7 @@ export const api = {
 
   async getBlogs() {
     try {
-      const response = await axios.get('http://cms.vegnarsurfaces.com/wp-json/wp/v2/posts?_embed', {
+      const response = await axios.get(`${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -120,7 +120,7 @@ export const api = {
 
   async getBlogBySlug(slug: string) {
     try {
-      const response = await axios.get(`http://cms.vegnarsurfaces.com/wp-json/wp/v2/posts?slug=${slug}&_embed`, {
+      const response = await axios.get(`${WORDPRESS_URL}/wp-json/wp/v2/posts?slug=${slug}&_embed`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -227,7 +227,6 @@ export const api = {
     additional_message?: string;
     number_of_samples?: number;
     currency?: string;
-
   }) {
     try {
       const response = await axios.post(`${STRAPI_URL}/api/orders/create`, orderData, {
