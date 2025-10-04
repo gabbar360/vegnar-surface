@@ -140,7 +140,7 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen marble-pattern">
       {/* Reading progress bar */}
       {/* <div className="fixed top-0 left-0 right-0 h-1 bg-gray-100 z-50">
         <div
