@@ -213,7 +213,7 @@ export default function Export() {
 
         {/* 3D Globe Component */}
         <div className="w-full mb-12">
-          <Globe3D rotationSpeed={1.5} />
+          <Globe3D rotationSpeed={0.5} />
         </div>
         
         {/* Country Presence List */}
