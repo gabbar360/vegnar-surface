@@ -121,7 +121,7 @@ export default function RootLayout({
               <Toaster />
               <Sonner />
               <LazyWhatsAppWidget />
-              <LazyCookieConsent />
+              {/* <LazyCookieConsent /> */}
               <LazyPageTracker />
               <LazyRoutePreloader />
               <ToastContainer

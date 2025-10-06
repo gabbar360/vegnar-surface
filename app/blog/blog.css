@@ -166,17 +166,18 @@
 }
 
 /* WordPress Block: Table */
-.blog-content table,
 .blog-content .wp-block-table {
-  @apply w-full border-collapse my-6 shadow-lg rounded-lg overflow-hidden border border-gray-300;
+  @apply my-6 overflow-x-auto;
 }
 
-.blog-content table {
+.blog-content table,
+.blog-content .wp-block-table table {
+  @apply w-full border-collapse shadow-lg rounded-lg overflow-hidden border border-gray-300 min-w-full;
   border-spacing: 0;
 }
 
 .blog-content th {
-  @apply bg-charcoal px-4 py-3 font-semibold text-left text-white border-b border-r border-gray-300;
+  @apply bg-charcoal px-4 py-3 font-semibold text-left text-white border-b border-r border-gray-300 whitespace-nowrap;
 }
 
 .blog-content th:last-child {
@@ -330,5 +331,24 @@
   .blog-content ol,
   .blog-content .wp-block-list {
     @apply pl-6;
+  }
+  
+  /* Mobile table styles */
+  .blog-content .wp-block-table {
+    @apply -mx-6 px-6;
+  }
+  
+  .blog-content table,
+  .blog-content .wp-block-table table {
+    @apply min-w-max;
+  }
+  
+  .blog-content th,
+  .blog-content td {
+    @apply px-3 py-2 text-sm;
+  }
+  
+  .blog-content th {
+    @apply whitespace-nowrap;
   }
 }
