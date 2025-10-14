@@ -161,6 +161,31 @@ const Footer = () => {
                   germany@vegnar.com
                 </a>
               </div>
+              
+              <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg transition-colors duration-300">
+                <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0 group-hover:text-black transition-colors duration-300" />
+                <div>
+                  <p className="text-sm font-semibold text-white group-hover:text-black transition-colors duration-300 mb-1">
+                    USA Office
+                  </p>
+                  <p className="text-sm text-primary-foreground/80 group-hover:text-black transition-colors duration-300">
+                    30 N Gould St Ste R
+                    <br />
+                    Sheridan, WY 82801-6317
+                    <br />
+                    United States
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg transition-colors duration-300">
+                <Mail className="w-5 h-5 text-white flex-shrink-0 group-hover:text-black transition-colors duration-300" />
+                <a href="mailto:usa@vegnar.com" 
+                  className="text-sm text-primary-foreground/80 group-hover:text-black transition-colors duration-300"
+                >
+                  usa@vegnar.com
+                </a>
+              </div>
             </div>
           </div>
 
