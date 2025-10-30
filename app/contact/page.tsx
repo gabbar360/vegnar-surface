@@ -66,12 +66,12 @@ export default function Contact() {
       ],
       link: "https://maps.google.com/?q=B-623+RK+Iconic+Shital+Park+Rajkot+Gujarat+360006+India",
     },
-    {
-      icon: MapPin,
-      title: "Germany Office",
-      details: ["Rheinstraße 10, D-35764 Sinn,", "Germany"],
-      link: "https://maps.google.com/?q=Rheinstraße+10+D-35764+Sinn+Germany",
-    },
+    // {
+    //   icon: MapPin,
+    //   title: "Germany Office",
+    //   details: ["Rheinstraße 10, D-35764 Sinn,", "Germany"],
+    //   link: "https://maps.google.com/?q=Rheinstraße+10+D-35764+Sinn+Germany",
+    // },
     {
       icon: MapPin,
       title: "USA Office",
