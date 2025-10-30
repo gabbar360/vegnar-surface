@@ -138,8 +138,8 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6 text-white">
               Our Global Presence
             </h3>
-            {/* <div className="space-y-3">
-              <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg transition-colors duration-300">
+            <div className="space-y-3">
+              {/* <div className="flex items-start space-x-3 group hover:bg-white p-2 rounded-lg transition-colors duration-300">
                 <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0 group-hover:text-black transition-colors duration-300" />
                 <div>
                   <p className="text-sm font-semibold text-white group-hover:text-black transition-colors duration-300 mb-1">
@@ -150,8 +150,8 @@ const Footer = () => {
                     <br />
                     Germany
                   </p>
-                </div> */}
-              </div>
+                </div>
+              </div> */}
               
               {/* <div className="flex items-center space-x-3 group hover:bg-white p-2 rounded-lg transition-colors duration-300">
                 <Mail className="w-5 h-5 text-white flex-shrink-0 group-hover:text-black transition-colors duration-300" />
