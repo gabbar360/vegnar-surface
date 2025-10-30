@@ -66,12 +66,12 @@ export default function Contact() {
       ],
       link: "https://maps.google.com/?q=B-623+RK+Iconic+Shital+Park+Rajkot+Gujarat+360006+India",
     },
-    {
-      icon: MapPin,
-      title: "Germany Office",
-      details: ["Rheinstraße 10, D-35764 Sinn,", "Germany"],
-      link: "https://maps.google.com/?q=Rheinstraße+10+D-35764+Sinn+Germany",
-    },
+    // {
+    //   icon: MapPin,
+    //   title: "Germany Office",
+    //   details: ["Rheinstraße 10, D-35764 Sinn,", "Germany"],
+    //   link: "https://maps.google.com/?q=Rheinstraße+10+D-35764+Sinn+Germany",
+    // },
     {
       icon: MapPin,
       title: "USA Office",
@@ -87,17 +87,17 @@ export default function Contact() {
       title: "Call Us",
       details: ["+91 90333 31005", "+91 90333 31031"],
     },
-    {
-      icon: Mail,
-      title: "Email Us",
-      details: ["connect@vegnar.com", "germany@vegnar.com", "usa@vegnar.com"],
-    },
+    // {
+    //   icon: Mail,
+    //   title: "Email Us",
+    //   details: ["connect@vegnar.com", "germany@vegnar.com", "usa@vegnar.com"],
+    // },
     {
       icon: Clock,
       title: "Business Hours",
       details: [
         "India: Mon-Sat 10:00 AM - 7:00 PM",
-        "Germany: Mon-Fri 9:00 AM - 6:00 PM",
+        // "Germany: Mon-Fri 9:00 AM - 6:00 PM",
       ],
     },
   ];
