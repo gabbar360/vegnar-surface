@@ -80,6 +80,7 @@ interface BlogPost {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  categories?: string[];
   image?: {
     id: number;
     name: string;
@@ -177,7 +178,6 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
       const shareLink = typeof window !== "undefined" ? window.location.href : "";
       await navigator.clipboard.writeText(shareLink);
       setCopyDone(true);
-      setTimeout(() => setCopyDone(false), 1500);
     } catch (e) {
       console.error("Copy failed", e);
     }
@@ -199,14 +199,12 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
   // Add IDs to headings in content after render
   useEffect(() => {
     if (articleRef.current && tocItems.length > 0) {
-      setTimeout(() => {
-        const headings = articleRef.current?.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        headings?.forEach((heading, index) => {
-          if (tocItems[index]) {
-            heading.id = tocItems[index].id;
-          }
-        });
-      }, 100);
+      const headings = articleRef.current?.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      headings?.forEach((heading, index) => {
+        if (tocItems[index]) {
+          heading.id = tocItems[index].id;
+        }
+      });
     }
   }, [tocItems]);
 
@@ -243,7 +241,7 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="min-h-screen marble-pattern">
+    <div className="min-h-screen marble-pattern overflow-x-hidden">
       {/* Reading progress bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50">
         <div
@@ -257,14 +255,14 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
       {/* Mobile TOC Toggle */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="fixed top-20 right-4 z-40 lg:hidden bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg border border-gray-200 hover:bg-white transition-colors"
+        className="fixed top-24 right-4 z-40 xl:hidden bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg border border-gray-200 hover:bg-white transition-colors"
       >
         {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
       {/* Table of Contents Sidebar */}
-      <div className={`fixed top-0 right-0 w-80 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-200 z-10 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'} lg:translate-x-0`} style={{ height: 'calc(100vh - 150px)' }}>
-        <div className="p-6 pt-24 h-full flex flex-col">
+      <div className={`fixed top-0 right-0 w-80 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-200 z-30 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'} xl:translate-x-0`} style={{ height: '100vh', paddingTop: '80px' }}>
+        <div className="p-6 h-full flex flex-col">
           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2 flex-shrink-0">
             <div className="w-1 h-6 bg-orange-500 rounded-full"></div>
             Table of Contents
@@ -299,9 +297,6 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
         <a href="https://www.instagram.com/vegnarsurfaces/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
           <Instagram className="w-5 h-5" />
         </a>
-        <a href="https://wa.me/919998040370" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-green-600 hover:bg-green-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
-          <FaSquareWhatsapp className="w-5 h-5" />
-        </a>
         <a href="https://in.pinterest.com/latavegnarsurfaces/_created/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
           <FaPinterest className="w-5 h-5" />
         </a>
@@ -313,13 +308,13 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/20 z-5 lg:hidden" 
+          className="fixed inset-0 bg-black/20 z-20 xl:hidden" 
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] overflow-hidden lg:mr-80">
+      <section className="relative h-[70vh] min-h-[500px] overflow-hidden xl:mr-80">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -348,7 +343,17 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
               {/* Category */}
               <div className="mb-4">
                 <span className="inline-block px-4 py-2 bg-orange-500/90 text-white text-sm font-semibold rounded-full uppercase tracking-wide backdrop-blur-sm">
-                  Outdoor Tiles
+                  {(() => {
+                    if (!blog.categories || blog.categories.length === 0) return 'Blog';
+                    
+                    // Filter out subcategories and show main categories
+                    const mainCategories = blog.categories.filter(cat => 
+                      !cat.toLowerCase().includes('customer stories') && 
+                      !cat.toLowerCase().includes('case studies')
+                    );
+                    
+                    return mainCategories.length > 0 ? mainCategories[0] : blog.categories[0];
+                  })()}
                 </span>
               </div>
 
@@ -393,8 +398,8 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
       </section>
 
       {/* Article Content */}
-      <section className="py-12 lg:mr-80 marble-pattern">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="py-12 xl:mr-80 marble-pattern">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Content */}
           <article
             ref={articleRef}
@@ -458,9 +463,9 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
 
       {/* Related Posts */}
       {related.length > 0 && (
-        <section className="py-16 lg:mr-80 marble-pattern relative">
+        <section className="py-16 xl:mr-80 marble-pattern relative">
           <div className="absolute inset-0 bg-white/80"></div>
-          <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center mb-12">
               <h3 className="text-3xl font-bold text-gray-900 mb-4">
                 Related Articles

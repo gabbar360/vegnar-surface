@@ -86,31 +86,39 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
-        timeout: 5000,
       });
       
       // Transform WordPress data to match existing structure
-      const transformedData = response.data.map((post: any) => ({
-        id: post.id,
-        documentId: post.id.toString(),
-        title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
-        content: [{ type: 'paragraph', children: [{ text: post.content?.rendered || post.excerpt?.rendered || '' }] }],
-        slug: post.slug,
-        meta_title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
-        meta_description: post.excerpt.rendered.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…').trim(),
-        createdAt: post.date,
-        updatedAt: post.modified,
-        publishedAt: post.date,
-        image: post._embedded?.['wp:featuredmedia']?.[0] ? {
-          id: post._embedded['wp:featuredmedia'][0].id,
-          name: post._embedded['wp:featuredmedia'][0].alt_text || post.title.rendered,
-          url: post._embedded['wp:featuredmedia'][0].source_url
-        } : {
-          id: 0,
-          name: 'Default Blog Image',
-          url: '/assets/tiles-bg.jpg'
+      const transformedData = response.data.map((post: any) => {
+        // Get categories
+        let categories: string[] = [];
+        if (post._embedded?.['wp:term']?.[0]) {
+          categories = post._embedded['wp:term'][0].map((cat: any) => cat.name);
         }
-      }));
+        
+        return {
+          id: post.id,
+          documentId: post.id.toString(),
+          title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
+          content: [{ type: 'paragraph', children: [{ text: post.content?.rendered || post.excerpt?.rendered || '' }] }],
+          slug: post.slug,
+          meta_title: post.title.rendered.replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…'),
+          meta_description: post.excerpt.rendered.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…').trim(),
+          createdAt: post.date,
+          updatedAt: post.modified,
+          publishedAt: post.date,
+          categories: categories,
+          image: post._embedded?.['wp:featuredmedia']?.[0] ? {
+            id: post._embedded['wp:featuredmedia'][0].id,
+            name: post._embedded['wp:featuredmedia'][0].alt_text || post.title.rendered,
+            url: post._embedded['wp:featuredmedia'][0].source_url
+          } : {
+            id: 0,
+            name: 'Default Blog Image',
+            url: '/assets/tiles-bg.jpg'
+          }
+        };
+      });
       
       return transformedData;
     } catch (error: any) {
@@ -147,7 +155,6 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
-        timeout: 5000,
       });
       
       if (!response.data || response.data.length === 0) {
@@ -155,6 +162,12 @@ export const api = {
       }
       
       const post = response.data[0];
+      
+      // Get categories
+      let categories: string[] = [];
+      if (post._embedded?.['wp:term']?.[0]) {
+        categories = post._embedded['wp:term'][0].map((cat: any) => cat.name);
+      }
       
       // Transform WordPress data to match existing structure
       return {
@@ -168,6 +181,7 @@ export const api = {
         createdAt: post.date,
         updatedAt: post.modified,
         publishedAt: post.date,
+        categories: categories,
         image: post._embedded?.['wp:featuredmedia']?.[0] ? {
           id: post._embedded['wp:featuredmedia'][0].id,
           name: post._embedded['wp:featuredmedia'][0].alt_text || post.title.rendered,

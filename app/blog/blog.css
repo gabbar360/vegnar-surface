@@ -352,3 +352,20 @@
     @apply whitespace-nowrap;
   }
 }
+
+/* Prevent horizontal overflow */
+.blog-content {
+  overflow-x: hidden;
+}
+
+.blog-content * {
+  max-width: 100%;
+}
+
+.blog-content table {
+  width: 100%;
+}
+
+.blog-content pre {
+  overflow-x: auto;
+}
