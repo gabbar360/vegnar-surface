@@ -86,6 +86,7 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
+        timeout: 5000,
       });
       
       // Transform WordPress data to match existing structure
@@ -112,8 +113,30 @@ export const api = {
       }));
       
       return transformedData;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching blogs:', error);
+      
+      // Return fallback data for timeout errors
+      if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
+        return [{
+          id: 1,
+          documentId: '1',
+          title: 'Blog Temporarily Unavailable',
+          content: [{ type: 'paragraph', children: [{ text: 'Our blog is temporarily unavailable. Please check back later.' }] }],
+          slug: 'blog-unavailable',
+          meta_title: 'Blog Temporarily Unavailable',
+          meta_description: 'Our blog is temporarily unavailable.',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          publishedAt: new Date().toISOString(),
+          image: {
+            id: 0,
+            name: 'Default Blog Image',
+            url: '/assets/tiles-bg.jpg'
+          }
+        }];
+      }
+      
       return [];
     }
   },
@@ -124,6 +147,7 @@ export const api = {
         headers: {
           'Content-Type': 'application/json',
         },
+        timeout: 5000,
       });
       
       if (!response.data || response.data.length === 0) {
@@ -154,8 +178,30 @@ export const api = {
           url: '/assets/tiles-bg.jpg'
         }
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching blog by slug:', error);
+      
+      // Return fallback data for timeout errors
+      if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
+        return {
+          id: 1,
+          documentId: '1',
+          title: 'Blog Post Temporarily Unavailable',
+          content: [{ type: 'paragraph', children: [{ text: 'This blog post is temporarily unavailable due to server issues. Please try again later or contact support if the problem persists.' }] }],
+          slug: slug,
+          meta_title: 'Blog Post Temporarily Unavailable',
+          meta_description: 'This blog post is temporarily unavailable.',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          publishedAt: new Date().toISOString(),
+          image: {
+            id: 0,
+            name: 'Default Blog Image',
+            url: '/assets/tiles-bg.jpg'
+          }
+        };
+      }
+      
       return null;
     }
   },
