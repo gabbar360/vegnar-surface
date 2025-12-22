@@ -104,12 +104,12 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const [blogData, allBlogsData] = await Promise.all([
+        const [blogData, allBlogsResponse] = await Promise.all([
           api.getBlogBySlug(slug),
-          api.getBlogs(),
+          api.getBlogs(1, 100), // Get more blogs for related posts
         ]);
         setBlog(blogData);
-        setAllBlogs(allBlogsData);
+        setAllBlogs(allBlogsResponse.data);
       } catch (error) {
         console.error("Error fetching blog:", error);
       } finally {
