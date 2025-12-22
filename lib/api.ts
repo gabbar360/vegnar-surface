@@ -80,9 +80,9 @@ export const api = {
     }
   },
 
-  async getBlogs() {
+  async getBlogs(page: number = 1, perPage: number = 10) {
     try {
-      const response = await axios.get(`${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed`, {
+      const response = await axios.get(`${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed&page=${page}&per_page=${perPage}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -120,32 +120,47 @@ export const api = {
         };
       });
       
-      return transformedData;
+      return {
+        data: transformedData,
+        totalPages: parseInt(response.headers['x-wp-totalpages'] || '1'),
+        totalPosts: parseInt(response.headers['x-wp-total'] || '0'),
+        currentPage: page
+      };
     } catch (error: any) {
       console.error('Error fetching blogs:', error);
       
       // Return fallback data for timeout errors
       if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
-        return [{
-          id: 1,
-          documentId: '1',
-          title: 'Blog Temporarily Unavailable',
-          content: [{ type: 'paragraph', children: [{ text: 'Our blog is temporarily unavailable. Please check back later.' }] }],
-          slug: 'blog-unavailable',
-          meta_title: 'Blog Temporarily Unavailable',
-          meta_description: 'Our blog is temporarily unavailable.',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          publishedAt: new Date().toISOString(),
-          image: {
-            id: 0,
-            name: 'Default Blog Image',
-            url: '/assets/tiles-bg.jpg'
-          }
-        }];
+        return {
+          data: [{
+            id: 1,
+            documentId: '1',
+            title: 'Blog Temporarily Unavailable',
+            content: [{ type: 'paragraph', children: [{ text: 'Our blog is temporarily unavailable. Please check back later.' }] }],
+            slug: 'blog-unavailable',
+            meta_title: 'Blog Temporarily Unavailable',
+            meta_description: 'Our blog is temporarily unavailable.',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            publishedAt: new Date().toISOString(),
+            image: {
+              id: 0,
+              name: 'Default Blog Image',
+              url: '/assets/tiles-bg.jpg'
+            }
+          }],
+          totalPages: 1,
+          totalPosts: 1,
+          currentPage: 1
+        };
       }
       
-      return [];
+      return {
+        data: [],
+        totalPages: 0,
+        totalPosts: 0,
+        currentPage: 1
+      };
     }
   },
 
