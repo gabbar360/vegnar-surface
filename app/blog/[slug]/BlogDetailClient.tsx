@@ -283,8 +283,8 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
 
       {/* Table of Contents Sidebar */}
       <div className={`fixed top-0 right-0 w-80 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-200 z-30 transform transition-transform duration-300 ${
-        (sidebarOpen || autoShowTOC) ? 'translate-x-0' : 'translate-x-full'
-      } xl:${(sidebarOpen || autoShowTOC) ? 'translate-x-0' : 'translate-x-full'}`} style={{ height: '100vh', paddingTop: '80px' }}>
+        sidebarOpen ? 'translate-x-0' : 'translate-x-full'
+      } xl:${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ height: '100vh', paddingTop: '80px' }}>
         <div className="p-6 h-full flex flex-col">
           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2 flex-shrink-0">
             <div className="w-1 h-6 bg-orange-500 rounded-full"></div>
@@ -329,19 +329,16 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
       </div>
 
       {/* Overlay for mobile */}
-      {(sidebarOpen || autoShowTOC) && (
+      {sidebarOpen && (
         <div 
           className="fixed inset-0 bg-black/20 z-20 xl:hidden" 
-          onClick={() => {
-            setSidebarOpen(false);
-            setAutoShowTOC(false);
-          }}
+          onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Hero Section */}
       <section className={`relative h-[70vh] min-h-[500px] overflow-hidden transition-all duration-300 ${
-        (sidebarOpen || autoShowTOC) ? 'xl:mr-80' : 'xl:mr-0'
+        sidebarOpen ? 'xl:mr-80' : 'xl:mr-0'
       }`}>
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -427,7 +424,7 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
 
       {/* Article Content */}
       <section className={`py-12 marble-pattern transition-all duration-300 ${
-        (sidebarOpen || autoShowTOC) ? 'xl:mr-80' : 'xl:mr-0'
+        sidebarOpen ? 'xl:mr-80' : 'xl:mr-0'
       }`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Content */}
@@ -494,7 +491,7 @@ export default function BlogDetailClient({ slug }: { slug: string }) {
       {/* Related Posts */}
       {related.length > 0 && (
         <section className={`py-16 marble-pattern relative transition-all duration-300 ${
-          (sidebarOpen || autoShowTOC) ? 'xl:mr-80' : 'xl:mr-0'
+          sidebarOpen ? 'xl:mr-80' : 'xl:mr-0'
         }`}>
           <div className="absolute inset-0 bg-white/80"></div>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
