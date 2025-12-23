@@ -281,6 +281,23 @@ const Footer = () => {
               © 2025 Vegnar Surfaces. All rights reserved.
             </p>
 
+            {/* Center Links */}
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+              <a 
+                href="/terms" 
+                className="text-primary-foreground/60 hover:text-white transition-colors duration-300 underline hover:no-underline"
+              >
+                Terms & Conditions
+              </a>
+              <span className="text-primary-foreground/60">•</span>
+              <a 
+                href="/privacy" 
+                className="text-primary-foreground/60 hover:text-white transition-colors duration-300 underline hover:no-underline"
+              >
+                Privacy Policy
+              </a>
+            </div>
+
             <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-2 text-sm text-center">
               <span className="text-primary-foreground/60">
                 Exporting to 30+ Countries
