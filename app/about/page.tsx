@@ -12,7 +12,7 @@ export default function About() {
       <Header />
       
       {/* Hero Banner */}
-      <section className="relative h-96 bg-charcoal flex items-center">
+      <section className="relative min-h-96 bg-charcoal flex items-center pt-32 pb-8">
         <div className="absolute inset-0">
           <img 
             src="/assets/about-section.jpg" 
@@ -22,8 +22,8 @@ export default function About() {
         </div>
         <div className="relative z-10 container mx-auto px-4">
           <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">About Vegnar Surfaces - India's Largest Outdoor Tiles Manufacturer</h1>
-            <p className="text-xl opacity-90">Leading Exporter of Premium R11 Tiles, 2cm Porcelain Pavers & Heavy-Duty Outdoor Tiles to USA, Europe & Global Markets</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">About Vegnar Surfaces - India's Largest Outdoor Tiles Manufacturer</h1>
+            <p className="text-lg md:text-xl opacity-90">Leading Exporter of Premium R11 Tiles, 2cm Porcelain Pavers & Heavy-Duty Outdoor Tiles to USA, Europe & Global Markets</p>
           </div>
         </div>
       </section>
