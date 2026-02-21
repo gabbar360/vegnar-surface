@@ -36,6 +36,7 @@ const Header = () => {
 
   const navigationItems: NavigationItem[] = [
     { name: "HOME", path: "/" },
+    { name: "R11", path: "/r11" },
     {
       name: "COMPANY",
       path: "/about",
@@ -64,7 +65,7 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => pathname === path;
-  const isHomePage = pathname === '/';
+  const isHomePage = pathname === '/' || pathname === '/r11';
 
   return (
     <header className={cn(
