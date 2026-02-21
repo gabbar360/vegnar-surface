@@ -1,16 +1,16 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Droplets, Shield, Bug, Flame, Wrench, Sparkles, ArrowRight, CheckCircle2, Star, Quote, Award, Users, TrendingUp, Phone } from "lucide-react";
 import Link from "next/link";
-import { Metadata } from "next";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Premium SPC Flooring – 100% Waterproof | Vegnar Surfaces",
-  description: "Transform your spaces with durable, elegant, and modern Stone Polymer Composite flooring by Vegnar Surfaces. 100% waterproof, scratch-resistant, and built to last.",
-  keywords: "SPC flooring, stone polymer composite, waterproof flooring, luxury vinyl flooring, click-lock flooring, India",
-};
+
 
 const FEATURES = [
   { icon: Droplets, title: "100% Waterproof", desc: "Perfect for kitchens, bathrooms, and high-moisture areas" },
@@ -51,51 +51,195 @@ const TESTIMONIALS = [
   { name: "Rajesh Kumar", role: "Builder, Bangalore", text: "Used Vegnar SPC in 50+ apartments. Zero complaints. Fast installation, great finish, and clients love it.", rating: 5 }
 ];
 
+const SLIDES = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920",
+    title: "Premium SPC Flooring",
+    subtitle: "100% Waterproof. Built to Last.",
+    description: "Transform your spaces with durable, elegant, and modern Stone Polymer Composite flooring."
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=1920",
+    title: "Natural Wood Finish",
+    subtitle: "Elegance Meets Durability",
+    description: "Experience the warmth of wood with the strength of stone polymer composite technology."
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1920",
+    title: "Luxury Living Spaces",
+    subtitle: "Redefine Your Home",
+    description: "Create stunning interiors with our premium collection of scratch-resistant SPC flooring."
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=1920",
+    title: "Easy Installation",
+    subtitle: "Click-Lock System",
+    description: "DIY-friendly installation with no glue required. Professional results in hours, not days."
+  }
+];
+
+const SLIDE_DURATION = 6000;
+
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, SLIDE_DURATION);
+    return () => clearInterval(timer);
+  }, [mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    let rafId: number;
+    let start = performance.now();
+    const step = (now: number) => {
+      const elapsed = now - start;
+      const pct = Math.min(((elapsed % SLIDE_DURATION) / SLIDE_DURATION) * 100, 100);
+      setProgress(pct);
+      rafId = requestAnimationFrame(step);
+    };
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
+  }, [mounted, currentSlide]);
+
   return (
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
-        <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920" alt="Luxury SPC Flooring" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30"></div>
-        </div>
-        <div className="container mx-auto px-4 z-10 text-white">
-          <div className="max-w-4xl">
-            {/* <div className="inline-block bg-orange/20 backdrop-blur-sm border border-orange/30 rounded-full px-6 py-2 mb-6">
-              <p className="text-orange font-semibold">🏆 India's #1 Premium SPC Flooring Brand</p>
-            </div> */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in">Premium SPC Flooring – 100% Waterproof. Built to Last.</h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200 leading-relaxed">Transform your spaces with durable, elegant, and modern Stone Polymer Composite flooring by Vegnar Surfaces.</p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-8 md:mb-12">
-              <Link href="/catalog" className="w-full sm:w-auto"><Button size="lg" className="w-full sm:w-auto bg-orange hover:bg-orange/90 text-white text-base md:text-lg px-6 md:px-8 py-5 md:py-6 shadow-xl hover:shadow-2xl transition-all">Explore Collection <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" /></Button></Link>
-              <Link href="/contact" className="w-full sm:w-auto"><Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 backdrop-blur border-2 border-white text-white hover:bg-white hover:text-charcoal text-base md:text-lg px-6 md:px-8 py-5 md:py-6">Get Free Quote</Button></Link>
-            </div>
-            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/20">
-              {STATS.map((stat, i) => (
-                <div key={i} className="text-center">
-                  <p className="text-3xl md:text-4xl font-bold text-orange mb-1">{stat.number}</p>
-                  <p className="text-sm text-gray-300">{stat.label}</p>
+      {/* Hero Slider Section */}
+      <section className="relative h-screen overflow-hidden">
+        {/* Background Slides */}
+        {SLIDES.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={cn(
+              "absolute inset-0 transition-opacity duration-1000 ease-in-out will-change-transform",
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            )}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+              priority={index === 0}
+              quality={index === 0 ? 90 : 75}
+              sizes="100vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            />
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+        ))}
+
+        {/* Content */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl">
+              {SLIDES.map((slide, index) => (
+                <div
+                  key={`content-${slide.id}`}
+                  className={cn(
+                    "transition-all duration-1000 ease-in-out will-change-transform",
+                    index === currentSlide
+                      ? "opacity-100 translate-y-0 scale-100"
+                      : "opacity-0 translate-y-6 scale-95"
+                  )}
+                >
+                  {index === currentSlide && (
+                    <>
+                      <div className="mb-6">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-none">
+                          {slide.title}
+                        </h1>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white">
+                          {slide.subtitle}
+                        </h2>
+                      </div>
+                      
+                      <p className="text-base md:text-lg text-white/90 mb-10 max-w-2xl leading-relaxed">
+                        {slide.description}
+                      </p>
+                      
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <Link href="/catalog">
+                          <Button size="lg" className="bg-orange hover:bg-orange/90 text-white text-lg px-10 py-7 shadow-xl hover:shadow-2xl transition-all group">
+                            Explore Collection
+                            <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                          </Button>
+                        </Link>
+                        <Link href="/contact">
+                          <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur border-2 border-white text-white hover:bg-white hover:text-charcoal text-lg px-10 py-7">
+                            Get Free Quote
+                          </Button>
+                        </Link>
+                      </div>
+                    </>
+                  )}
                 </div>
               ))}
-            </div> */}
+            </div>
+          </div>
+        </div>
+
+        {/* Progress Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="flex items-center space-x-3">
+            {SLIDES.map((_, index) => {
+              const isActive = index === currentSlide;
+              return (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={cn(
+                    "relative h-2 w-12 rounded-full overflow-hidden transition-all",
+                    isActive ? "bg-white/30" : "bg-white/20 hover:bg-white/30"
+                  )}
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                  <span
+                    className={cn(
+                      "absolute left-0 top-0 h-full bg-charcoal transition-[width]",
+                      isActive ? "" : "w-0"
+                    )}
+                    style={{ width: isActive ? `${progress}%` : "0%" }}
+                  />
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="py-6 md:py-8 bg-charcoal">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 text-white/80 text-xs sm:text-sm">
-            <div className="flex items-center gap-2"><Award className="w-4 h-4 md:w-5 md:h-5 text-orange" /> <span className="hidden sm:inline">ISO Certified</span><span className="sm:hidden">ISO</span></div>
-            <div className="flex items-center gap-2"><Shield className="w-4 h-4 md:w-5 md:h-5 text-orange" /> <span className="hidden sm:inline">15-20 Years Warranty</span><span className="sm:hidden">Warranty</span></div>
-            <div className="flex items-center gap-2"><Users className="w-4 h-4 md:w-5 md:h-5 text-orange" /> <span className="hidden sm:inline">10,000+ Happy Customers</span><span className="sm:hidden">10K+ Customers</span></div>
-            <div className="flex items-center gap-2"><TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-orange" /> Made in India</div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* About SPC Section */}
       <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50">
